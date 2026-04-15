@@ -1,0 +1,34 @@
+---
+alwaysApply: true
+---
+# Coding Standards
+
+Follow SOLID principles.
+
+Single Responsibility:
+Each class has one responsibility.
+
+Open Closed:
+Extend functionality without modifying core classes.
+
+Liskov Substitution:
+Interfaces must be replaceable by implementations.
+
+Interface Segregation:
+Prefer small focused interfaces.
+
+Dependency Inversion:
+Depend on interfaces instead of concrete classes.
+
+Never:
+
+Put business logic in controllers.
+
+Query database inside controllers.
+
+Mix validation with business logic.
+
+Validation must use Form Requests.
+
+Authorization must use Policies.
+

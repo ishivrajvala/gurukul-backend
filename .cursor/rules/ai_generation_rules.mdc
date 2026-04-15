@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+# AI Code Generation Rules
+
+Generate code module by module.
+
+Do not generate entire systems at once.
+
+Follow existing architecture.
+
+Reuse existing services and repositories.
+
+Avoid unnecessary dependencies.
+
+Do not modify unrelated files.
+
+If architecture conflicts occur, ask for clarification.
+

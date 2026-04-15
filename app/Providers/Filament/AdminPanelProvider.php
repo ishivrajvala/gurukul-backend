@@ -25,7 +25,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
 	    ->default()
             ->id('admin')
-            ->domain('admin.gurukul2.com')
+            ->domain(app()->environment('production') ? 'admin.gurukul2.com' : null)
 	    ->path('')
 	    ->login()
             ->colors([

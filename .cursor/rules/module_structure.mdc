@@ -1,0 +1,36 @@
+---
+alwaysApply: true
+---
+# Module Structure
+
+Every module must follow this structure.
+
+Domain
+Models
+Policies
+Enums
+Events
+Interfaces
+
+Application
+Services
+Actions
+DTO
+
+Infrastructure
+Persistence
+Repositories
+Providers
+Jobs
+Notifications
+
+Interfaces
+API
+Controllers
+Requests
+Resources
+
+Modules must remain isolated.
+
+Do not mix module responsibilities.
+

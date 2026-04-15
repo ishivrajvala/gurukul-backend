@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+# Architecture Rules
+
+Architecture: Clean Modular Monolith.
+
+Layers:
+
+Domain
+Application
+Infrastructure
+Interfaces
+Support
+
+Controllers must contain no business logic.
+
+Flow:
+
+Controller → Service → Action → Repository → Model
+
+Repositories handle database queries.
+
+Domain layer must not depend on Infrastructure.
+
+Services orchestrate business operations.
+
+DTO objects must be used between layers.
+
+Architecture must remain stable unless explicitly changed.

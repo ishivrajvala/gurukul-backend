@@ -1,0 +1,23 @@
+---
+alwaysApply: true
+---
+# Database Rules
+
+Database: PostgreSQL.
+
+All foreign keys must have indexes.
+
+Use eager loading to avoid N+1 queries.
+
+Use pagination for large result sets.
+
+Avoid SELECT * queries.
+
+Use database transactions for multi-step operations.
+
+Prefer composite indexes for multi-column filtering.
+
+Repositories must handle all database queries.
+
+Never query database inside controllers.
+

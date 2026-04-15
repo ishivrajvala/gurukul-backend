@@ -1,0 +1,22 @@
+---
+alwaysApply: true
+---
+# Laravel Rules
+
+Laravel Version: 11+
+
+Use PostgreSQL compatible migrations.
+
+Use Laravel Sanctum for API authentication.
+
+Use Policies for authorization.
+
+Use Form Requests for validation.
+
+Use Jobs for background tasks.
+
+Use API Resources for responses.
+
+Never access Eloquent models directly from controllers.
+
+Controllers must call services only.
