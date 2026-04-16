@@ -14,6 +14,11 @@ class Theme extends Model
         'cover_image',
         'start_date',
         'end_date',
+        'is_active',
+        'is_home_active',
+        'banner_text',
+        'banner_cta_text',
+        'banner_cta_link',
         'status',
     ];
 
@@ -22,6 +27,8 @@ class Theme extends Model
         return [
             'start_date' => 'date',
             'end_date' => 'date',
+            'is_active' => 'boolean',
+            'is_home_active' => 'boolean',
             'status' => 'boolean',
         ];
     }
