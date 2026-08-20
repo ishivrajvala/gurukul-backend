@@ -1,25 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * Order matters: taxonomy first, because Circles and Stories look their topics, stages and petals
+ * up by slug. Everything is `updateOrCreate`, so re-running is safe.
+ */
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            TaxonomySeeder::class,
+            CircleSeeder::class,
+            StorySeeder::class,
         ]);
     }
 }
