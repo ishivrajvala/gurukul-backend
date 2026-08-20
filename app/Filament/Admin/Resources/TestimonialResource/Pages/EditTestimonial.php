@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Admin\Resources\TestimonialResource\Pages;
 
 use App\Filament\Admin\Resources\TestimonialResource;
@@ -12,8 +14,6 @@ class EditTestimonial extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        return [Actions\DeleteAction::make()];
     }
 }

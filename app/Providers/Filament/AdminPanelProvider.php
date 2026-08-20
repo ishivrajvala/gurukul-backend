@@ -48,11 +48,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandName('Avdhara')
             /*
-             * Nunito Sans is the body face on the site and the right one for an admin: it is a
-             * reading face at small sizes, which is what a table of thirty rows is. Baloo 2 is the
-             * display face and is deliberately NOT used here. The site's headings run 36-52px and a
-             * panel is dense by necessity; the brand carries through colour and logo rather than by
-             * making the admin look like a marketing page.
+             * BOTH FACES, each doing its own job.
+             *
+             * `->font()` sets the panel's base, and Nunito Sans is right for it: it is a reading
+             * face at small sizes, and a table of thirty rows is entirely small sizes. Baloo 2 is
+             * the brand's DISPLAY face and carries every heading, label and the logotype, applied
+             * in `resources/css/filament-avdhara.css`.
+             *
+             * Setting Baloo everywhere was tried and is worse than it sounds: it is a rounded
+             * display face, warm at 32px and mushy at 13px, so the panel reads as on-brand and
+             * scans noticeably slower. Splitting them keeps both.
              */
             ->font('Nunito Sans')
             /*

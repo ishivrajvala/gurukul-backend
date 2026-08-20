@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Admin\Resources\TestimonialResource\Pages;
 
 use App\Filament\Admin\Resources\TestimonialResource;
@@ -12,8 +14,6 @@ class ListTestimonials extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        return [Actions\CreateAction::make()];
     }
 }
