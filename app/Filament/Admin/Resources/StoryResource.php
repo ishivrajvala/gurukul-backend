@@ -33,11 +33,31 @@ class StoryResource extends Resource
 {
     protected static ?string $model = Story::class;
 
+    /*
+     * FOUND BY, and CALLED. Global search stays off until a resource answers both: `$recordTitle`
+     * is what a result reads as in the list, and the attributes are what it matches on.
+     *
+     * Deliberately narrow. Searching a body of text finds every article that mentions a word, which
+     * is a research tool rather than a way to reach the one record somebody has in mind.
+     */
+    protected static ?string $recordTitleAttribute = 'title';
+
+    /** @return array<string> */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'author_name', 'place'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): string
+    {
+        return 'Story: '.\Illuminate\Support\Str::limit((string) $record->title, 60);
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
-    protected static ?string $navigationGroup = 'Stories';
+    protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -158,9 +178,32 @@ class StoryResource extends Resource
 
             Forms\Components\Section::make('Publishing')->schema([
                 Forms\Components\Toggle::make('is_published')->label('Published'),
-                Forms\Components\Toggle::make('is_featured')->label('Featured')->helperText('Appears in the carousel at the top of the page.'),
+                Forms\Components\Toggle::make('is_featured')->label('Featured')->helperText('Appears in the carousel at the top of Parent Stories.'),
                 Forms\Components\DateTimePicker::make('published_at')->seconds(false),
             ])->columns(3),
+
+            /*
+             * SEPARATE FROM "Featured" ON PURPOSE. That flag is the Parent Stories carousel; this
+             * is the homepage band, and while the homepage read the same flag the two could not
+             * differ — promoting a story on the hub promoted it on the homepage as a side effect,
+             * and nobody could choose which one led.
+             */
+            Forms\Components\Section::make('On the homepage')
+                ->description('The "From the Parent Circle" band. Five stories: one large with its video, four small beneath.')
+                ->schema([
+                    Forms\Components\Select::make('home_position')
+                        ->label('Homepage slot')
+                        ->options([
+                            1 => '1 — the large one, with the video',
+                            2 => '2',
+                            3 => '3',
+                            4 => '4',
+                            5 => '5',
+                        ])
+                        ->placeholder('Not on the homepage')
+                        ->helperText('Slot 1 is the lead. Leave empty to keep a story off the homepage. Two stories in the same slot is not an error, but only one of them will be shown.')
+                        ->native(false),
+                ])->columns(2),
         ]);
     }
 
@@ -178,11 +221,20 @@ class StoryResource extends Resource
                     ->formatStateUsing(fn (string $state): string => $state === 'video' ? 'Video' : 'Written'),
                 Tables\Columns\TextColumn::make('petal.name')->label('Petal')->badge()->color('warning')->toggleable(),
                 Tables\Columns\IconColumn::make('is_featured')->label('Featured')->boolean(),
+                Tables\Columns\TextColumn::make('home_position')
+                    ->label('Home')
+                    ->badge()
+                    ->color(fn (?int $state): string => $state === 1 ? 'warning' : 'gray')
+                    ->formatStateUsing(fn (?int $state): string => $state === 1 ? 'Lead' : (string) $state)
+                    ->placeholder('—'),
                 Tables\Columns\IconColumn::make('is_published')->label('Live')->boolean(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('media_kind')->label('Format')->options(['written' => 'Written', 'video' => 'Video']),
                 Tables\Filters\TernaryFilter::make('is_published')->label('Published'),
+                Tables\Filters\Filter::make('on_home')
+                    ->label('On the homepage')
+                    ->query(fn ($query) => $query->whereNotNull('home_position')),
             ])
             ->actions([Tables\Actions\EditAction::make()]);
     }

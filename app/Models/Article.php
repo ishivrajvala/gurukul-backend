@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -65,5 +66,22 @@ class Article extends Model
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->orderByDesc('published_at');
+    }
+
+    /**
+     * Editable search-result metadata.
+     *
+     * WITHOUT IT, GOOGLE SHOWS THE HEADLINE AND THE STANDFIRST, and those are written for somebody
+     * who has already arrived. "Should My Five-Year-Old Already Be Reading?" is a fine title on the
+     * page and a poor one in a result list next to nine competitors; the standfirst is a lead-in,
+     * not a 155-character summary that has to work alone.
+     *
+     * Every field is optional and every field falls back, so an article with no row here behaves
+     * exactly as it did before. `seo_meta` has existed since the first schema and was used by
+     * nothing at all until now.
+     */
+    public function seo(): MorphOne
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
     }
 }

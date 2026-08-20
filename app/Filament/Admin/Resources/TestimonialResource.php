@@ -28,11 +28,31 @@ class TestimonialResource extends Resource
 {
     protected static ?string $model = Testimonial::class;
 
+    /*
+     * FOUND BY, and CALLED. Global search stays off until a resource answers both: `$recordTitle`
+     * is what a result reads as in the list, and the attributes are what it matches on.
+     *
+     * Deliberately narrow. Searching a body of text finds every article that mentions a word, which
+     * is a research tool rather than a way to reach the one record somebody has in mind.
+     */
+    protected static ?string $recordTitleAttribute = 'content';
+
+    /** @return array<string> */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['content', 'family_label'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): string
+    {
+        return 'Testimonial: '.\Illuminate\Support\Str::limit((string) $record->content, 60);
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
-    protected static ?string $navigationGroup = 'Stories';
+    protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -59,7 +79,6 @@ class TestimonialResource extends Resource
 
             /* NOT NULL from when testimonials were a generic marketing block, and every one of
                these is a written line — the filmed ones are Stories. Hidden rather than asked. */
-            Forms\Components\Hidden::make('type')->default('text'),
         ])->columns(2);
     }
 

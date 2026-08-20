@@ -14,6 +14,8 @@ class EditEnquiry extends EditRecord
 
     protected function getHeaderActions(): array
     {
+        /* The Download CV action lived here while the careers form posted to this endpoint. Hiring
+           has its own table, inbox and file handling now: Careers > Applications. */
         return [Actions\DeleteAction::make()];
     }
 }

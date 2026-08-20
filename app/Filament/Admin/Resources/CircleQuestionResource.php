@@ -98,6 +98,10 @@ class CircleQuestionResource extends Resource
                     ->trueColor('warning')
                     ->falseIcon('heroicon-o-user')
                     ->falseColor('gray'),
+                Tables\Columns\TextColumn::make('source')
+                    ->badge()
+                    ->color('gray')
+                    ->formatStateUsing(fn (string $state): string => $state === 'journal' ? 'Journal' : 'Circle'),
                 Tables\Columns\TextColumn::make('circle.name')->label('Circle')->color('gray')->toggleable(),
                 Tables\Columns\TextColumn::make('status')->badge()
                     ->color(fn (string $state): string => $state === 'pending' ? 'warning' : ($state === 'declined' ? 'gray' : 'success')),
@@ -106,6 +110,7 @@ class CircleQuestionResource extends Resource
                 Tables\Filters\SelectFilter::make('status')->options([
                     'pending' => 'Pending', 'published' => 'Relayed', 'answered' => 'Answered', 'declined' => 'Not taken forward',
                 ])->default('pending'),
+                Tables\Filters\SelectFilter::make('source')->options(['circle' => 'Circle', 'journal' => 'Journal']),
                 Tables\Filters\TernaryFilter::make('is_anonymous')->label('Anonymous'),
             ])
             ->actions([Tables\Actions\EditAction::make()->label('Open')]);

@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CircleQuestion extends Model
 {
     protected $fillable = [
-        'circle_id', 'question', 'is_anonymous', 'name', 'email',
+        'circle_id', 'source', 'question', 'is_anonymous', 'name', 'email',
         'status', 'handled_at', 'handled_by',
     ];
 

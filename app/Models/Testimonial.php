@@ -24,15 +24,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Testimonial extends Model
 {
-    protected $fillable = [
-        'slug', 'content', 'family_label', 'position', 'is_published',
-        'type', 'title', 'name', 'tags', 'video_url', 'thumbnail', 'is_featured', 'status',
-    ];
+    protected $fillable = ['slug', 'content', 'family_label', 'position', 'is_published'];
 
     protected function casts(): array
     {
         return [
-            'is_featured' => 'boolean',
             'is_published' => 'boolean',
             'position' => 'integer',
         ];

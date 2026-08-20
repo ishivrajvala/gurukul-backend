@@ -27,7 +27,7 @@ class Story extends Model
         'author_name', 'author_relation', 'place',
         'media_kind', 'youtube_id', 'media_aspect', 'duration_minutes',
         'reading_minutes', 'image_path', 'image_alt',
-        'is_featured', 'is_published', 'published_at',
+        'is_featured', 'home_position', 'is_published', 'published_at',
     ];
 
     protected function casts(): array
@@ -65,5 +65,27 @@ class Story extends Model
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('is_published', true)->orderByDesc('published_at');
+    }
+
+    /**
+     * The homepage band: the chosen stories, the lead first.
+     *
+     * SEPARATE FROM `is_featured` ON PURPOSE. That flag drives the Parent Stories carousel, and
+     * while the homepage read it too the two surfaces could not differ — promoting a story on the
+     * hub promoted it on the homepage as a side effect, and nobody could say which one led.
+     *
+     * `home_position` 1 is the lead, 2 to 5 the row beneath, null is not on the homepage at all.
+     */
+    public function scopeOnHome(Builder $query): Builder
+    {
+        /*
+         * `reorder()` FIRST, and it is the whole reason this works.
+         *
+         * `published()` already applied `orderByDesc('published_at')`, and a second `orderBy` only
+         * ever becomes a TIEBREAKER behind the first. Chaining `published()->onHome()` therefore
+         * returned the right five stories in publication order while looking exactly like a working
+         * sort — an editor moving a story to slot 1 saw nothing change and no error anywhere.
+         */
+        return $query->whereNotNull('home_position')->reorder()->orderBy('home_position');
     }
 }

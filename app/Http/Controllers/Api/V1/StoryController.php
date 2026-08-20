@@ -9,6 +9,7 @@ use App\Models\CommunityReview;
 use App\Models\Story;
 use App\Models\Testimonial;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Parent Stories, the short testimonials, and the community screenshots.
@@ -29,6 +30,28 @@ class StoryController extends Controller
     public function index(): JsonResponse
     {
         $stories = Story::published()
+            ->with(['topic', 'petal', 'ageStages'])
+            ->get()
+            ->map(fn (Story $s): array => $this->summary($s));
+
+        return response()->json(['data' => $stories]);
+    }
+
+    /**
+     * The five on the homepage, in the order an editor chose, the lead first.
+     *
+     * ITS OWN ENDPOINT rather than a flag on the feed, because the ORDER is the answer. The
+     * homepage band asks "which five, and which one leads"; sending all eight with a nullable
+     * position and re-sorting on the client puts that question in two places, and the client would
+     * be the one that got it wrong.
+     *
+     * `published()` is applied as well as the slot: a story pulled from the site should leave the
+     * homepage without anybody remembering to clear its slot too.
+     */
+    public function home(): JsonResponse
+    {
+        $stories = Story::published()
+            ->onHome()
             ->with(['topic', 'petal', 'ageStages'])
             ->get()
             ->map(fn (Story $s): array => $this->summary($s));
@@ -67,9 +90,20 @@ class StoryController extends Controller
     public function reviews(): JsonResponse
     {
         $rows = CommunityReview::publishable()->get()->map(fn (CommunityReview $r): array => [
+            /*
+             * A stable key for the client's list. There is no slug column and there should not be
+             * one: a screenshot has no name, only a position on a wall. Indexing the array instead
+             * would reorder every tile the moment one review is unpublished.
+             */
+            'id' => $r->id,
             'source' => $r->source,
             'image' => [
-                'src' => $r->image_path,
+                /*
+                 * An ABSOLUTE URL, not the stored path. The consumer is a different origin and
+                 * cannot resolve `stories/reviews/x.png` against anything; it would render a
+                 * broken tile per review and nothing in either log would say why.
+                 */
+                'src' => Storage::disk('public')->url($r->image_path),
                 'alt' => $r->image_alt,
                 'width' => $r->image_width,
                 'height' => $r->image_height,

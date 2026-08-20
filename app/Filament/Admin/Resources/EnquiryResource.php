@@ -27,6 +27,26 @@ class EnquiryResource extends Resource
 {
     protected static ?string $model = Enquiry::class;
 
+    /*
+     * FOUND BY, and CALLED. Global search stays off until a resource answers both: `$recordTitle`
+     * is what a result reads as in the list, and the attributes are what it matches on.
+     *
+     * Deliberately narrow. Searching a body of text finds every article that mentions a word, which
+     * is a research tool rather than a way to reach the one record somebody has in mind.
+     */
+    protected static ?string $recordTitleAttribute = 'email';
+
+    /** @return array<string> */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): string
+    {
+        return 'Enquiry: '.\Illuminate\Support\Str::limit((string) $record->email, 60);
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 
     protected static ?string $navigationGroup = 'Inbox';
@@ -105,7 +125,51 @@ class EnquiryResource extends Resource
                     ->action(fn (Enquiry $record) => $record->update([
                         'status' => 'handled', 'handled_at' => now(), 'handled_by' => auth()->id(),
                     ])),
-            ]);
+            ])
+            /*
+             * AN EMPTY INBOX HAS TO SAY WHICH INBOX IT IS.
+             *
+             * Filament's default is "No records found", which on the Waitlist tab is
+             * indistinguishable from a waitlist that was never built — and that is exactly how it
+             * got read. Nothing arrives here until somebody uses the form on the site, so the empty
+             * state names the form, says which page it sits on, and stops a quiet week looking like
+             * a missing feature.
+             */
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading(fn ($livewire): string => static::emptyHeading($livewire->activeTab ?? null))
+            ->emptyStateDescription(fn ($livewire): string => static::emptyBody($livewire->activeTab ?? null));
+    }
+
+    /** @param string|null $tab The active tab, which is the enquiry kind, or `all`. */
+    private static function emptyHeading(?string $tab): string
+    {
+        return match ($tab) {
+            'waitlist' => 'Nobody on the waitlist yet',
+            'newsletter' => 'No subscribers yet',
+            'contact' => 'No messages yet',
+            'booking' => 'No calls requested yet',
+            'parent-guide' => 'Nobody has asked for the guide yet',
+            default => 'Nothing here yet',
+        };
+    }
+
+    /**
+     * Where each kind comes from.
+     *
+     * Naming the form and the page it sits on turns "is this broken?" into "nobody has filled it
+     * in" — very different questions to be left holding, and only one of them is worth anybody's
+     * afternoon.
+     */
+    private static function emptyBody(?string $tab): string
+    {
+        return match ($tab) {
+            'waitlist' => 'Waitlist signups arrive here, from the Join Waitlist button in the site footer and the waitlist form.',
+            'newsletter' => 'Subscribers arrive here, from the Subscribe box in the footer of the Journal, Circles and Stories pages.',
+            'contact' => 'Messages arrive here, from the form on the Contact page.',
+            'booking' => 'Call requests arrive here, from Book a call in the site navigation. The time is not held until somebody replies.',
+            'parent-guide' => 'Requests arrive here, from the Get the guide form at the foot of the homepage.',
+            default => 'Waitlist signups, subscribers, contact messages, call bookings and parent-guide requests all arrive here as people use the site.',
+        };
     }
 
     public static function getPages(): array

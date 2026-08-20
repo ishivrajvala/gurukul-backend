@@ -33,9 +33,9 @@ class CommunityReviewResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static ?string $navigationGroup = 'Stories';
+    protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationLabel = 'Community reviews';
 

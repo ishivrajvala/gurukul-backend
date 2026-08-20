@@ -56,6 +56,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Frontend URL
+    |--------------------------------------------------------------------------
+    |
+    | Where the public website lives. The admin's "View the site" menu item points
+    | at it, and it is a different origin from this application: the site is a
+    | Next.js build that reads this API. Set FRONTEND_URL in production or the
+    | menu item quietly sends editors to a development address.
+    |
+    */
+
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost:3000'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

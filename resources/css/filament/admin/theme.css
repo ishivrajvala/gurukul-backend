@@ -1,0 +1,1122 @@
+/*
+ * FIRST LINE, AND IT HAS TO BE. CSS requires every `@import` to precede all other rules, so a
+ * font import placed further down is silently dropped by the build — which is exactly what
+ * happened: the compiled file still said `font-family: 'Baloo 2'` on every heading, the face was
+ * never fetched, and the panel quietly fell through to the system sans.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+@import '../../../../vendor/filament/filament/resources/css/base.css';
+
+@config 'tailwind.config.js';
+
+/*
+ * ══════════════════════════════════════════════════════════════════════════════════════════
+ *  THE AVDHARA ADMIN THEME
+ * ══════════════════════════════════════════════════════════════════════════════════════════
+ *
+ * A REAL COMPILED FILAMENT THEME, replacing the plain stylesheet that used to be injected through
+ * `FilamentAsset`. That worked, but it could only paint over Filament's own compiled CSS from the
+ * outside: it could not change a single Tailwind token, so the panel's radii, shadows, spacing and
+ * ring colours stayed Filament's while only type and a few colours were Avdhara's.
+ *
+ * Built with the Tailwind v3 CLI rather than this project's Vite — see the note in
+ * `tailwind.config.js` for why, and `npm run theme` for how.
+ *
+ * ── WHAT THIS FILE MAY AND MAY NOT DO ─────────────────────────────────────────────────────
+ *
+ * The site's design rules are LOCKED and they apply here too. The two that produce unreadable
+ * text if broken:
+ *
+ *   · INDIGO IS THE ONLY TEXT OR MARK ON MARIGOLD. Orange on marigold is ~1.3:1; white on
+ *     marigold is ~1.9:1. Every marigold surface below carries indigo text and nothing else.
+ *   · MARIGOLD TEXT NEVER ON WHITE (~1.9:1), and green text never as body copy on white
+ *     (3.04:1, which fails). Both are fills and marks here, never running text.
+ *
+ * ── WHAT IS NOT HERE ──────────────────────────────────────────────────────────────────────
+ *
+ * The 50–950 colour ramps. Those come from `->colors()` in AdminPanelProvider, which is the right
+ * place: Filament generates every shade from them and uses them across components this file never
+ * names. Restating them here would create a second source of truth for the same six colours.
+ */
+
+/*
+ * Baloo 2. `->font()` on the panel loads exactly ONE family (Nunito Sans, the base), so the display
+ * face has to be fetched here or every Baloo rule below falls silently through to the system stack
+ * — which is exactly what happened the first time: the stylesheet loaded, the selectors matched,
+ * and nothing looked any different.
+ *
+ * Three weights, matching what is actually used: 500 labels, 600 headings, 700 the logotype.
+ * `display=swap` so a slow font never blanks the admin.
+ */
+
+:root {
+    --av-indigo: #27156b;
+    --av-marigold: #f7b75f;
+    --av-green: #56a195;
+    --av-orange: #f0713d;
+    --av-ink: #282828;
+    --av-line: rgba(39, 21, 107, 0.12);
+    --av-radius-card: 20px;
+    --av-radius-control: 12px;
+
+    /*
+     * ONE VERTICAL UNIT FOR THE WHOLE SIDEBAR.
+     *
+     * Every gap in the rail is this and only this: below the last item of a group, above the rule,
+     * below the rule, under the section title. Four different measurements were being eyeballed
+     * against each other and the rhythm never quite settled — one variable is the only way it stays
+     * settled after the next edit.
+     */
+    --av-nav-gap: 0.75rem;
+
+    /*
+     * A TINTED GROUND, so a white card reads as a card.
+     *
+     * The panel was pure white with white cards on it, which meant every section, table and widget
+     * had to be found by its border. The reference solves this with `#f8f7fa` — a ground half a
+     * step off white — and it is the single change that makes a dashboard look built rather than
+     * drafted. This is the same idea leaned toward indigo instead of grey, because this palette has
+     * no grey in it.
+     */
+    --av-ground: #f7f6fa;
+
+    /*
+     * SHADOWS TINTED WITH THE BRAND'S OWN DARK, never black. Measured from the reference, which
+     * tints with its ink (47, 43, 61) rather than with 0,0,0; a neutral black shadow on a coloured
+     * ground reads as dirt. Ours leans on indigo, which the site already does.
+     */
+    --av-shadow-card: 0 0.1875rem 0.75rem 0 rgba(39, 21, 107, 0.10);
+    --av-shadow-raised: 0 0.25rem 1.125rem 0 rgba(39, 21, 107, 0.14);
+}
+
+/* ══ TYPOGRAPHY ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Baloo carries the display tier and nothing else: page titles, section and widget headings, modal
+ * titles, the big number on a stat. Everything a person reads row by row stays in Nunito.
+ */
+.fi-header-heading,
+.fi-section-header-heading,
+.fi-modal-heading,
+.fi-wi-stats-overview-stat-value,
+.fi-fo-wizard-header-step-label,
+.fi-ta-empty-state-heading,
+.fi-in-entry-wrp-label,
+.fi-sidebar-group-label,
+h1, h2, h3 {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.fi-header-heading {
+    /* The site's h2 tier. An admin page title should read as a page title, not a browser default. */
+    font-size: 1.75rem;
+    line-height: 1.2;
+    color: var(--av-indigo);
+}
+
+.fi-header-subheading {
+    color: rgba(40, 40, 40, 0.66);
+}
+
+/* Section descriptions are the helper text a person actually reads before filling a form in. */
+.fi-section-header-description,
+.fi-fo-field-wrp-helper-text {
+    line-height: 1.7;
+}
+
+/*
+ * FORM LABELS IN BALOO AT 500, matching the site's nav and button weight. They are labels rather
+ * than prose, they sit alone above a field, and this is the tier the brand uses for exactly that.
+ */
+.fi-fo-field-wrp-label,
+.fi-ta-header-cell-label {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+/* ══ THE SHELL ════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * THE GROUND IS A HALF STEP OFF WHITE, and this is the one place the panel departs from the site.
+ *
+ * The site has exactly two full-section surfaces, white and indigo, because a page is read top to
+ * bottom in one pass and alternating bands are how it keeps its rhythm. An ADMIN is read as a set
+ * of objects on a surface — cards, tables, widgets — and objects need something to sit ON. White
+ * on white left every one of them to be found by its border.
+ *
+ * Not grey: `#f7f6fa` is indigo carried down to a few per cent, so the ground belongs to this
+ * palette rather than to Bootstrap's.
+ */
+.fi-body,
+.fi-main-ctn {
+    background-color: var(--av-ground);
+}
+
+/* Cards, tables and panels stay white so they lift off it. */
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat,
+.fi-modal-window {
+    background-color: #ffffff;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * INDIGO, like the site's footer and nav. It is the one dark surface the brand has, and it is what
+ * makes the panel recognisable in the first half second.
+ */
+.fi-sidebar,
+.fi-sidebar-header,
+.fi-sidebar-nav {
+    background-color: var(--av-indigo);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/*
+ * ONE SOURCE OF SPACING.
+ *
+ * Filament puts `gap-y-7` (28px) on BOTH the nav and the `.fi-sidebar-nav-groups` list inside it,
+ * and `py-8` on the nav as well. Setting a gap on `.fi-sidebar-nav` alone left the list's 28px in
+ * place and the group margin stacked on top of it, which is what produced the ~100px chasms
+ * between one group and the next.
+ *
+ * Both go to zero and the ONLY thing separating groups is the margin rule below. Two mechanisms for
+ * one measurement is how it drifted in the first place.
+ */
+/*
+ * THE RAIL SCROLLS, because twenty-one items and six section titles come to roughly 1000px and no
+ * laptop has that below the logo. That is normal for an admin this size — the reference scrolls
+ * too — and the fix is not to cram it but to make the scrolling behave.
+ *
+ * `overscroll-behavior: contain` is the part that matters: without it, reaching the end of the rail
+ * hands the wheel to the page behind it, so one flick past the bottom scrolls the content instead
+ * and the whole thing appears to jump.
+ */
+.fi-sidebar-nav {
+    gap: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    overscroll-behavior: contain;
+}
+
+.fi-sidebar-nav-groups {
+    gap: 0;
+}
+
+.fi-sidebar-nav > ul,
+.fi-sidebar-group {
+    margin: 0;
+}
+
+/*
+ * The first group is Dashboard, which has no label, so nothing holds it off the logo divider. It
+ * gets the air a group label would have given it.
+ */
+/* Dashboard has no title of its own, so it opens at the same distance from the logo divider. */
+.fi-sidebar-nav-groups > .fi-sidebar-group:first-child {
+    margin-top: var(--av-nav-gap);
+    margin-bottom: 0;
+}
+
+/* Below the last item of a group, and therefore above the rule that starts the next one. */
+.fi-sidebar-group + .fi-sidebar-group {
+    margin-top: var(--av-nav-gap);
+}
+
+.fi-sidebar-group-items {
+    gap: 0;
+    margin: 0;
+}
+
+/*
+ * A LABEL HAS TO BE READABLE. At 40% these were closer to a texture than a word; 62% reads as a
+ * heading while still sitting clearly beneath the items it introduces. Uppercase with the
+ * reference's own 0.4px-ish tracking.
+ */
+/*
+ * ALL THE SPACING GOES ON THE WRAPPER, and getting this wrong is why the gap under a section title
+ * stayed stubbornly bigger than the gap above it however the unit was retuned.
+ *
+ * Filament's markup is not a bare label:
+ *
+ *     li.fi-sidebar-group            (flex, gap-y-1)
+ *       div.fi-sidebar-group-button  (px-2 py-2)
+ *         span.fi-sidebar-group-label
+ *       ul.fi-sidebar-group-items
+ *
+ * The padding was on the SPAN, so it stacked on the wrapper's own `py-2`, and the group's `gap-y-1`
+ * added again below the wrapper: 20px above the title, 24px below it. It was never one measurement,
+ * so no single value could balance it.
+ *
+ * Now the wrapper carries the padding and the rule, the span carries neither, and the group gap is
+ * zero. Every step in the rail is exactly `--av-nav-gap`.
+ */
+.fi-sidebar-group {
+    gap: 0;
+}
+
+/* The horizontal padding matches the item rows, so a section title starts on the same vertical
+   line as the icons beneath it. The rule keeps its full width — padding sits inside the border. */
+.fi-sidebar-group-button {
+    padding: var(--av-nav-gap) 0.75rem;
+}
+
+.fi-sidebar-group-label {
+    color: rgba(255, 255, 255, 0.62);
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    font-size: 0.625rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * A hairline above each group but the first, which would otherwise draw a line under the logo.
+ *
+ * On the WRAPPER, so it runs the full width of the rail. On the span it was bounded by the label's
+ * own flex box — `flex-1` today, and not full width the moment anything else sits in that row.
+ */
+.fi-sidebar-group + .fi-sidebar-group > .fi-sidebar-group-button {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* The chevron went with the collapsing. Hidden rather than left inert. */
+.fi-sidebar-group-collapse-button {
+    display: none;
+}
+
+/* 2.25rem rows: a touch under the reference's 2.375rem, which buys back most of a group's height
+   over twenty-one of them without taking the row below a comfortable pointer target. */
+.fi-sidebar-item-button {
+    padding: 0.3125rem 0.75rem;
+    min-height: 2.25rem;
+    border-radius: 10px;
+    transition: background 140ms ease-out, color 140ms ease-out, box-shadow 140ms ease-out;
+}
+
+.fi-sidebar-group-items > li + li {
+    margin-top: 0.125rem;
+}
+
+/*
+ * THE ITEM ITSELF. 92% white: a step below the active pill, which is what should carry the
+ * emphasis, and comfortably above the "is that dimmed?" line. The icon sits lower at 62%, because
+ * the word is what people read and the icon is what they aim at.
+ */
+.fi-sidebar-item-label {
+    color: rgba(255, 255, 255, 0.92);
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    letter-spacing: 0.005em;
+}
+
+.fi-sidebar-item-icon {
+    color: rgba(255, 255, 255, 0.62);
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+/* Hover lifts toward white. The site turns every footer link marigold on hover; here that would put
+   marigold text on indigo at every row, which is loud in a list of twenty. */
+.fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-button:hover .fi-sidebar-item-label,
+.fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
+    color: #ffffff;
+}
+
+/*
+ * A FILLED GRADIENT PILL WITH A COLOURED GLOW — the reference's signature treatment, measured from
+ * its own CSS: `linear-gradient(270deg, rgba(primary,.7), primary)` over a
+ * `0 .125rem .375rem rgba(primary,.3)` shadow.
+ *
+ * In their palette the fill is a violet primary. In ours it can only be marigold: the sidebar is
+ * indigo, and indigo on indigo vanishes — the same inversion the site's own `Button` performs the
+ * moment it lands on an indigo band.
+ *
+ * AND THEREFORE INDIGO TEXT ON IT. That is the locked rule rather than a preference: white on
+ * marigold is about 1.9:1 and orange on it about 1.3:1. A filled pill forces the question a tinted
+ * one did not, and there is only one legal answer.
+ */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-button {
+    background: linear-gradient(270deg, rgba(247, 183, 95, 0.78) 0%, var(--av-marigold) 100%);
+    box-shadow: 0 0.125rem 0.375rem 0 rgba(247, 183, 95, 0.32);
+}
+
+/* Indigo on marigold. The only legal pairing on this fill — see the note above. */
+.fi-sidebar-item.fi-active .fi-sidebar-item-label {
+    color: var(--av-indigo);
+    font-weight: 600;
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon {
+    color: var(--av-indigo);
+}
+
+/*
+ * THE COUNT ON A MENU ROW: marigold fill, indigo numeral.
+ *
+ * Filament's `warning` badge on a dark ground renders as a near-white pill with marigold text,
+ * which put the site's accent colour on the one element small enough for it to fail on — and left
+ * a white dot as the loudest thing in an indigo rail. Filled marigold reads as a count; indigo on
+ * it is the locked pairing, and at 12px it is the pairing that matters most.
+ *
+ * ON THE ACTIVE ROW IT INVERTS, because the active row is itself a marigold pill and marigold on
+ * marigold is nothing at all. Indigo fill, marigold numeral — the same swap the row itself makes
+ * against the indigo rail.
+ */
+.fi-sidebar-item .fi-badge {
+    background-color: var(--av-marigold);
+    color: var(--av-indigo);
+    box-shadow: none;
+    font-weight: 700;
+}
+
+.fi-sidebar-item.fi-active .fi-badge {
+    background-color: var(--av-indigo);
+    color: var(--av-marigold);
+}
+
+/* ── Topbar ───────────────────────────────────────────────────────────────── */
+
+/*
+ * THE TOPBAR SITS ON THE GROUND, not on a second dark band.
+ *
+ * The reference gives its navbar `background-color: var(--bs-body-bg)` — the bar and the page are
+ * the same surface and the content floats over both. Ours was indigo, which with an indigo sidebar
+ * made two thirds of the chrome one flat colour with nowhere for the content to sit.
+ *
+ * The sidebar keeps indigo, because that is the brand and it is what makes the panel recognisable
+ * in the first half second. One dark surface is a frame; two is a box.
+ */
+.fi-topbar > nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(39, 21, 107, 0.06);
+    box-shadow: none;
+}
+
+/* Indigo on the light bar, at the weight the site gives a secondary control. */
+.fi-topbar .fi-icon-btn,
+.fi-topbar .fi-dropdown-trigger button {
+    color: rgba(39, 21, 107, 0.72);
+}
+
+.fi-topbar .fi-icon-btn:hover,
+.fi-topbar .fi-dropdown-trigger button:hover {
+    color: var(--av-indigo);
+}
+
+/* ── The logo ──────────────────────────────────────────────────────────── */
+
+/*
+ * THE REAL LOGO, the same file the site's nav uses — and TWO of them, because a sidebar that
+ * collapses needs two.
+ *
+ * Filament's default is the brand NAME set in whatever face the panel loaded, which is a wordmark
+ * pretending to be a logo. `brandLogo` then takes a single picture, and a horizontal lockup
+ * squeezed into a 64px rail renders the words as an illegible smear — so `brand.blade.php` emits
+ * both and this hides whichever is wrong.
+ *
+ * KEYED OFF FILAMENT'S OWN COLLAPSED CLASS, not Alpine state. Doing the swap in JavaScript would
+ * show the wrong logo for a frame on every page load, before Alpine boots.
+ */
+.av-logo-full,
+.av-logo-mark {
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Open: the full lockup, large. The logotype is mostly wordmark, so at the old 2.5rem it read as
+   a stripe rather than a mark; the sidebar header has the width and nothing competes for it. */
+.av-logo-full {
+    height: 5rem;
+    margin-left: -0.25rem;   /* the artwork carries its own left bearing */
+}
+
+.av-logo-mark {
+    display: none;
+    height: 2.5rem;
+}
+
+/* Collapsed: the mark alone, centred in the rail. */
+.fi-sidebar:not(.fi-sidebar-open) .av-logo-full {
+    display: none;
+}
+
+.fi-sidebar:not(.fi-sidebar-open) .av-logo-mark {
+    display: block;
+    margin-inline: auto;
+}
+
+/*
+ * THE COLLAPSE BUTTON IS HIDDEN, and the sidebar still collapses.
+ *
+ * Filament renders a toggle in the sidebar header that sits directly beside the logo and competes
+ * with it — a small grey chevron next to the one piece of branding on the screen. The rail still
+ * expands on hover and the topbar's own trigger still works, so nothing is lost but the clutter.
+ */
+.fi-sidebar-header .fi-icon-btn,
+.fi-sidebar-close-overlay + .fi-sidebar .fi-sidebar-header button[x-on\:click*="sidebar"] {
+    display: none;
+}
+
+/* With the button gone the header is just the logo, so it centres itself when collapsed. */
+/* The artwork carries more empty space above the mark than below it, so equal padding sits it high
+   in the band. A little more underneath centres it optically rather than mathematically. */
+.fi-sidebar-header {
+    justify-content: flex-start;
+    padding-top: 1.75rem;
+    padding-bottom: 1.25rem;
+}
+
+.fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header {
+    justify-content: center;
+}
+
+/* And the wrapper shrinks with it, or the collapsed rail keeps a 4.25rem hole where the lockup
+   used to be. `!important` because the height is an inline style Filament writes itself. */
+.fi-sidebar:not(.fi-sidebar-open) .fi-logo {
+    height: 2.5rem !important;
+}
+
+/* ══ SCROLLBARS ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * THE DEFAULT WINDOWS SCROLLBAR IS 17px OF GREY FURNITURE, and it sat down the middle of an indigo
+ * sidebar. Nothing else on this panel is that colour or that wide.
+ *
+ * Both syntaxes, because they cover different browsers and neither is enough alone: `scrollbar-*`
+ * is the standard one Firefox implements, `::-webkit-scrollbar` is what Chrome and Safari read.
+ *
+ * The track is transparent throughout, so the bar is a thumb floating on whatever it is over rather
+ * than a channel cut into it.
+ */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(39, 21, 107, 0.22) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(39, 21, 107, 0.2);
+    border-radius: 99px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(39, 21, 107, 0.35);
+}
+
+/* On the indigo sidebar the thumb has to be light, or it disappears into the ground. */
+.fi-sidebar {
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+.fi-sidebar *::-webkit-scrollbar-thumb,
+.fi-sidebar-nav::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.fi-sidebar *::-webkit-scrollbar-thumb:hover,
+.fi-sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ══ TEXT SIZE ════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * ONE READING SIZE, and it is 14px rather than Filament's 13px.
+ *
+ * The reference sets its body at 0.9375rem. Filament runs a lot of its interface at `text-sm`
+ * (0.875rem) and its table and form values smaller again, which is defensible for a dense
+ * enterprise tool and wrong for a panel five people use to write copy for parents. Everything a
+ * person READS is 0.875rem; everything that LABELS something stays smaller.
+ */
+.fi-ta-text-item-label,
+.fi-fo-field-wrp .fi-input,
+.fi-in-entry-wrp-content,
+.fi-ta-record-content {
+    font-size: 0.9375rem;
+}
+
+.fi-fo-field-wrp-label {
+    font-size: 0.875rem;
+}
+
+/* Helper text is guidance, not fine print: it has to survive being read. */
+.fi-fo-field-wrp-helper-text,
+.fi-section-header-description {
+    font-size: 0.875rem;
+    line-height: 1.65;
+}
+
+.fi-modal-heading {
+    font-size: 1.25rem;
+}
+
+.fi-section-header-heading {
+    font-size: 1.0625rem;
+}
+
+/* Badges and the smallest chips stay small, or they start competing with the words beside them. */
+.fi-badge {
+    font-size: 0.75rem;
+}
+
+/* ══ CARDS, SECTIONS AND PANELS ═══════════════════════════════════════════════════════════ */
+
+/*
+ * The site's card: 20px radius, a hairline of indigo at 12%, and a soft indigo-tinted shadow.
+ * Filament's default is an 8px radius with a neutral grey ring, which is the single biggest reason
+ * the panel read as "a Filament app" rather than as Avdhara.
+ */
+/*
+ * THE SHADOW DOES THE WORK NOW, not the border.
+ *
+ * On a white ground a card needed a hairline to exist at all. On a tinted one the shadow separates
+ * it, and the border becomes a second outline drawn around the first — the reference uses shadow
+ * alone for exactly this reason. The hairline stays at a quarter of its weight for the edge cases
+ * where a card sits on white (inside a modal, inside another card).
+ *
+ * The radius stays 20px: that is `SCALE.cardRadius` from the site's own tokens, and it is where the
+ * reference's look is dropped in favour of ours.
+ */
+.fi-section,
+.fi-wi-stats-overview-stat,
+.fi-ta-ctn,
+.fi-fo-repeater-item,
+.fi-modal-window {
+    border-radius: var(--av-radius-card);
+    border: 1px solid rgba(39, 21, 107, 0.04);
+    box-shadow: var(--av-shadow-card);
+}
+
+.fi-section-header {
+    border-bottom: 1px solid var(--av-line);
+}
+
+.fi-section-header-heading {
+    color: var(--av-indigo);
+}
+
+/* ══ CONTROLS ═════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Inputs match the site's field: 12px radius, indigo hairline, and an INDIGO focus ring rather
+ * than Filament's default blue. The site has one focus rule and it recolours an edge; a second
+ * blue ring in the middle of a six-colour palette is a seventh colour by accident.
+ */
+.fi-input,
+.fi-select-input,
+.fi-fo-field-wrp .fi-input-wrp {
+    border-radius: var(--av-radius-control);
+}
+
+.fi-input-wrp {
+    border-radius: var(--av-radius-control);
+    box-shadow: 0 0 0 1px var(--av-line);
+}
+
+.fi-input-wrp:focus-within {
+    box-shadow: 0 0 0 2px var(--av-indigo);
+}
+
+/* Buttons carry the site's control radius and its display face at the nav/button weight. */
+.fi-btn {
+    border-radius: var(--av-radius-control);
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+/*
+ * THE PRIMARY BUTTON IS INDIGO WITH CREAM TEXT — the site's primary CTA exactly, including the
+ * shadow. The site lifts a button 1px on hover; that is a pointer affordance rather than
+ * decoration, so it comes across.
+ */
+.fi-btn.fi-color-primary {
+    background-color: var(--av-indigo);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(39, 21, 107, 0.25);
+    transition: transform 250ms ease-out, filter 250ms ease-out;
+}
+
+.fi-btn.fi-color-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/*
+ * MARIGOLD CARRIES INDIGO TEXT. Never white, never orange. This is the locked rule that produces
+ * unreadable text when broken — white on marigold is about 1.9:1.
+ */
+.fi-btn.fi-color-warning {
+    background-color: var(--av-marigold);
+    color: var(--av-indigo);
+    box-shadow: 0 4px 16px rgba(247, 183, 95, 0.3);
+}
+
+.fi-btn.fi-color-warning:hover {
+    filter: brightness(0.95);
+    color: var(--av-indigo);
+}
+
+/* ══ TABLES ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * THE TABLE IS THE SCREEN PEOPLE ACTUALLY LIVE IN, and Filament's default is built to be neutral
+ * rather than to be read for an hour. Three changes carry most of it: a quieter header, rows with
+ * enough height to scan, and a hairline instead of a rule between them.
+ */
+.fi-ta-ctn {
+    overflow: hidden;
+}
+
+/*
+ * The header is a faint indigo wash rather than grey, with an uppercase eyebrow label. It is the
+ * one place on this site a wash belongs: it separates the header from the rows without a heavy
+ * rule, and the site's own rails do exactly this.
+ */
+.fi-ta-header-cell {
+    background-color: rgba(39, 21, 107, 0.035);
+    border-bottom: 1px solid var(--av-line);
+    padding-top: 0.6875rem;
+    padding-bottom: 0.6875rem;
+}
+
+.fi-ta-header-cell-label {
+    color: var(--av-indigo);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.78;
+}
+
+/*
+ * ROWS: taller than Filament's default and separated by a hairline of indigo at 6%, not a grey
+ * rule. Twelve rows of dense text with hard lines between them is a spreadsheet; this is a list of
+ * people who wrote in.
+ */
+.fi-ta-row {
+    transition: background-color 120ms ease-out;
+}
+
+.fi-ta-row:not(:last-child) {
+    border-bottom: 1px solid rgba(39, 21, 107, 0.06);
+}
+
+/* `.782rem 1.25rem`, measured from the reference's table cells. Roomier than Filament's default
+   and the reason its tables read as calm rather than dense. */
+.fi-ta-cell {
+    padding: 0.782rem 1.25rem;
+}
+
+.fi-ta-header-cell {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.fi-ta-row:hover {
+    background-color: rgba(39, 21, 107, 0.03);
+}
+
+/* The first column is the one people scan down, so it carries the ink rather than a muted grey. */
+.fi-ta-cell:first-of-type .fi-ta-text-item-label {
+    color: var(--av-ink);
+    font-weight: 600;
+}
+
+/* The row of tabs above an inbox: the active one is indigo, not Filament's default blue. */
+.fi-tabs-item.fi-active {
+    background-color: rgba(39, 21, 107, 0.07);
+}
+
+.fi-tabs-item.fi-active .fi-tabs-item-label {
+    color: var(--av-indigo);
+    font-weight: 600;
+}
+
+.fi-tabs-item-label {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+}
+
+/* The toolbar above a table — search, filters — sits on the same faint wash as the header. */
+.fi-ta-header-ctn {
+    border-bottom: 1px solid var(--av-line);
+}
+
+/*
+ * NO PAGE TITLE. The sidebar row is already highlighted and the tab says the same word; a heading
+ * that can only repeat them is a line of furniture between the reader and the content. Header
+ * ACTIONS stay — they are the only thing in that row worth the space.
+ */
+.fi-header-heading {
+    display: none;
+}
+
+/*
+ * The header row keeps its actions and loses everything else. With the heading hidden it was still
+ * reserving its own height and the page's gap beneath it — an empty band on every screen.
+ */
+/*
+ * With the title hidden, a header with no actions is an empty flex row still contributing its gap
+ * to the page — which is the space that stayed above every table however far `.fi-main` came down.
+ * `:has()` removes it entirely, and leaves it in place on the pages that do have a Create button.
+ */
+.fi-header {
+    margin-bottom: 0;
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    row-gap: 0;
+    gap: 0;
+}
+
+.fi-header:not(:has(.fi-ac)) {
+    display: none;
+}
+
+/* And the page itself opens flush with the bar. */
+.fi-page {
+    padding-top: 0;
+    gap: 0.75rem;
+}
+
+.fi-header:empty {
+    display: none;
+}
+
+/* ══ THE HEADER ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * SEARCH TAKES THE HEADER.
+ *
+ * Filament sizes the field to its placeholder and leaves the rest of the bar empty, which on a
+ * 1600px screen is a 200px box adrift in a metre of nothing. The reference runs its search the full
+ * width of the navbar, and it is the right call for the same reason the field exists at all: with
+ * twenty-two resources, search is the primary way to reach a record, not an afterthought parked
+ * next to the avatar.
+ *
+ * Capped rather than truly full width — a text input a metre wide is a shape nobody recognises as
+ * a search box, and the caret ends up a long way from where the eye is.
+ */
+/*
+ * The search sits in a right-aligned group beside the bell and the avatar, so growing the field
+ * alone did nothing — its PARENT had no width to give it. `:has()` grows the group that contains it
+ * and leaves the group that contains the avatar alone.
+ */
+.fi-topbar nav > div:has(> .fi-global-search),
+.fi-topbar nav > div > div:has(> .fi-global-search) {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.fi-global-search {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-inline-end: 1rem;
+}
+
+.fi-global-search > *,
+.fi-global-search-field {
+    width: 100%;
+}
+
+.fi-global-search-field,
+.fi-global-search .fi-input-wrp {
+    width: 100%;
+}
+
+/*
+ * NO BORDER ON THE SEARCH, matching the reference: the field is part of the bar rather than a box
+ * placed on it. Only the focus ring remains, because a field you cannot see the focus of is a
+ * keyboard trap.
+ */
+.fi-topbar .fi-input-wrp {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/*
+ * NO RING AT ALL on the header search, focused or not — Filament draws one on the wrapper and the
+ * input both, which stacked into a double outline the moment the field was clicked.
+ *
+ * Focus is shown by the field lifting to a faint indigo wash instead. It is quieter than an
+ * outline and still unmistakable, which matters: a field with no visible focus state is a keyboard
+ * trap, so this cannot simply be removed.
+ */
+.fi-topbar .fi-input-wrp,
+.fi-topbar .fi-input-wrp:focus-within,
+.fi-topbar .fi-input,
+.fi-topbar .fi-input:focus,
+.fi-topbar .fi-global-search-field,
+.fi-topbar .fi-global-search-field:focus-within {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    ring: 0;
+}
+
+.fi-topbar .fi-input-wrp:focus-within {
+    background-color: rgba(39, 21, 107, 0.05);
+    border-radius: var(--av-radius-control);
+}
+
+/*
+ * The ring survived every attempt to remove it because Tailwind draws it with `--tw-ring-shadow`
+ * inside a composed `box-shadow`, from a utility on an element further in than the one being
+ * targeted. Zeroing the ring VARIABLE kills it wherever in the subtree it is set, which no
+ * selector-by-selector chase was going to manage.
+ */
+.fi-topbar *,
+.fi-topbar *:focus,
+.fi-topbar *:focus-within,
+.fi-topbar *:focus-visible {
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-color: transparent;
+    --tw-ring-offset-width: 0px;
+    outline: none;
+}
+
+/*
+ * THE RESULTS PANEL LINES UP WITH THE FIELD, and is as wide as it.
+ *
+ * It was anchored to the right of a flex row, so a search that spans the header dropped its results
+ * under the far end of it — the eye types on the left and the answers appear a foot away. Anchoring
+ * to the search itself puts them under the caret.
+ */
+.fi-global-search {
+    position: relative;
+}
+
+.fi-global-search-results-ctn,
+.fi-global-search-results-container {
+    left: 0;
+    right: auto;
+    width: 100%;
+    max-width: none;
+    text-align: start;
+}
+
+/*
+ * THE RESULTS PANEL, once you type.
+ *
+ * Filament drops a default-radius panel with a blue-grey highlight on the focused row — the two
+ * places the framework's own palette shows through hardest, right at the moment somebody is looking
+ * straight at it. Card radius, the brand's shadow, and an indigo wash on whichever row is selected
+ * by keyboard or pointer, so arrowing down the list looks like arrowing down this panel.
+ */
+.fi-global-search-results-ctn,
+.fi-global-search-results-container {
+    border-radius: var(--av-radius-card);
+    border: 1px solid rgba(39, 21, 107, 0.06);
+    box-shadow: var(--av-shadow-raised);
+    overflow: hidden;
+}
+
+.fi-global-search-result-group-label {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--av-indigo);
+    opacity: 0.7;
+}
+
+.fi-global-search-result:hover,
+.fi-global-search-result:focus,
+.fi-global-search-result:focus-visible,
+.fi-global-search-result[aria-selected='true'] {
+    background-color: rgba(39, 21, 107, 0.06);
+    outline: none;
+}
+
+.fi-global-search-result-title {
+    color: var(--av-indigo);
+    font-weight: 600;
+}
+
+/*
+ * The avatar sits quiet. Filament's default is a near-black disc, which made the smallest thing in
+ * the bar the darkest — grey with ink on it reads as an account, not as a control.
+ */
+.fi-topbar .fi-avatar,
+.fi-topbar .fi-user-avatar,
+.fi-dropdown-trigger .fi-avatar {
+    background-color: #e8e7ee;
+    color: var(--av-ink);
+}
+
+/* ── Page rhythm ────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * AIR AT THE TOP OF EVERY PAGE.
+ *
+ * Filament starts its content tight under the topbar, so the first thing on a page — a stat card
+ * on the dashboard, a table toolbar everywhere else — sits hard against the chrome above it. The
+ * site opens every section with real space (`SCALE.sectionY`), and this is most of why the panel
+ * read as cramped beside it.
+ */
+/*
+ * The page opens close to the bar now the title is gone. It was 2rem of air above a heading that
+ * said what the sidebar already said; with the heading hidden that air was holding up nothing.
+ */
+.fi-main {
+    padding-top: 0;
+}
+
+/*
+ * The dashboard has no page heading, so its first widget starts where a heading would have. Without
+ * this the stats sit a whole heading's height higher than every other page's content.
+ */
+.fi-page > .fi-wi:first-child,
+.fi-dashboard-page .fi-wi {
+    margin-top: 0;
+}
+
+/* ── Dashboard ──────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * A stat is a link here, so it needs to behave like one. The lift is the site's own button hover,
+ * which is the affordance this panel already uses for "this does something".
+ */
+.fi-wi-stats-overview-stat {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.fi-wi-stats-overview-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -12px rgba(39, 21, 107, 0.22);
+}
+
+/*
+ * THE STATS READ AS ONE LINE.
+ *
+ * Five cards with 2rem numbers and a description under each stacked to nearly half the screen
+ * before the table below them started. They are a glance, not a report: the number and its label
+ * belong on one line each, and the whole row wants to be readable without scrolling.
+ */
+.fi-wi-stats-overview-stat {
+    padding: 1rem 1.125rem;
+}
+
+.fi-wi-stats-overview-stat-label {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.72;
+}
+
+.fi-wi-stats-overview-stat-value {
+    color: var(--av-indigo);
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-top: 0.125rem;
+}
+
+.fi-wi-stats-overview-stat-description {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    margin-top: 0.125rem;
+}
+
+/* The gap between widgets, and between the stats and the table under them. */
+.fi-page .fi-wi + .fi-wi,
+.fi-wi-stats-overview + * {
+    margin-top: 1rem;
+}
+
+.fi-ta-record-checkbox:checked,
+.fi-checkbox-input:checked {
+    background-color: var(--av-indigo);
+    border-color: var(--av-indigo);
+}
+
+/* Badges keep the card radius family rather than a pill, matching the site's tag chips. */
+.fi-badge {
+    border-radius: 9999px;
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* ══ THE LOGIN PAGE ═══════════════════════════════════════════════════════════════════════ */
+
+/*
+ * The first thing anybody sees, and previously the least branded screen in the panel: a grey field
+ * with a white box on it. Indigo ground, white card, the site's radius.
+ */
+.fi-simple-layout {
+    background-color: var(--av-indigo);
+}
+
+.fi-simple-main {
+    border-radius: var(--av-radius-card);
+    border: 1px solid var(--av-line);
+    box-shadow: 0 20px 60px -20px rgba(39, 21, 107, 0.45);
+}
+
+/*
+ * The login screen shows the full lockup on indigo, larger still: it is the only thing on it.
+ * The WRAPPER has to grow too — `brandLogoHeight` writes an inline height on `.fi-logo`, and a
+ * taller <img> inside a shorter box is simply a clipped logo.
+ */
+.fi-simple-layout .fi-logo {
+    height: 5rem !important;
+}
+
+.fi-simple-layout .av-logo-full {
+    height: 5rem;
+}
+
+.fi-simple-layout .av-logo-mark {
+    display: none;
+}
+
+/* ══ MISCELLANY ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Filament's default link blue is a seventh colour. Indigo, like every link on the site. */
+.fi-link {
+    color: var(--av-indigo);
+}
+
+/*
+ * A required field's asterisk is orange, which on white is the site's `textOrange` used exactly as
+ * intended — as a MARK rather than as running text, where it would fail contrast at 2.94:1.
+ */
+.fi-fo-field-wrp-label sup {
+    color: var(--av-orange);
+}
+
+/* The empty state is a moment of copy, so it gets the display face and the brand's ink. */
+.fi-ta-empty-state-heading {
+    color: var(--av-indigo);
+}

@@ -37,9 +37,29 @@ class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
 
+    /*
+     * FOUND BY, and CALLED. Global search stays off until a resource answers both: `$recordTitle`
+     * is what a result reads as in the list, and the attributes are what it matches on.
+     *
+     * Deliberately narrow. Searching a body of text finds every article that mentions a word, which
+     * is a research tool rather than a way to reach the one record somebody has in mind.
+     */
+    protected static ?string $recordTitleAttribute = 'title';
+
+    /** @return array<string> */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'standfirst'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): string
+    {
+        return 'Article: '.\Illuminate\Support\Str::limit((string) $record->title, 60);
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
-    protected static ?string $navigationGroup = 'Journal';
+    protected static ?string $navigationGroup = 'Content System';
 
     protected static ?int $navigationSort = 1;
 
@@ -139,6 +159,53 @@ class ArticleResource extends Resource
                     ->maxLength(200)
                     ->columnSpanFull(),
             ])->columns(3),
+
+            /*
+             * WHAT GOOGLE SHOWS, when it should differ from what the page shows.
+             *
+             * Left empty, a result uses the article's own headline and standfirst — and those are
+             * written for somebody who has already arrived. "Should My Five-Year-Old Already Be
+             * Reading?" reads well at the top of a page and competes badly in a list of ten blue
+             * links; a standfirst is a lead-in, not a summary that has to work alone.
+             *
+             * Every field falls back, so an article with none of this behaves exactly as before.
+             * Write one when the page title is genuinely the wrong thing to show in a result.
+             */
+            Forms\Components\Section::make('Search results')
+                ->description('Optional. Left blank, the article\'s own title and standfirst are used.')
+                ->relationship('seo')
+                ->schema([
+                    Forms\Components\TextInput::make('meta_title')
+                        ->label('Title')
+                        ->helperText('Around 60 characters. Longer is not an error — Google simply cuts it, so put what matters first.')
+                        ->maxLength(180)
+                        ->live(debounce: 400)
+                        ->hintColor(fn (?string $state): string => strlen((string) $state) > 60 ? 'warning' : 'gray')
+                        ->hint(fn (?string $state): string => strlen((string) $state).' characters')
+                        ->columnSpanFull(),
+
+                    Forms\Components\Textarea::make('meta_description')
+                        ->label('Description')
+                        ->helperText('Around 155 characters. A sentence that answers the question the title asks, written for somebody deciding whether to open it.')
+                        ->rows(3)
+                        ->maxLength(400)
+                        ->live(debounce: 400)
+                        ->hintColor(fn (?string $state): string => strlen((string) $state) > 155 ? 'warning' : 'gray')
+                        ->hint(fn (?string $state): string => strlen((string) $state).' characters')
+                        ->columnSpanFull(),
+
+                    Forms\Components\TextInput::make('og_image')
+                        ->label('Share image')
+                        ->helperText('The picture used when the link is shared. Leave blank to use the site default.')
+                        ->maxLength(500)
+                        ->columnSpanFull(),
+
+                    Forms\Components\TextInput::make('canonical_url')
+                        ->label('Canonical URL')
+                        ->helperText('Only when this piece is published somewhere else first. Wrong values here remove the page from search entirely, so leave it blank unless you are sure.')
+                        ->maxLength(500)
+                        ->columnSpanFull(),
+                ]),
         ]);
     }
 

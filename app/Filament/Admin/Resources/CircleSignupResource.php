@@ -28,6 +28,26 @@ class CircleSignupResource extends Resource
 {
     protected static ?string $model = CircleSignup::class;
 
+    /*
+     * FOUND BY, and CALLED. Global search stays off until a resource answers both: `$recordTitle`
+     * is what a result reads as in the list, and the attributes are what it matches on.
+     *
+     * Deliberately narrow. Searching a body of text finds every article that mentions a word, which
+     * is a research tool rather than a way to reach the one record somebody has in mind.
+     */
+    protected static ?string $recordTitleAttribute = 'email';
+
+    /** @return array<string> */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
+
+    public static function getGlobalSearchResultTitle(\Illuminate\Database\Eloquent\Model $record): string
+    {
+        return 'Circle signup: '.\Illuminate\Support\Str::limit((string) $record->email, 60);
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
 
     protected static ?string $navigationGroup = 'Inbox';
