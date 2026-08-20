@@ -97,13 +97,13 @@ class CircleSignupResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')->label('Came in')->since()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->weight('semibold'),
-                Tables\Columns\TextColumn::make('kind')->badge()->color(fn (string $s): string => $s === 'join' ? 'success' : 'primary'),
+                Tables\Columns\TextColumn::make('kind')->badge()->color(fn (string $state): string => $state === 'join' ? 'success' : 'primary'),
                 Tables\Columns\TextColumn::make('circle.name')->label('Circle')->color('gray')->toggleable(),
                 Tables\Columns\TextColumn::make('gathering.title')->label('Gathering')->limit(28)->color('gray')->toggleable(),
                 Tables\Columns\TextColumn::make('whatsapp')->label('WhatsApp')->copyable()->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $s): string => match ($s) {
+                    ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning',
                         'approved' => 'primary',
                         'invited' => 'success',
@@ -122,10 +122,10 @@ class CircleSignupResource extends Resource
                     ->label('Mark invited')
                     ->icon('heroicon-m-paper-airplane')
                     ->color('success')
-                    ->visible(fn (CircleSignup $r): bool => $r->status !== 'invited')
+                    ->visible(fn (CircleSignup $record): bool => $record->status !== 'invited')
                     ->requiresConfirmation()
                     ->modalDescription('Only after you have actually sent the WhatsApp invite. This is a record of what happened, not the thing that sends it.')
-                    ->action(fn (CircleSignup $r) => $r->update([
+                    ->action(fn (CircleSignup $record) => $record->update([
                         'status' => 'invited',
                         'handled_at' => now(),
                         'handled_by' => auth()->id(),

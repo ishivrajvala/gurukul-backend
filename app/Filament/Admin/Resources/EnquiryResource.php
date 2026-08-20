@@ -84,7 +84,7 @@ class EnquiryResource extends Resource
                 Tables\Columns\TextColumn::make('email')->searchable()->copyable(),
                 Tables\Columns\TextColumn::make('message')->limit(50)->wrap()->toggleable(),
                 Tables\Columns\TextColumn::make('status')->badge()
-                    ->color(fn (string $s): string => $s === 'pending' ? 'warning' : ($s === 'handled' ? 'success' : 'gray')),
+                    ->color(fn (string $state): string => $state === 'pending' ? 'warning' : ($state === 'handled' ? 'success' : 'gray')),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kind')->options([
@@ -101,8 +101,8 @@ class EnquiryResource extends Resource
                     ->label('Mark handled')
                     ->icon('heroicon-m-check')
                     ->color('success')
-                    ->visible(fn (Enquiry $r): bool => $r->status === 'pending')
-                    ->action(fn (Enquiry $r) => $r->update([
+                    ->visible(fn (Enquiry $record): bool => $record->status === 'pending')
+                    ->action(fn (Enquiry $record) => $record->update([
                         'status' => 'handled', 'handled_at' => now(), 'handled_by' => auth()->id(),
                     ])),
             ]);

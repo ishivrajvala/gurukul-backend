@@ -71,7 +71,7 @@ class StorySubmissionResource extends Resource
             Forms\Components\Section::make('Consent')->schema([
                 Forms\Components\Placeholder::make('consent_given')
                     ->label('')
-                    ->content(fn (?StorySubmission $r): string => $r?->has_consent
+                    ->content(fn (?StorySubmission $record): string => $record?->has_consent
                         ? 'Consent given. The exact wording they agreed to is below — read it before publishing anything that shows a child.'
                         : 'NO CONSENT RECORDED. Nothing from this submission may be published.')
                     ->columnSpanFull(),
@@ -114,10 +114,10 @@ class StorySubmissionResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')->label('Came in')->since()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->weight('semibold'),
                 Tables\Columns\TextColumn::make('story')->limit(60)->wrap()->label('Story')->toggleable(),
-                Tables\Columns\IconColumn::make('video_path')->label('Video')->boolean()->state(fn ($r): bool => filled($r->video_path)),
+                Tables\Columns\IconColumn::make('video_path')->label('Video')->boolean()->state(fn ($record): bool => filled($record->video_path)),
                 Tables\Columns\IconColumn::make('has_consent')->label('Consent')->boolean()->trueColor('success')->falseColor('danger'),
                 Tables\Columns\TextColumn::make('status')->badge()
-                    ->color(fn (string $s): string => match ($s) {
+                    ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning', 'approved' => 'primary', 'published' => 'success', default => 'gray',
                     }),
             ])

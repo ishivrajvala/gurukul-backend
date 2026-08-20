@@ -100,7 +100,7 @@ class CircleQuestionResource extends Resource
                     ->falseColor('gray'),
                 Tables\Columns\TextColumn::make('circle.name')->label('Circle')->color('gray')->toggleable(),
                 Tables\Columns\TextColumn::make('status')->badge()
-                    ->color(fn (string $s): string => $s === 'pending' ? 'warning' : ($s === 'declined' ? 'gray' : 'success')),
+                    ->color(fn (string $state): string => $state === 'pending' ? 'warning' : ($state === 'declined' ? 'gray' : 'success')),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')->options([

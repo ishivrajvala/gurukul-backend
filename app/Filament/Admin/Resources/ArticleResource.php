@@ -162,7 +162,7 @@ class ArticleResource extends Resource
                 Tables\Columns\IconColumn::make('content')
                     ->label('Written')
                     ->boolean()
-                    ->state(fn (Article $r): bool => filled($r->content)),
+                    ->state(fn (Article $record): bool => filled($record->content)),
                 Tables\Columns\IconColumn::make('is_featured')->label('Featured')->boolean()->toggleable(),
                 Tables\Columns\TextColumn::make('published_at')->date('j M Y')->sortable()->toggleable(),
             ])
