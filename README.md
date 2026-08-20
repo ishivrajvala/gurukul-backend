@@ -1,3 +1,11 @@
+# Avdhara backend
+
+**Start with [RUNBOOK.md](RUNBOOK.md)** — how to run it, the two steps that are not
+optional (`queue:work` and `npm run theme`), how to run the tests, where things are in the panel,
+and the locked design rules.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
