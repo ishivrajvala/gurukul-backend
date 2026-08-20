@@ -24,7 +24,9 @@ use Tests\TestCase;
  * RUN IT LIKE THIS — phpunit.xml points at an in-memory SQLite this project has no driver for, and
  * `User` does not implement `FilamentUser`, so Filament grants panel access in `local` only:
  *
- *   APP_ENV=local DB_CONNECTION=pgsql DB_HOST=127.0.0.1 DB_PORT=5432  *   DB_DATABASE=gurukul_local DB_USERNAME=postgres DB_PASSWORD=gurukul  *   php artisan test --filter=AdminPagesRenderTest
+ *   APP_ENV=local DB_CONNECTION=pgsql DB_HOST=127.0.0.1 DB_PORT=5432
+ *   DB_DATABASE=gurukul_local DB_USERNAME=postgres DB_PASSWORD=gurukul
+ *   php artisan test --filter=AdminPagesRenderTest
  *
  * That `FilamentUser` gap is worth fixing before production: as it stands nobody can reach the
  * panel outside local, and the failure is a flat 403 with nothing explaining it.
