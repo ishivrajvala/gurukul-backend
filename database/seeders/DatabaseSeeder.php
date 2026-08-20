@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TaxonomySeeder::class,
+            JournalSeeder::class,
             CircleSeeder::class,
             StorySeeder::class,
         ]);

@@ -27,9 +27,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'standfirst', 'short_description', 'excerpt', 'content',
+        'title', 'slug', 'standfirst', 'short_description', 'content',
         'featured_image', 'featured_image_alt',
-        'topic_id', 'category_id', 'theme_id',
+        'topic_id', 'category_id',
         'reading_minutes', 'is_featured', 'status', 'published_at',
     ];
 

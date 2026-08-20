@@ -48,7 +48,7 @@ class JournalController extends Controller
         return [
             'slug' => $a->slug,
             'title' => $a->title,
-            'standfirst' => $a->standfirst ?? $a->excerpt,
+            'standfirst' => $a->standfirst ?? $a->short_description,
             'topic' => $a->topic?->slug,
             'ages' => $a->ageStages->pluck('key'),
             'readingMinutes' => $a->reading_minutes,

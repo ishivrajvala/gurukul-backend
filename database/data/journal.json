@@ -1,0 +1,673 @@
+{
+  "articles": [
+    {
+      "slug": "should-my-five-year-old-already-be-reading",
+      "title": "Should My Five-Year-Old Already Be Reading?",
+      "standfirst": "Reading readiness begins long before a child decodes their first sentence. Here is what to notice, and what genuinely matters at this age.",
+      "category": "learning",
+      "ageStages": [
+        "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-08-17",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/reading-at-five.jpg",
+        "alt": "A parent and child sharing a picture book"
+      }
+    },
+    {
+      "slug": "my-child-hates-writing-what-do-i-do",
+      "title": "My Child Hates Writing. What Do I Do?",
+      "standfirst": "The bottleneck is almost never imagination. Separating the thinking from the handwriting lets both of them get easier.",
+      "category": "learning",
+      "ageStages": [
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-04",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/hates-writing.jpg",
+        "alt": "A child pausing over an open exercise book"
+      }
+    },
+    {
+      "slug": "math-anxiety-why-kids-struggle-and-what-helps",
+      "title": "Math Anxiety: Why Kids Struggle (and What Helps)",
+      "standfirst": "Math confidence grows from curiosity and hands-on experiences, not pressure.",
+      "category": "learning",
+      "ageStages": [
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-08-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/math-anxiety.jpg",
+        "alt": "A child working with counting blocks at a table"
+      }
+    },
+    {
+      "slug": "how-much-homework-is-too-much",
+      "title": "How Much Homework Is Too Much?",
+      "standfirst": "There is a point where the evening costs more than the worksheet returns. The research is clearer about where that point sits than schools tend to be.",
+      "category": "learning",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-29",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/homework-hour.jpg",
+        "alt": "A parent sitting beside a child at a homework table"
+      }
+    },
+    {
+      "slug": "my-toddler-wont-sit-still-to-learn-anything",
+      "title": "My Toddler Won't Sit Still to Learn Anything",
+      "standfirst": "At three, sitting still is not the state learning happens in. Almost everything a child of this age takes in arrives through movement.",
+      "category": "learning",
+      "ageStages": [
+        "seekers"
+      ],
+      "readingMinutes": 5,
+      "publishedAt": "2026-07-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/toddler-moving.jpg",
+        "alt": "A toddler moving between play materials on the floor"
+      }
+    },
+    {
+      "slug": "why-doesnt-my-child-listen-the-first-time",
+      "title": "Why Doesn't My Child Listen the First Time?",
+      "standfirst": "Selective hearing is rarely selective. Working memory offers a plainer explanation, and a fix that does not involve raising your voice.",
+      "category": "behaviour",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-08-06",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/first-time-listening.jpg",
+        "alt": "A parent crouching to speak with a child at eye level"
+      }
+    },
+    {
+      "slug": "big-feelings-little-bodies-understanding-tantrums",
+      "title": "Big Feelings, Little Bodies: Understanding Tantrums",
+      "standfirst": "Tantrums are communication, not manipulation. Let's understand what's really going on.",
+      "category": "behaviour",
+      "ageStages": [
+        "seekers"
+      ],
+      "readingMinutes": 5,
+      "publishedAt": "2026-08-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/tantrum.jpg",
+        "alt": "A young child mid-tantrum with a parent close by"
+      }
+    },
+    {
+      "slug": "should-i-punish-or-explain",
+      "title": "Should I Punish or Explain?",
+      "standfirst": "A consequence a child cannot connect to the act is just a punishment with better branding. The connection is the whole mechanism.",
+      "category": "behaviour",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-07-25",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/punish-or-explain.jpg",
+        "alt": "A parent and child talking together on a doorstep"
+      }
+    },
+    {
+      "slug": "my-teenager-has-stopped-talking-to-me",
+      "title": "My Teenager Has Stopped Talking to Me",
+      "standfirst": "The silence is developmental before it is personal. What reopens the conversation is usually sideways, not direct.",
+      "category": "behaviour",
+      "ageStages": [
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-11",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/teen-silence.jpg",
+        "alt": "A parent and teenager walking side by side"
+      }
+    },
+    {
+      "slug": "my-child-keeps-falling-out-with-friends",
+      "title": "My Child Keeps Falling Out With Friends. Should I Step In?",
+      "standfirst": "Conflict isn't always something adults need to remove. Here's how to support without taking over.",
+      "category": "friends",
+      "ageStages": [
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-08-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/falling-out.jpg",
+        "alt": "Two children sorting something out in a playground"
+      }
+    },
+    {
+      "slug": "my-child-doesnt-want-to-share",
+      "title": "My Child Doesn't Want to Share",
+      "standfirst": "Before about four, sharing on demand asks for something the brain has not built yet. There is a better thing to teach in the meantime.",
+      "category": "friends",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 5,
+      "publishedAt": "2026-08-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/sharing.jpg",
+        "alt": "Two young children playing with the same set of blocks"
+      }
+    },
+    {
+      "slug": "is-my-child-being-left-out-or-just-quiet",
+      "title": "Is My Child Being Left Out or Just Quiet?",
+      "standfirst": "Slow to warm is a temperament, not a deficit. The pressure to fix it is usually what does the damage.",
+      "category": "friends",
+      "ageStages": [
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-07-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/quiet-child.jpg",
+        "alt": "A child watching a group before joining in"
+      }
+    },
+    {
+      "slug": "how-do-i-talk-to-my-child-about-bullying",
+      "title": "How Do I Talk to My Child About Bullying?",
+      "standfirst": "The conversation that works is the one had before anything happens, and it sounds nothing like a warning.",
+      "category": "friends",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-07-08",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/bullying-talk.jpg",
+        "alt": "A parent and child sitting together on a sofa talking"
+      }
+    },
+    {
+      "slug": "how-do-i-build-confidence-without-empty-praise",
+      "title": "How Do I Build Confidence Without Empty Praise?",
+      "standfirst": "Some encouragement makes a child more fragile, not less. The difference sits in one word, and most of us reach for the wrong one.",
+      "category": "confidence",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-11",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/praise.jpg",
+        "alt": "A parent watching a child finish something on their own"
+      }
+    },
+    {
+      "slug": "my-child-gives-up-before-trying",
+      "title": "My Child Gives Up Before Trying. Why?",
+      "standfirst": "Quitting early is often a prediction rather than a preference. Changing the prediction takes smaller wins than you would expect.",
+      "category": "confidence",
+      "ageStages": [
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-30",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/gives-up.jpg",
+        "alt": "A child part way through a difficult build"
+      }
+    },
+    {
+      "slug": "is-my-teenagers-self-doubt-normal",
+      "title": "Is My Teenager's Self Doubt Normal?",
+      "standfirst": "Around thirteen, self image gets rebuilt from the outside in. Knowing that is happening makes it easier not to argue with it.",
+      "category": "confidence",
+      "ageStages": [
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/teen-self-doubt.jpg",
+        "alt": "A teenager at a window in thought"
+      }
+    },
+    {
+      "slug": "how-much-sleep-does-my-child-actually-need",
+      "title": "How Much Sleep Does My Child Actually Need?",
+      "standfirst": "Consolidation, mood and attention all run on the same overnight process. An hour of lost sleep shows up in all three by Thursday.",
+      "category": "health",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/sleep.jpg",
+        "alt": "A child settled in bed with a bedside lamp on"
+      }
+    },
+    {
+      "slug": "my-child-is-a-fussy-eater-should-i-worry",
+      "title": "My Child Is a Fussy Eater. Should I Worry?",
+      "standfirst": "Most narrow eating between two and six is a developmental stage with a predictable exit. A few signs are worth acting on.",
+      "category": "health",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/fussy-eater.jpg",
+        "alt": "A family meal with a child considering the food"
+      }
+    },
+    {
+      "slug": "how-do-i-know-if-my-child-is-anxious",
+      "title": "How Do I Know If My Child Is Anxious?",
+      "standfirst": "Anxiety at this age rarely announces itself. It arrives as stomach aches, stalling and anger, which is why it gets missed.",
+      "category": "health",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-07-16",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/anxious.jpg",
+        "alt": "A parent sitting close to a child at the end of the day"
+      }
+    },
+    {
+      "slug": "when-should-i-start-teaching-body-safety",
+      "title": "When Should I Start Teaching Body Safety?",
+      "standfirst": "Earlier than most families expect, and in plainer words. The vocabulary matters more than the conversation.",
+      "category": "safety",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/body-safety.jpg",
+        "alt": "A parent and young child talking at bath time"
+      }
+    },
+    {
+      "slug": "how-do-i-talk-about-strangers-without-scaring-my-child",
+      "title": "How Do I Talk About Strangers Without Scaring My Child?",
+      "standfirst": "The stranger rule is the least useful part of keeping a child safe. What replaces it is more specific and less frightening.",
+      "category": "safety",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-21",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/strangers.jpg",
+        "alt": "A parent and child walking together in a busy street"
+      }
+    },
+    {
+      "slug": "is-my-teenager-safe-online",
+      "title": "Is My Teenager Safe Online?",
+      "standfirst": "Monitoring buys less than most parents hope. What actually protects a teenager is whether they will tell you when something goes wrong.",
+      "category": "safety",
+      "ageStages": [
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 10,
+      "publishedAt": "2026-07-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/teen-online.jpg",
+        "alt": "A teenager and parent talking at a kitchen table"
+      }
+    },
+    {
+      "slug": "how-much-screen-time-is-too-much",
+      "title": "How Much Screen Time Is Too Much?",
+      "standfirst": "Two hours of one thing and two hours of another do completely different work on a child. Counting minutes hides the difference.",
+      "category": "technology-ai",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-08-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/screen-time.jpg",
+        "alt": "A family evening with a device set aside on the table"
+      }
+    },
+    {
+      "slug": "raising-children-in-a-digital-world",
+      "title": "Raising Children in a Digital World",
+      "standfirst": "Tools are here to stay. Our role is to help children use them wisely and mindfully.",
+      "category": "technology-ai",
+      "ageStages": [
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/digital-world.jpg",
+        "alt": "A child using a tablet at a table at home"
+      }
+    },
+    {
+      "slug": "should-my-child-be-using-ai-for-homework",
+      "title": "Should My Child Be Using AI for Homework?",
+      "standfirst": "The question is not whether they use it. It is which part of the thinking gets skipped, and whether that part mattered.",
+      "category": "technology-ai",
+      "ageStages": [
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-08-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/ai-homework.jpg",
+        "alt": "A teenager working at a desk with notes and a laptop"
+      }
+    },
+    {
+      "slug": "when-should-my-child-get-a-phone",
+      "title": "When Should My Child Get a Phone?",
+      "standfirst": "The talk that matters happens about two years before the phone arrives, and it is not about rules.",
+      "category": "technology-ai",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-18",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/first-phone.jpg",
+        "alt": "A parent and child talking on a sofa"
+      }
+    },
+    {
+      "slug": "why-does-turning-off-the-screen-cause-a-meltdown",
+      "title": "Why Does Turning Off the Screen Cause a Meltdown?",
+      "standfirst": "The transition, not the screen, is what your child is reacting to. Which puts the fix before the switch rather than after it.",
+      "category": "technology-ai",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-03",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/turning-it-off.jpg",
+        "alt": "A child being given a warning before a screen goes off"
+      }
+    },
+    {
+      "slug": "when-should-children-learn-about-money",
+      "title": "When Should Children Learn About Money?",
+      "standfirst": "Money habits are largely set by about seven. What builds them is smaller and more ordinary than a lesson.",
+      "category": "money-life-skills",
+      "ageStages": [
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-08",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/money.jpg",
+        "alt": "A child counting coins at a table with a parent"
+      }
+    },
+    {
+      "slug": "should-i-give-my-child-pocket-money",
+      "title": "Should I Give My Child Pocket Money?",
+      "standfirst": "Tied to chores or given freely changes what the money teaches. Both work, but not for the same thing.",
+      "category": "money-life-skills",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/pocket-money.jpg",
+        "alt": "A child putting money into a savings tin"
+      }
+    },
+    {
+      "slug": "what-should-a-fourteen-year-old-be-able-to-do-alone",
+      "title": "What Should a Fourteen-Year-Old Be Able to Do Alone?",
+      "standfirst": "Judgement is built by making decisions that carry weight. Most teenagers are handed neither the weight nor the decision.",
+      "category": "money-life-skills",
+      "ageStages": [
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/independence.jpg",
+        "alt": "A teenager cooking a meal in a home kitchen"
+      }
+    },
+    {
+      "slug": "how-do-i-teach-respect-without-teaching-fear",
+      "title": "How Do I Teach Respect Without Teaching Fear?",
+      "standfirst": "Many of us were raised on obedience and want something different. The tradition has more to offer than the version we inherited.",
+      "category": "values-culture",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-08-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/respect.jpg",
+        "alt": "Three generations of a family together at home"
+      }
+    },
+    {
+      "slug": "my-child-is-losing-our-mother-tongue",
+      "title": "My Child Is Losing Our Mother Tongue",
+      "standfirst": "A common worry and a solvable one. What keeps a language alive at home is far smaller than a curriculum.",
+      "category": "values-culture",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-07-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/mother-tongue.jpg",
+        "alt": "A grandparent reading aloud to a child"
+      }
+    },
+    {
+      "slug": "how-do-i-pass-on-our-values-without-lecturing",
+      "title": "How Do I Pass on Our Values Without Lecturing?",
+      "standfirst": "Children absorb what a household repeats, not what it announces. The distinction decides whether any of it survives adolescence.",
+      "category": "values-culture",
+      "ageStages": [
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/values.jpg",
+        "alt": "A family preparing food together in a kitchen"
+      }
+    },
+    {
+      "slug": "why-do-i-feel-guilty-at-nine-every-night",
+      "title": "Why Do I Feel Guilty at Nine Every Night?",
+      "standfirst": "Almost every parent replays the day once the house goes quiet. Here is what that replay is for, and when it stops being useful.",
+      "category": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-08-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/nine-at-night.jpg",
+        "alt": "A parent sitting alone in a quiet living room in the evening"
+      }
+    },
+    {
+      "slug": "we-are-both-exhausted-how-do-we-do-this",
+      "title": "We Are Both Exhausted. How Do We Do This?",
+      "standfirst": "Two tired adults negotiating an evening is its own problem, separate from the children, and it deserves its own plan.",
+      "category": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-31",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/exhausted.jpg",
+        "alt": "Two parents talking at the end of the day"
+      }
+    },
+    {
+      "slug": "am-i-comparing-my-child-too-much",
+      "title": "Am I Comparing My Child Too Much?",
+      "standfirst": "Another parent mentions what their child is already doing and the evening curdles. A short note on where that feeling comes from.",
+      "category": "parenting",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 5,
+      "publishedAt": "2026-07-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/comparison.jpg",
+        "alt": "Parents talking at a school gate"
+      }
+    }
+  ],
+  "mostAsked": [
+    {
+      "question": "Should my 5-year-old be reading?",
+      "slug": "should-my-five-year-old-already-be-reading"
+    },
+    {
+      "question": "How much screen time is too much?",
+      "slug": "how-much-screen-time-is-too-much"
+    },
+    {
+      "question": "My child doesn't want to share. What can I do?",
+      "slug": "my-child-doesnt-want-to-share"
+    },
+    {
+      "question": "How do I build confidence in my child?",
+      "slug": "how-do-i-build-confidence-without-empty-praise"
+    },
+    {
+      "question": "When should children learn about money?",
+      "slug": "when-should-children-learn-about-money"
+    },
+    {
+      "question": "Why doesn't my child listen the first time?",
+      "slug": "why-doesnt-my-child-listen-the-first-time"
+    },
+    {
+      "question": "Should I punish or explain?",
+      "slug": "should-i-punish-or-explain"
+    },
+    {
+      "question": "When should my child get a phone?",
+      "slug": "when-should-my-child-get-a-phone"
+    },
+    {
+      "question": "How much sleep does my child need?",
+      "slug": "how-much-sleep-does-my-child-actually-need"
+    },
+    {
+      "question": "How do I know if my child is anxious?",
+      "slug": "how-do-i-know-if-my-child-is-anxious"
+    }
+  ],
+  "trending": [
+    "screen time",
+    "reading",
+    "tantrums",
+    "confidence",
+    "sleep",
+    "friendship"
+  ]
+}
