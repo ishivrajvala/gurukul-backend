@@ -27,7 +27,21 @@ use Illuminate\Support\Facades\Route;
  * nothing. The site is hand-coded and reads none of this yet; `ARCHITECTURE.md` names the three
  * seams where it will.
  */
-Route::prefix('v1')->group(function (): void {
+/*
+ * A CEILING ON THE WHOLE PUBLIC API, over and above the tighter limit the writes already carry.
+ *
+ * Every route below is unauthenticated and cacheable, which is exactly the shape somebody scrapes:
+ * the journal, the circles, the taxonomy and every landing page, pulled as fast as the origin will
+ * answer. `php artisan serve` and php-fpm both answer until they fall over, and the first sign is
+ * the site being slow for the parents actually reading it.
+ *
+ * 120 A MINUTE PER IP is generous by design — a page render fans out to several of these, and a
+ * family behind one office or campus NAT shares an address. It is a ceiling against automation,
+ * not a budget for browsing.
+ *
+ * The POST group inside keeps its own `throttle:6,1`; the tighter limit wins where they overlap.
+ */
+Route::middleware('throttle:120,1')->prefix('v1')->group(function (): void {
     /* ---- content out ---- */
     Route::get('/taxonomy', [TaxonomyController::class, 'index']);
 
@@ -64,7 +78,25 @@ Route::prefix('v1')->group(function (): void {
         Route::post('/circle-signups', [SubmissionController::class, 'circleSignup']);
         Route::post('/circle-questions', [SubmissionController::class, 'circleQuestion']);
         Route::post('/story-submissions', [SubmissionController::class, 'storySubmission']);
-        Route::post('/enquiries', [SubmissionController::class, 'enquiry']);
+        /*
+         * LEADS AND SUBSCRIBERS ARE TWO ENDPOINTS, because they are two different things: a lead
+         * is somebody waiting on a reply, a subscriber is somebody on a weekly list. They shared
+         * `/enquiries` while they shared a table.
+         */
+        Route::post('/leads', [SubmissionController::class, 'lead']);
+        Route::post('/subscribers', [SubmissionController::class, 'subscribe']);
+
+        /*
+         * THE OLD NAME, KEPT ALIVE ON PURPOSE. A frontend build is deployed separately from this
+         * one and Next caches aggressively, so for a while after this ships there will be pages in
+         * the wild still posting to `/enquiries`. Dropping it would turn those into silent 404s on
+         * a contact form — the failure nobody reports because the page said nothing.
+         *
+         * It no longer accepts `newsletter`: that kind is gone from `LeadKind`, so an old page's
+         * subscribe box gets a 422 rather than quietly filing a subscriber as a lead. Remove this
+         * route once the site has been redeployed.
+         */
+        Route::post('/enquiries', [SubmissionController::class, 'lead']);
         /* Its own endpoint rather than an `enquiry` with kind=career: an application carries a
            role, a required CV and a portfolio, which are columns rather than a JSON blob. */
         Route::post('/job-applications', [CareerController::class, 'apply']);

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Widgets;
 
 use App\Filament\Admin\Resources\CircleSignupResource;
-use App\Filament\Admin\Resources\EnquiryResource;
+use App\Filament\Admin\Resources\LeadResource;
 use App\Filament\Admin\Resources\JobApplicationResource;
 use App\Filament\Admin\Resources\StorySubmissionResource;
 use App\Models\CircleQuestion;
 use App\Models\CircleSignup;
-use App\Models\Enquiry;
+use App\Models\Lead;
 use App\Models\JobApplication;
 use App\Models\StorySubmission;
 use Filament\Widgets\StatsOverviewWidget;
@@ -42,7 +42,8 @@ class InboxOverview extends StatsOverviewWidget
         $questions = CircleQuestion::where('status', 'pending')->count();
         $stories = StorySubmission::where('status', 'pending')->count();
         $applications = JobApplication::where('status', 'pending')->count();
-        $enquiries = Enquiry::where('status', 'pending')->count();
+        /* OPEN, not `pending`: each kind has its own words for unfinished — see `LeadKind`. */
+        $leads = Lead::query()->open()->count();
 
         return [
             Stat::make('Circle requests', $signups)
@@ -51,11 +52,11 @@ class InboxOverview extends StatsOverviewWidget
                 ->color($signups ? 'warning' : 'gray')
                 ->url(CircleSignupResource::getUrl()),
 
-            Stat::make('Enquiries', $enquiries)
-                ->description($enquiries ? 'Waitlist, contact, subscribers, bookings' : 'Nothing waiting')
+            Stat::make('Leads', $leads)
+                ->description($leads ? 'Waitlist, contact, call bookings, parent guide' : 'Nothing waiting')
                 ->descriptionIcon('heroicon-m-inbox-stack')
-                ->color($enquiries ? 'warning' : 'gray')
-                ->url(EnquiryResource::getUrl()),
+                ->color($leads ? 'warning' : 'gray')
+                ->url(LeadResource::getUrl()),
 
             Stat::make('Story submissions', $stories)
                 ->description($stories ? 'Families who have written in' : 'Nothing waiting')

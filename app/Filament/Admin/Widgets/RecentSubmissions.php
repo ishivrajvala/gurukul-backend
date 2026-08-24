@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Widgets;
 
-use App\Filament\Admin\Resources\EnquiryResource;
-use App\Models\Enquiry;
+use App\Filament\Admin\Resources\LeadResource;
+use App\Models\Lead;
+use App\Models\LeadKind;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
@@ -27,13 +28,13 @@ class RecentSubmissions extends TableWidget
 
     protected int|string|array $columnSpan = 'full';
 
-    protected static ?string $heading = 'Latest enquiries';
+    protected static ?string $heading = 'Latest leads';
 
     public function table(Table $table): Table
     {
         return $table
             ->query(
-                Enquiry::query()
+                Lead::query()
                     /* Pending first, then newest. Somebody scanning this wants the unanswered ones
                        at the top, not the most recent regardless of whether it is dealt with. */
                     ->orderByRaw("case when status = 'pending' then 0 else 1 end")
@@ -45,34 +46,41 @@ class RecentSubmissions extends TableWidget
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('When')
                     ->since()
-                    ->tooltip(fn (Enquiry $record): string => $record->created_at->format('j M Y, H:i')),
+                    ->tooltip(fn (Lead $record): string => $record->created_at->format('j M Y, H:i')),
 
+                /*
+                 * The label comes from `LeadKind`, not from a `match` restating the four names.
+                 * `kind` is cast to the enum on the model, so `$state` arrives as a LeadKind and
+                 * never as a string — which is what the old signature assumed, and what broke it.
+                 */
                 Tables\Columns\TextColumn::make('kind')
+                    ->label('Form')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'newsletter' => 'Subscriber',
-                        'parent-guide' => 'Parent guide',
-                        'booking' => 'Call booking',
-                        default => ucfirst($state),
-                    })
+                    ->formatStateUsing(fn (?LeadKind $state): string => $state?->label() ?? '—')
                     ->color('gray'),
 
                 Tables\Columns\TextColumn::make('name')->placeholder('No name given'),
 
                 Tables\Columns\TextColumn::make('email')->copyable(),
 
+                /*
+                 * Each kind has its own vocabulary now, so the label and the colour both come from
+                 * the record's kind — "Scheduled" means something on a booking and does not exist
+                 * on a contact message.
+                 */
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => $state === 'pending' ? 'warning' : 'success'),
+                    ->formatStateUsing(fn (Lead $record): string => $record->statusLabel())
+                    ->color(fn (Lead $record): string => $record->kind?->statusColour($record->status) ?? 'gray'),
             ])
             ->actions([
                 Tables\Actions\Action::make('open')
-                    ->url(fn (Enquiry $record): string => EnquiryResource::getUrl('edit', ['record' => $record]))
+                    ->url(fn (Lead $record): string => LeadResource::getUrl('edit', ['record' => $record]))
                     ->icon('heroicon-m-arrow-up-right')
                     ->label('Open'),
             ])
             ->emptyStateHeading('Nothing yet')
-            ->emptyStateDescription('Enquiries from the waitlist, contact, subscribe, booking and parent guide forms arrive here.')
+            ->emptyStateDescription('Leads from the waitlist, contact, book a call and parent guide forms arrive here. Subscribers are not leads — they are on the email list.')
             ->emptyStateIcon('heroicon-o-inbox');
     }
 }

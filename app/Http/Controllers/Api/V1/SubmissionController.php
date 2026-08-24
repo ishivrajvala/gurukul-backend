@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Filament\Admin\Resources\CircleQuestionResource;
 use App\Filament\Admin\Resources\CircleSignupResource;
-use App\Filament\Admin\Resources\EnquiryResource;
+use App\Filament\Admin\Resources\LeadResource;
 use App\Filament\Admin\Resources\StorySubmissionResource;
 use App\Http\Controllers\Controller;
 use App\Support\NotifyAdmins;
@@ -14,11 +14,14 @@ use App\Models\AgeStage;
 use App\Models\Circle;
 use App\Models\CircleQuestion;
 use App\Models\CircleSignup;
-use App\Models\Enquiry;
+use App\Models\Lead;
+use App\Models\LeadKind;
+use App\Models\Subscriber;
 use App\Models\Gathering;
 use App\Models\StorySubmission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 /**
  * Everything the site sends IN.
@@ -189,12 +192,20 @@ class SubmissionController extends Controller
     }
 
     /** Waitlist, contact, newsletter, booking, parent guide, careers. */
-    public function enquiry(Request $request): JsonResponse
+    /**
+     * The four forms where somebody is waiting on a reply.
+     *
+     * NEWSLETTER IS NO LONGER ONE OF THEM. It has its own endpoint below, because a subscriber is
+     * not a lead: nobody handles one, and it is on a weekly clock rather than a reply-once clock.
+     * The kinds accepted here come from `LeadKind` rather than a list written out again, so adding
+     * a fifth form is one enum case and not three places to remember.
+     */
+    public function lead(Request $request): JsonResponse
     {
         $data = $request->validate([
             /* No `career`: applications go to /v1/job-applications, which files them against a
                role and requires the CV that makes an application an application. */
-            'kind' => ['required', 'in:waitlist,contact,newsletter,booking,parent-guide'],
+            'kind' => ['required', Rule::in(array_column(LeadKind::cases(), 'value'))],
             'name' => ['nullable', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:190'],
             'phone' => ['nullable', 'string', 'max:32'],
@@ -202,32 +213,104 @@ class SubmissionController extends Controller
             'message' => ['nullable', 'string', 'max:5000'],
             'payload' => ['nullable', 'array'],
             /*
-             * NO FILE UPLOAD HERE ANY MORE. The careers form was the only thing that sent one, and
-             * it has its own endpoint now — see CareerController::apply. An unauthenticated endpoint
-             * that accepts documents from strangers is worth keeping only while something needs it.
+             * ATTRIBUTION, sent by the frontend with every form. All optional and all bounded: this
+             * is an unauthenticated endpoint and these values come from a query string anybody can
+             * write, so they are length-capped here rather than trusted. They are recorded, never
+             * executed, and never used to look anything up.
              */
+            'attribution' => ['nullable', 'array'],
+            'attribution.utm_source' => ['nullable', 'string', 'max:80'],
+            'attribution.utm_medium' => ['nullable', 'string', 'max:80'],
+            'attribution.utm_campaign' => ['nullable', 'string', 'max:120'],
+            'attribution.utm_content' => ['nullable', 'string', 'max:120'],
+            'attribution.utm_term' => ['nullable', 'string', 'max:120'],
+            'attribution.first_source' => ['nullable', 'string', 'max:80'],
+            'attribution.first_campaign' => ['nullable', 'string', 'max:120'],
+            'attribution.landing_path' => ['nullable', 'string', 'max:200'],
+            'attribution.submitted_path' => ['nullable', 'string', 'max:200'],
+            'attribution.referrer' => ['nullable', 'string', 'max:200'],
         ]);
 
-        Enquiry::create([
-            'kind' => $data['kind'],
+        $kind = LeadKind::from($data['kind']);
+
+        Lead::create([
+            'kind' => $kind->value,
             'name' => $data['name'] ?? null,
             'email' => $data['email'],
             'phone' => $data['phone'] ?? null,
             'age_stage_id' => $this->ageStageId($data['ageStage'] ?? null),
             'message' => $data['message'] ?? null,
             'payload' => $data['payload'] ?? null,
-            'status' => 'pending',
-        ]);
-
+            /* Where this kind's process starts, which the model layer decides. */
+            'status' => $kind->initialStatus(),
+        ] + $this->attribution($data));
 
         /* The row is saved; this is a courtesy on top of it and never throws. */
         NotifyAdmins::of(
-            'New '.str_replace('-', ' ', $data['kind']).' enquiry',
-            ($data['name'] ?? $data['email']).' used the '.str_replace('-', ' ', $data['kind']).' form.',
-            EnquiryResource::getUrl(),
+            'New '.lcfirst($kind->label()).' lead',
+            ($data['name'] ?? $data['email']).' used the '.lcfirst($kind->label()).' form.',
+            LeadResource::getUrl(),
         );
 
         return response()->json(['message' => 'Received.'], 201);
+    }
+
+    /**
+     * The email list, which is deliberately not the lead inbox.
+     *
+     * ALWAYS 201, EVEN FOR AN ADDRESS ALREADY ON THE LIST. `Subscriber::subscribe` upserts, so a
+     * second signup updates the row rather than failing a unique constraint — and the response
+     * must not differ, because a different answer for "already subscribed" turns this open endpoint
+     * into a way to test whether a given person is on the list.
+     *
+     * NO ADMIN NOTIFICATION. Every lead raises one because somebody has to act; a subscriber needs
+     * nobody, and a bell that rings for each signup is a bell people learn to ignore — which would
+     * cost the notifications that do matter.
+     */
+    public function subscribe(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'email' => ['required', 'email', 'max:190'],
+            'name' => ['nullable', 'string', 'max:120'],
+            'source' => ['nullable', 'string', 'max:60'],
+            /*
+             * ATTRIBUTION, sent by the frontend with every form. All optional and all bounded: this
+             * is an unauthenticated endpoint and these values come from a query string anybody can
+             * write, so they are length-capped here rather than trusted. They are recorded, never
+             * executed, and never used to look anything up.
+             */
+            'attribution' => ['nullable', 'array'],
+            'attribution.utm_source' => ['nullable', 'string', 'max:80'],
+            'attribution.utm_medium' => ['nullable', 'string', 'max:80'],
+            'attribution.utm_campaign' => ['nullable', 'string', 'max:120'],
+            'attribution.utm_content' => ['nullable', 'string', 'max:120'],
+            'attribution.utm_term' => ['nullable', 'string', 'max:120'],
+            'attribution.first_source' => ['nullable', 'string', 'max:80'],
+            'attribution.first_campaign' => ['nullable', 'string', 'max:120'],
+            'attribution.landing_path' => ['nullable', 'string', 'max:200'],
+            'attribution.submitted_path' => ['nullable', 'string', 'max:200'],
+            'attribution.referrer' => ['nullable', 'string', 'max:200'],
+        ]);
+
+        $subscriber = Subscriber::subscribe($data['email'], $data['name'] ?? null, $data['source'] ?? null);
+
+        /*
+         * ATTRIBUTION IS ONLY WRITTEN ONCE — `filled()` guards each field, so a subscriber who
+         * signs up again from a different page keeps the campaign that first brought them in.
+         * Overwriting it would mean the newest touch always wins and the list slowly reattributes
+         * itself to whatever ran most recently.
+         */
+        $attribution = array_filter($this->attribution($data), fn ($v): bool => filled($v));
+
+        foreach (['utm_source', 'utm_campaign', 'landing_path'] as $field) {
+            if (filled($attribution[$field] ?? null) && blank($subscriber->{$field})) {
+                $subscriber->{$field} = $attribution[$field];
+            }
+        }
+
+        $subscriber->save();
+
+        return response()->json(['message' => 'Subscribed.'], 201);
     }
 
     /**
@@ -251,6 +334,33 @@ class SubmissionController extends Controller
     private function gatheringId(?string $slug): ?int
     {
         return $slug ? Gathering::where('slug', $slug)->value('id') : null;
+    }
+
+    /**
+     * The attribution block, flattened onto the columns.
+     *
+     * ONE MAPPER FOR BOTH ENDPOINTS, so a lead and a subscriber can never disagree about what
+     * `utm_source` means. Missing keys become null rather than absent, which is what keeps a
+     * partial payload from leaving a column at whatever it was before.
+     *
+     * @return array<string, string|null>
+     */
+    private function attribution(array $data): array
+    {
+        $a = $data['attribution'] ?? [];
+
+        return [
+            'utm_source' => $a['utm_source'] ?? null,
+            'utm_medium' => $a['utm_medium'] ?? null,
+            'utm_campaign' => $a['utm_campaign'] ?? null,
+            'utm_content' => $a['utm_content'] ?? null,
+            'utm_term' => $a['utm_term'] ?? null,
+            'first_source' => $a['first_source'] ?? null,
+            'first_campaign' => $a['first_campaign'] ?? null,
+            'landing_path' => $a['landing_path'] ?? null,
+            'submitted_path' => $a['submitted_path'] ?? null,
+            'referrer' => $a['referrer'] ?? null,
+        ];
     }
 
     private function ageStageId(?string $key): ?int
