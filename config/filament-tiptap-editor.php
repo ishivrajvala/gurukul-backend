@@ -17,9 +17,25 @@ return [
     |
     */
     'profiles' => [
+        /*
+         * `color` AND `highlight` ARE GONE, and that is the point of this edit.
+         *
+         * Both open a free hex picker inside the article body. The site's palette is six locked
+         * tokens and an editor able to type `#ff00ff` into a paragraph is a seventh, an eighth and
+         * a ninth — written as an inline style on the saved HTML, where no stylesheet can correct
+         * it and no review catches it until it is live. Nothing else in this application can
+         * introduce a colour; this was the one hole.
+         *
+         * Everything else the default profile offered is kept: `journal-content.ts` documents the
+         * frontend as rendering the full default output, so narrowing further would leave tools
+         * the site can handle unavailable, and widening would produce markup nothing renders.
+         *
+         * ALREADY-SAVED COLOURS SURVIVE. Removing the tool stops new ones; it does not strip
+         * existing inline styles from articles written before this.
+         */
         'default' => [
             'heading', 'bullet-list', 'ordered-list', 'checked-list', 'blockquote', 'hr', '|',
-            'bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'color', 'highlight', 'align-left', 'align-center', 'align-right', '|',
+            'bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'align-left', 'align-center', 'align-right', '|',
             'link', 'media', 'oembed', 'table', 'grid-builder', 'details', '|', 'code', 'code-block', 'source', 'blocks',
         ],
         'simple' => ['heading', 'hr', 'bullet-list', 'ordered-list', 'checked-list', '|', 'bold', 'italic', 'lead', 'small', '|', 'link', 'media'],
@@ -112,7 +128,17 @@ return [
     ]
     |
     */
-    'preset_colors' => [],
+    /*
+     * THE BRAND'S FOUR, AND NOTHING ELSE. The colour tools are off in every profile above, so this
+     * is a belt-and-braces measure: if `color` is ever switched back on, the picker offers these
+     * and only these rather than the full spectrum. An empty array here would mean a free picker.
+     */
+    'preset_colors' => [
+        'indigo' => '#27156B',
+        'marigold' => '#F7B75F',
+        'green' => '#56A195',
+        'orange' => '#F0713D',
+    ],
 
     /*
     |--------------------------------------------------------------------------
