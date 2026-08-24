@@ -29,7 +29,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->domain(app()->environment('production') ? 'admin.gurukul2.com' : null)
 	    ->path('')
-	    ->login()
+	    /*
+             * THE SIGN-IN PAGE, ours rather than Filament's: a two-panel screen with the brand at
+             * full height beside the form, instead of one card centred in an empty field. The class
+             * inherits every piece of the authentication itself — see its docblock for what is and
+             * is not overridden.
+             */
+	    ->login(\App\Filament\Admin\Auth\Login::class)
             /*
              * The Avdhara palette, from the frontend's locked `models/tokens.ts`. Six brand tokens
              * and nothing else; a shade that does not exist there is an opacity of one that does.
@@ -74,20 +80,32 @@ class AdminPanelProvider extends PanelProvider
               * <img> inside says it is. It has to match the CSS, so both are 4.25rem.
               */
              ->brandLogoHeight('5rem')
-             ->favicon(asset('images/logo.webp'))
+             /*
+              * A REAL .ICO, not the logotype. `logo.webp` is a 420x175 horizontal lockup, and a
+              * browser asked to draw it in a 16px square renders the wordmark as two grey smudges.
+              * This is the MARK alone — cropped from the same master the site's icons come from —
+              * on a white ground, at 16/32/48 in one file so the browser picks its own size.
+              *
+              * White rather than transparent: the artwork is dark line-work, and a transparent
+              * favicon vanishes into a dark tab strip.
+              */
+             ->favicon(asset('images/favicon.ico'))
             /*
              * BOTH FACES, each doing its own job.
              *
-             * `->font()` sets the panel's base, and Nunito Sans is right for it: it is a reading
-             * face at small sizes, and a table of thirty rows is entirely small sizes. Baloo 2 is
-             * the brand's DISPLAY face and carries every heading, label and the logotype, applied
-             * in the compiled theme.
+             * `->font()` sets the panel's BASE, and it is Baloo 2 — the brand's own face, worn by
+             * everything: headings, labels, table cells, buttons, numbers, navigation.
              *
-             * Setting Baloo everywhere was tried and is worse than it sounds: it is a rounded
-             * display face, warm at 32px and mushy at 13px, so the panel reads as on-brand and
-             * scans noticeably slower. Splitting them keeps both.
+             * NUNITO SANS IS NOT GONE, it is reduced to one job: description and helper text, the
+             * sentences somebody reads rather than scans. That is applied in the compiled theme
+             * rather than here, because `->font()` loads exactly one family.
+             *
+             * THE TRADE WAS MADE ON PURPOSE AND IS LOCKED. Baloo is a rounded display face and it
+             * is genuinely mushier than Nunito at 13px; the panel used to split them for that
+             * reason. The answer is size, not a second face — nothing here is 13px any more. See
+             * the font block in `resources/css/filament/admin/tailwind.config.js`.
              */
-            ->font('Nunito Sans')
+            ->font('Baloo 2')
             /*
              * One light palette, as on the site. Filament ships dark mode on by default, and a
              * half-themed dark mode looks broken; there is no dark palette in `tokens.ts` to theme
@@ -133,6 +151,15 @@ class AdminPanelProvider extends PanelProvider
                 fn (string $label): NavigationGroup => NavigationGroup::make($label)->collapsible(false),
                 [
                     'Inbox',
+                    /*
+                     * THE EMAIL LIST IS ITS OWN GROUP, directly under the inbox and deliberately
+                     * not in it. Subscribers used to be the fifth tab of Enquiries, sitting in the
+                     * same pending count as four things that all needed doing — but nobody handles
+                     * a subscriber, so every one of them read as work that could never be finished
+                     * and made the number meaningless. An inbox answers "what is waiting for me";
+                     * this answers "who gets Thursday's email".
+                     */
+                    'Email list',
                     /* Everything written and published: articles, landing pages, the top strip. */
                     'Content System',
                     /* Circles and Stories merged: both are the parenting community, and two groups
@@ -204,6 +231,13 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+                /*
+                 * The two-factor pages. Registered so they get panel routes and the panel's chrome;
+                 * neither appears in the navigation — they are somewhere you are SENT, never
+                 * somewhere you browse to.
+                 */
+                \App\Filament\Admin\Auth\TwoFactorSetup::class,
+                \App\Filament\Admin\Auth\TwoFactorChallenge::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             /*
@@ -213,6 +247,12 @@ class AdminPanelProvider extends PanelProvider
              */
             ->widgets([
                 \App\Filament\Admin\Widgets\InboxOverview::class,
+                /*
+                 * THE SHAPE, under the numbers. The stats answer "is anybody waiting on me"; only a
+                 * trend answers "is this quieter than usual", which is how a form that silently
+                 * stopped posting gets noticed at all.
+                 */
+                \App\Filament\Admin\Widgets\ArrivalsChart::class,
                 \App\Filament\Admin\Widgets\RecentSubmissions::class,
             ])
             ->middleware([
@@ -228,6 +268,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                /*
+                 * TWO-FACTOR IS MANDATORY, FOR EVERY ROLE. On `authMiddleware` rather than in the
+                 * login page, because login is not the only way a session comes to exist — a
+                 * remembered cookie, a deep link, or any future SSO route would all walk past a
+                 * check that lived in one controller. Here it runs on every authenticated request.
+                 */
+                \App\Http\Middleware\RequireTwoFactor::class,
             ]);
     }
 }
