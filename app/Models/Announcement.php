@@ -55,6 +55,7 @@ class Announcement extends Model
     protected $fillable = [
         'label', 'message', 'cta_label', 'theme', 'audience',
         'cta_type', 'cta_route', 'landing_page_id', 'cta_url',
+        'utm_campaign', 'utm_source',
         'starts_at', 'ends_at', 'is_published', 'priority',
     ];
 
@@ -108,10 +109,46 @@ class Announcement extends Model
      */
     public function ctaHref(): ?string
     {
-        return match ($this->cta_type) {
+        $href = match ($this->cta_type) {
             'landing' => $this->landingPage ? '/'.$this->landingPage->slug : null,
             'url' => $this->cta_url,
             default => $this->cta_route,
         };
+
+        return $this->withCampaign($href);
+    }
+
+    /**
+     * Append this strip's campaign to its own link, so the leads it produces are attributable to it.
+     *
+     * WITHOUT THIS THE CAMPAIGN FIELDS WOULD BE DECORATION. A strip that ran for six weeks and the
+     * leads it produced are otherwise two facts with nothing joining them — the lead carries
+     * whatever UTM happened to be on the link the visitor arrived by, which for somebody who
+     * clicked a banner on our own site is nothing at all.
+     *
+     * `utm_source` DEFAULTS TO `site`, because a strip on our own pages IS the source and leaving it
+     * empty would file these leads as Direct — indistinguishable from somebody typing the address in.
+     *
+     * EXISTING QUERY STRINGS ARE PRESERVED. A CTA already carrying `?tab=summer` must keep it;
+     * blindly appending `?utm_campaign=` would produce two question marks and a dead link.
+     */
+    private function withCampaign(?string $href): ?string
+    {
+        if ($href === null || blank($this->utm_campaign)) {
+            return $href;
+        }
+
+        /* An absolute URL to somewhere else is not ours to tag. */
+        if (str_starts_with($href, 'http') && ! str_contains($href, (string) parse_url((string) config('app.frontend_url'), PHP_URL_HOST))) {
+            return $href;
+        }
+
+        $params = http_build_query([
+            'utm_source' => $this->utm_source ?: 'site',
+            'utm_medium' => 'announcement',
+            'utm_campaign' => $this->utm_campaign,
+        ]);
+
+        return $href.(str_contains($href, '?') ? '&' : '?').$params;
     }
 }

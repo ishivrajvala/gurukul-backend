@@ -130,6 +130,22 @@ class AnnouncementResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
+            Forms\Components\Section::make('Campaign')
+                ->description('Name the campaign and the leads this strip produces become attributable to it. Leave it empty and they arrive as Direct — indistinguishable from somebody who typed the address in.')
+                ->schema([
+                    Forms\Components\TextInput::make('utm_campaign')
+                        ->label('Campaign name')
+                        ->maxLength(120)
+                        ->placeholder('summer_parent_circle')
+                        ->helperText('Appended to this strip as utm_campaign. Lowercase with underscores keeps the reports readable — GA4 treats Summer and summer as two campaigns.'),
+
+                    Forms\Components\TextInput::make('utm_source')
+                        ->label('Source')
+                        ->maxLength(80)
+                        ->placeholder('site')
+                        ->helperText('Defaults to "site". Change it only to tell this strip apart from an ad pointing at the same page in the same campaign.'),
+                ])->columns(2)->collapsed(),
+
             Forms\Components\Section::make('When it shows')
                 ->description('Leave a date empty for no bound: no start means it is already running, no end means until you stop it.')
                 ->schema([
