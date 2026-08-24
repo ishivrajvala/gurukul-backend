@@ -43,6 +43,7 @@ class User extends Authenticatable implements FilamentUser
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
+    use \App\Models\Concerns\HasTwoFactor;
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +64,9 @@ class User extends Authenticatable implements FilamentUser
     protected $hidden = [
         'password',
         'remember_token',
+        /* Never serialised, never logged — see HasTwoFactor. */
+        'two_factor_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**
