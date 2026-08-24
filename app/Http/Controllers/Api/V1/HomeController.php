@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\HomeConcern;
 use App\Models\HomeStat;
+use App\Models\SocialLink;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -63,6 +64,28 @@ class HomeController extends Controller
      * the client choose would put the scheduling rule in two places, and the client is the copy
      * that goes stale.
      */
+    /**
+     * The public profiles, in display order, and ONLY the ones with a URL.
+     *
+     * Filtering here rather than on the website is deliberate. If the API returned every platform
+     * and left the website to skip the blank ones, then every consumer — the site, the app, an
+     * email footer — would have to remember to do it, and the first one that forgot would render an
+     * icon linking nowhere. An empty platform is not data anybody needs.
+     *
+     * `platform` is a stable slug and the website maps it to an icon. `label` is what a person
+     * reads, and may be renamed freely (twitter -> "X") without the icon disappearing.
+     */
+    public function socialLinks(): JsonResponse
+    {
+        return response()->json([
+            'data' => SocialLink::live()->get()->map(fn (SocialLink $link): array => [
+                'platform' => $link->platform,
+                'label' => $link->label,
+                'url' => $link->url,
+            ])->all(),
+        ]);
+    }
+
     public function announcement(Request $request): JsonResponse
     {
         /*

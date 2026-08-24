@@ -51,6 +51,9 @@ Route::middleware('throttle:120,1')->prefix('v1')->group(function (): void {
     /* The top strip. Its own route because it is in the site's root layout, on every page. */
     Route::get('/announcement', [HomeController::class, 'announcement']);
 
+    /* Public profiles. Site-wide chrome like the strip: the footer and the contact page both use it. */
+    Route::get('/social-links', [HomeController::class, 'socialLinks']);
+
     Route::get('/journal', [JournalController::class, 'index']);
     /* Its own path rather than `/journal/meta`, which one article slug away would shadow. */
     Route::get('/journal-meta', [JournalController::class, 'meta']);
