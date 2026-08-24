@@ -229,6 +229,14 @@ class SubmissionController extends Controller
             'attribution.landing_path' => ['nullable', 'string', 'max:200'],
             'attribution.submitted_path' => ['nullable', 'string', 'max:200'],
             'attribution.referrer' => ['nullable', 'string', 'max:200'],
+            /*
+             * The ad click. `click_platform` is an enum in practice, but validated only as a short
+             * string: a new platform must not make a real lead bounce, and the value is recorded
+             * rather than dispatched on.
+             */
+            'attribution.click_id' => ['nullable', 'string', 'max:200'],
+            'attribution.click_platform' => ['nullable', 'string', 'max:20'],
+            'attribution.first_click_id' => ['nullable', 'string', 'max:200'],
         ]);
 
         $kind = LeadKind::from($data['kind']);
@@ -290,6 +298,14 @@ class SubmissionController extends Controller
             'attribution.landing_path' => ['nullable', 'string', 'max:200'],
             'attribution.submitted_path' => ['nullable', 'string', 'max:200'],
             'attribution.referrer' => ['nullable', 'string', 'max:200'],
+            /*
+             * The ad click. `click_platform` is an enum in practice, but validated only as a short
+             * string: a new platform must not make a real lead bounce, and the value is recorded
+             * rather than dispatched on.
+             */
+            'attribution.click_id' => ['nullable', 'string', 'max:200'],
+            'attribution.click_platform' => ['nullable', 'string', 'max:20'],
+            'attribution.first_click_id' => ['nullable', 'string', 'max:200'],
         ]);
 
         $subscriber = Subscriber::subscribe($data['email'], $data['name'] ?? null, $data['source'] ?? null);
@@ -360,6 +376,9 @@ class SubmissionController extends Controller
             'landing_path' => $a['landing_path'] ?? null,
             'submitted_path' => $a['submitted_path'] ?? null,
             'referrer' => $a['referrer'] ?? null,
+            'click_id' => $a['click_id'] ?? null,
+            'click_platform' => $a['click_platform'] ?? null,
+            'first_click_id' => $a['first_click_id'] ?? null,
         ];
     }
 

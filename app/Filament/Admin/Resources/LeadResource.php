@@ -197,6 +197,22 @@ class LeadResource extends Resource
             Forms\Components\TextInput::make('landing_path')->label('Arrived on')->disabled(),
             Forms\Components\TextInput::make('submitted_path')->label('Submitted from')->disabled(),
             Forms\Components\TextInput::make('referrer')->label('Referrer')->disabled()->columnSpanFull(),
+
+            /*
+             * THE AD CLICK. Shown because it is the only thing that makes a paid lead traceable:
+             * an auto-tagged Google Ads click carries no UTMs at all, so without this row the
+             * attribution panel above would be entirely empty for exactly the leads that cost money.
+             *
+             * The id itself is long and opaque, and nobody reads it — it is here to be COPIED, into
+             * an offline conversion upload when a lead becomes an enrolment. That is why it takes
+             * the full width and is not truncated.
+             */
+            Forms\Components\TextInput::make('click_platform')->label('Paid click from')->disabled(),
+            Forms\Components\TextInput::make('first_click_id')->label('First click id')->disabled(),
+            Forms\Components\TextInput::make('click_id')
+                ->label('Click id (for offline conversion upload)')
+                ->disabled()
+                ->columnSpanFull(),
         ];
     }
 

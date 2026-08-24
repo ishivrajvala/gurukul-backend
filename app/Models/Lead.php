@@ -31,6 +31,7 @@ class Lead extends Model
         'offer_code', 'offer_applied_at', 'registered_at',
         'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
         'first_source', 'first_campaign', 'landing_path', 'submitted_path', 'referrer',
+        'click_id', 'click_platform', 'first_click_id',
     ];
 
     protected function casts(): array
