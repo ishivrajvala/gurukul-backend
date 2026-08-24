@@ -286,7 +286,7 @@ class AdminPagesRenderTest extends TestCase
 
     private function panelUser(): User
     {
-        $user = User::first();
+        $user = $this->adminUser();
 
         $this->assertNotNull($user, 'no user to act as — seed one first');
         $this->assertTrue(

@@ -20,11 +20,8 @@ class AdminTableConventionsTest extends TestCase
 {
     private function panelUser(): User
     {
-        $user = User::whereHas('roles')->first();
-
-        $this->assertNotNull($user, 'no user with a role to act as — seed one first');
-
-        return $user;
+        /* Built, not found: see `adminUser` on the base TestCase for why looking one up was wrong. */
+        return $this->adminUser();
     }
 
     /**

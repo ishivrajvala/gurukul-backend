@@ -69,7 +69,7 @@ class AdminThemeTest extends TestCase
 
     public function test_the_panel_links_the_theme_and_the_real_logo(): void
     {
-        $user = User::first();
+        $user = $this->adminUser();
 
         $this->assertNotNull($user, 'no user to act as — seed one first');
 

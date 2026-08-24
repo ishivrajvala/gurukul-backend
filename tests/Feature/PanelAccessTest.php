@@ -107,7 +107,7 @@ class PanelAccessTest extends TestCase
 
     public function test_a_user_with_a_role_can_reach_the_panel(): void
     {
-        $user = User::first();
+        $user = $this->adminUser();
 
         $this->assertNotNull($user, 'no user to act as — seed one first');
         $this->assertTrue(

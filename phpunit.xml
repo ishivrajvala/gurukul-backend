@@ -23,8 +23,24 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>
         <env name="CACHE_STORE" value="array"/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value=":memory:"/>
+        <!--
+            POSTGRES, NOT SQLITE, and not the development database either.
+
+            The suite used to say sqlite/:memory:. It is faster, and it is the Laravel default, but
+            it tests a database this project does not run on: production and development are both
+            Postgres, and the differences are exactly where this codebase has already been bitten —
+            a CHECK constraint that survived a table rename passed every sqlite test and broke the
+            live panel.
+
+            gurukul_test is a separate database from gurukul_local on the same server, because
+            RefreshDatabase drops and rebuilds every table it touches. Pointing this at the
+            development database would wipe the team's working data on every test run.
+
+            Credentials still come from .env — only the connection and the database name are
+            overridden here, so nothing secret lives in a committed file.
+        -->
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <env name="DB_DATABASE" value="gurukul_test"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
