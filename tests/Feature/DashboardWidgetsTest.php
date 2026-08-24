@@ -28,7 +28,7 @@ class DashboardWidgetsTest extends TestCase
             ->test(InboxOverview::class)
             ->assertSuccessful()
             ->assertSee('Circle requests')
-            ->assertSee('Enquiries')
+            ->assertSee('Leads')
             ->assertSee('Story submissions')
             ->assertSee('Applications')
             ->assertSee('Questions asked');
@@ -39,7 +39,7 @@ class DashboardWidgetsTest extends TestCase
         Livewire::actingAs($this->panelUser())
             ->test(RecentSubmissions::class)
             ->assertSuccessful()
-            ->assertSee('Latest enquiries');
+            ->assertSee('Latest leads');
     }
 
     /**
@@ -64,5 +64,21 @@ class DashboardWidgetsTest extends TestCase
         $this->assertNotNull($user, 'no user to act as — seed one first');
 
         return $user;
+    }
+
+    /**
+     * THE CHART RENDERS, AND ITS DATA ASSEMBLES.
+     *
+     * A chart widget is lazy, so the dashboard page returns 200 with only a placeholder where it
+     * will be — which means the page-level sweep in `AdminPagesRenderTest` cannot see it and a
+     * chart that throws would ship silently. This drives the component itself, which is the only
+     * place `getData()` actually runs.
+     */
+    public function test_the_arrivals_chart_renders(): void
+    {
+        \Livewire\Livewire::actingAs($this->panelUser())
+            ->test(\App\Filament\Admin\Widgets\ArrivalsChart::class)
+            ->assertOk()
+            ->assertSee('Who got in touch');
     }
 }

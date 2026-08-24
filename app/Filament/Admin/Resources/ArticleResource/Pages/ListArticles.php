@@ -41,7 +41,6 @@ class ListArticles extends ListRecords
                 ->color('gray')
                 ->url(TrendingSearchResource::getUrl()),
 
-            Actions\CreateAction::make(),
         ];
     }
 }

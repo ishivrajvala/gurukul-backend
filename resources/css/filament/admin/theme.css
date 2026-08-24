@@ -4,7 +4,8 @@
  * happened: the compiled file still said `font-family: 'Baloo 2'` on every heading, the face was
  * never fetched, and the panel quietly fell through to the system sans.
  */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -59,6 +60,13 @@
     --av-marigold: #f7b75f;
     --av-green: #56a195;
     --av-orange: #f0713d;
+
+    /*
+     * The same hue darkened until it passes AA on white (4.54:1 against 2.94:1). Not used by
+     * default — the theme's overlines are brand orange by direction — but kept here so switching
+     * is one edit rather than a colour-picking exercise. See the note above the overline block.
+     */
+    --av-orange-ink: #b34618;
     --av-ink: #282828;
     --av-line: rgba(39, 21, 107, 0.12);
     --av-radius-card: 20px;
@@ -97,9 +105,34 @@
 /* ══ TYPOGRAPHY ═══════════════════════════════════════════════════════════════════════════ */
 
 /*
- * Baloo carries the display tier and nothing else: page titles, section and widget headings, modal
- * titles, the big number on a stat. Everything a person reads row by row stays in Nunito.
+ * BALOO 2 IS THE PANEL'S FACE. ALL OF IT. — LOCKED
+ *
+ * Headings, labels, table cells, buttons, numbers, navigation, badges. The base is set by
+ * `->font('Baloo 2')` in AdminPanelProvider, so this block does not have to name every component;
+ * what it does is set the WEIGHTS and the TRACKING each tier needs, which a single base font
+ * declaration cannot.
+ *
+ * ── WHY THIS REVERSED ─────────────────────────────────────────────────────────────────────
+ *
+ * The panel used to split the two faces the way the website does: Baloo for the display tier,
+ * Nunito Sans for anything read row by row. The reasoning was sound and is worth keeping written
+ * down — Baloo is a rounded display face, warm at 32px and genuinely mushy at 13px, and an admin
+ * table used to be entirely 13px.
+ *
+ * It was overruled deliberately. A panel wearing the brand's own face everywhere reads as part of
+ * Avdhara rather than as a tool bolted to the side of it, and that is worth more than the fraction
+ * of a second a Nunito table saves. THE MUSHINESS IS ANSWERED BY SIZE, NOT BY A SECOND FACE:
+ * nothing in this panel is 13px any longer — see the TEXT SIZE block — and at 15px Baloo holds its
+ * counters perfectly.
+ *
+ * NUNITO SANS KEEPS EXACTLY ONE JOB: description and helper text. Those are sentences somebody
+ * READS, at length, to decide what to type — the one place a reading face earns its keep, and the
+ * one place a rounded display face genuinely costs you. Everything else is scanned, not read.
+ *
+ * Do not re-split them without moving the TEXT SIZE block back too. The two are one decision.
  */
+
+/* The display tier: page titles, section and widget headings, modal titles, the big stat number. */
 .fi-header-heading,
 .fi-section-header-heading,
 .fi-modal-heading,
@@ -107,17 +140,16 @@
 .fi-fo-wizard-header-step-label,
 .fi-ta-empty-state-heading,
 .fi-in-entry-wrp-label,
-.fi-sidebar-group-label,
 h1, h2, h3 {
     font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.015em;
 }
 
 .fi-header-heading {
     /* The site's h2 tier. An admin page title should read as a page title, not a browser default. */
-    font-size: 1.75rem;
-    line-height: 1.2;
+    font-size: 1.875rem;
+    line-height: 1.15;
     color: var(--av-indigo);
 }
 
@@ -125,21 +157,147 @@ h1, h2, h3 {
     color: rgba(40, 40, 40, 0.66);
 }
 
-/* Section descriptions are the helper text a person actually reads before filling a form in. */
-.fi-section-header-description,
-.fi-fo-field-wrp-helper-text {
-    line-height: 1.7;
+/*
+ * THE OVERLINE — small, uppercase, tracked out, and ORANGE.
+ *
+ * This is the brand's Label role and the one tier that carries `textOrange` as type. It is applied
+ * to the things that title a region rather than say anything themselves: table column headers, the
+ * sidebar's group labels, the label above a stat.
+ *
+ * A NOTE ON CONTRAST, because this is the rule the rest of the palette bends around. Brand orange
+ * measures 2.94:1 on white. WCAG AA wants 4.5:1 for text this size, so this fails that bar and is
+ * a deliberate, brand-directed exception — orange is the agreed overline colour for the whole
+ * theme. It is confined to words that label something already obvious from its position and never
+ * carries information of its own; nothing a person has to READ is orange anywhere in this panel.
+ * `--av-orange-ink` below is a darkened version of the same hue that passes at 4.54:1, and
+ * swapping the two declarations is a one-line change if that call is ever revisited.
+ */
+.fi-ta-header-cell-label,
+.fi-sidebar-group-label,
+.fi-wi-stats-overview-stat-label {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--av-orange);
+}
+
+/* On the indigo sidebar the overline lifts to marigold — orange on indigo is 2.3:1 and unreadable. */
+.fi-sidebar-group-label {
+    color: var(--av-marigold);
 }
 
 /*
- * FORM LABELS IN BALOO AT 500, matching the site's nav and button weight. They are labels rather
- * than prose, they sit alone above a field, and this is the tier the brand uses for exactly that.
+ * FORM LABELS at 500, matching the site's nav and button weight. They are labels rather than prose,
+ * and they sit alone above a field.
  */
-.fi-fo-field-wrp-label,
-.fi-ta-header-cell-label {
+.fi-fo-field-wrp-label {
     font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
     font-weight: 500;
     letter-spacing: 0;
+    color: var(--av-indigo);
+}
+
+/*
+ * NUNITO SANS, AND ONLY HERE. Section descriptions and field helper text are the sentences a person
+ * actually reads before filling a form in — paragraphs rather than labels. This is the one job the
+ * reading face keeps, and the list below is exhaustive on purpose: anything not named here wears
+ * Baloo.
+ */
+.fi-section-header-description {
+    font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0;
+}
+
+/*
+ * TWO FACES IN THE WHOLE PANEL, AND A THIRD IS A BUG. — LOCKED
+ *
+ * Baloo 2 for everything, Nunito Sans for the one rule above, and nothing else may appear. The
+ * places a third face gets in are never the stylesheet — they are components that ship their own:
+ * the rich-text editors, code blocks, and anything Filament renders with a `prose` class.
+ *
+ * `!important` because these are fighting utility classes and third-party component CSS that load
+ * after this file. It is the correct tool for a rule whose whole job is to be unbeatable.
+ */
+.fi-fo-rich-editor,
+.fi-fo-rich-editor *,
+.tiptap,
+.tiptap *,
+.filament-tiptap-editor,
+.filament-tiptap-editor *,
+.fi-prose,
+.prose,
+.prose * {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/*
+ * THE SERIF ESCAPE HATCH, CLOSED.
+ *
+ * Filament's text column and text entry both accept `->fontFamily(FontFamily::Serif)`, which emits
+ * Tailwind's `.font-serif` — a Georgia stack, and a third face in the panel the moment anybody
+ * reaches for it. No resource here uses it today; this makes sure none can tomorrow without
+ * deliberately deleting this rule, which is a much louder act than adding one enum to a column.
+ */
+.fi .font-serif,
+.fi-body .font-serif {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/*
+ * THE ONE EXEMPTION: actual code. A proportional face makes code unreadable and alignment
+ * meaningless, and `<code>` is not brand type — it is a quotation of something a machine reads.
+ */
+.tiptap code,
+.tiptap pre,
+.prose code,
+.prose pre,
+code, pre, kbd, samp {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace !important;
+}
+
+/*
+ * INPUTS: the value typed in, the label above it, and the placeholder. Filament sets its own stack
+ * on inputs, so inheriting the base font is not enough — they have to be named.
+ */
+.fi-input,
+.fi-select-input,
+.fi-ta-search-field input,
+.fi-fo-field-wrp-label,
+.fi-fo-field-wrp-label *,
+input, select, textarea {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+}
+
+.fi-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * TABLES ARE BALOO THROUGHOUT — every cell, header, badge and empty state. The base font already
+ * says so; this exists because the empty-state description used to be exempted as "prose" and it
+ * is not: it is one line inside a table, and a single Nunito sentence in a Baloo table reads as a
+ * rendering fault rather than as a deliberate contrast.
+ */
+.fi-ta,
+.fi-ta *,
+.fi-ta-empty-state-description {
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * NUMBERS GET TABULAR FIGURES. A column of counts in proportional digits does not line up on the
+ * decimal, and a table of numbers that does not line up is the clearest possible sign of a panel
+ * nobody looked at twice.
+ */
+.fi-wi-stats-overview-stat-value,
+.fi-ta-text-item-label {
+    font-variant-numeric: tabular-nums;
 }
 
 /* ══ THE SHELL ════════════════════════════════════════════════════════════════════════════ */
@@ -772,13 +930,20 @@ h1, h2, h3 {
 }
 
 /*
- * NO PAGE TITLE. The sidebar row is already highlighted and the tab says the same word; a heading
- * that can only repeat them is a line of furniture between the reader and the content. Header
- * ACTIONS stay — they are the only thing in that row worth the space.
+ * THE PAGE TITLE IS BACK, and this reverses a decision documented here at length.
+ *
+ * It used to be hidden, and the argument was decent: the sidebar row is already highlighted and
+ * the browser tab says the same word, so a heading that can only repeat them is furniture. What
+ * that argument missed is that the title is not only a label — it is the top of the page's
+ * STRUCTURE. Tabler builds every screen as a header band and then a body, with the band setting
+ * the rhythm for everything beneath it; hide the title and the band collapses, the body opens
+ * flush against the topbar, and every screen starts with content and no anchor.
+ *
+ * It returns at TABLER'S SIZE, which is what makes it work rather than intrude:
+ * `--tblr-font-size-h2`, 1.25rem on a 1.75rem line, set at the end of THE TABLER LAYER. The
+ * panel's own heading was 1.875rem — half as big again — and at that size the objection above was
+ * fair, because it genuinely did read as a poster over the top of the work.
  */
-.fi-header-heading {
-    display: none;
-}
 
 /*
  * The header row keeps its actions and loses everything else. With the heading hidden it was still
@@ -790,7 +955,7 @@ h1, h2, h3 {
  * `:has()` removes it entirely, and leaves it in place on the pages that do have a Create button.
  */
 .fi-header {
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
     min-height: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -798,14 +963,15 @@ h1, h2, h3 {
     gap: 0;
 }
 
-.fi-header:not(:has(.fi-ac)) {
+/* A page with neither a title nor actions still must not reserve an empty band. */
+.fi-header:empty {
     display: none;
 }
 
-/* And the page itself opens flush with the bar. */
+/* The page opens on Tabler's rhythm — `--tblr-page-padding-y`, spacer-4 — not flush with the bar. */
 .fi-page {
-    padding-top: 0;
-    gap: 0.75rem;
+    padding-top: 1.5rem;
+    gap: 1.5rem;
 }
 
 .fi-header:empty {
@@ -1068,37 +1234,921 @@ h1, h2, h3 {
     letter-spacing: 0.01em;
 }
 
-/* ══ THE LOGIN PAGE ═══════════════════════════════════════════════════════════════════════ */
+/* ══ THE SIGN-IN PAGE ══════════════════════════════════════════════════════════════════════ */
 
 /*
- * The first thing anybody sees, and previously the least branded screen in the panel: a grey field
- * with a white box on it. Indigo ground, white card, the site's radius.
+ * TWO PANELS, NOT A CARD ON A FIELD.
+ *
+ * The first thing anybody sees, and for a long time the least branded screen in the panel: a grey
+ * field with a white box floating in the middle of it. It is now a photograph at full height on
+ * the left and the form on the right, 60/40.
+ *
+ * The markup is `resources/views/filament/admin/auth/layout.blade.php` and the page that asks for
+ * it is `App\Filament\Admin\Auth\Login`. Filament's `.fi-simple-*` classes do not appear on this
+ * screen at all any more, which is why the rules that used to be here are gone rather than
+ * amended: `.fi-simple-layout` would now match nothing in this panel.
  */
-.fi-simple-layout {
+
+.av-auth {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* `dvh` after `vh` so a mobile browser's collapsing address bar cannot leave a strip of the
+       body's grey showing under the panel. The `vh` line is the fallback and has to come first. */
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #ffffff;
+}
+
+/*
+ * 60/40, AND `minmax(0, …)` IS NOT DECORATION.
+ *
+ * A grid track defaults to `min-width: auto`, which means it refuses to shrink below the
+ * min-content width of what is inside it. The form column holds inputs and a submit button with
+ * real minimum widths, so at 1024px the 40% track quietly grew past its share and pushed the
+ * photograph narrower than the 60% asked for here. `minmax(0, …)` is what makes the percentages
+ * mean what they say.
+ *
+ * ONE COLUMN BELOW 1024px, with the photograph gone entirely. Stacking it above the form would
+ * put a full-bleed image between somebody on a phone and the two fields they opened the page for.
+ */
+@media (min-width: 1024px) {
+    .av-auth {
+        grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+    }
+}
+
+/* ── The photograph ────────────────────────────────────────────────────────────────────────── */
+
+.av-auth-brand {
+    position: relative;
+    display: none;
+    overflow: hidden;
+    /* Behind the photo while it decodes, so the panel never flashes white against the form. */
     background-color: var(--av-indigo);
 }
 
-.fi-simple-main {
-    border-radius: var(--av-radius-card);
-    border: 1px solid var(--av-line);
-    box-shadow: 0 20px 60px -20px rgba(39, 21, 107, 0.45);
+@media (min-width: 1024px) {
+    .av-auth-brand {
+        display: block;
+    }
 }
 
 /*
- * The login screen shows the full lockup on indigo, larger still: it is the only thing on it.
- * The WRAPPER has to grow too — `brandLogoHeight` writes an inline height on `.fi-logo`, and a
- * taller <img> inside a shorter box is simply a clipped logo.
+ * `object-fit: cover` — the panel's shape is set by the viewport and the photograph's is not, so
+ * one of the two has to give. Cropping is the one that does not distort a face.
+ *
+ * `object-position` at 42% keeps the woman and the laptop in frame as the column narrows. Dead
+ * centre loses her to the left edge on a 1280px screen, because the subject sits left of centre
+ * in the source and the crop eats evenly from both sides.
  */
-.fi-simple-layout .fi-logo {
-    height: 5rem !important;
+.av-auth-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 42% center;
 }
 
-.fi-simple-layout .av-logo-full {
-    height: 5rem;
+/* ── The form panel ────────────────────────────────────────────────────────────────────────── */
+
+.av-auth-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /*
+     * TIGHT VERTICAL PADDING, and it is a constraint rather than a taste.
+     *
+     * This panel has to fit a laptop at 125% Windows scaling — a 768px screen becomes a ~510px CSS
+     * viewport once browser chrome and the scale factor are taken out. At the 3.5rem this started
+     * on, the form cleared a 900px window and scrolled on a real one. Everything below is measured
+     * against that budget, not against how it looks on a desktop monitor.
+     */
+    padding: 1.75rem 1.5rem;
+    background-color: #ffffff;
 }
 
-.fi-simple-layout .av-logo-mark {
-    display: none;
+@media (min-width: 640px) {
+    .av-auth-panel {
+        padding: 2rem 3rem;
+    }
+}
+
+/*
+ * 24rem, which is the width of the FIELDS rather than the width of the panel. A form allowed to
+ * run the full 40% of a 1600px screen gives you a 600px-wide password box, and a text input far
+ * wider than anything ever typed into it reads as a mistake.
+ */
+.av-auth-panel-inner {
+    position: relative;
+    width: 100%;
+    max-width: 24rem;
+}
+
+.av-auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── The mandala watermark ─────────────────────────────────────────────────────────────────── */
+
+/*
+ * Where the reference puts botanical line-work in the bottom corner. Those leaves are generic
+ * stock ornament; this is the brand's own shape, used the way the site already uses it — a
+ * watermark behind copy rather than a picture of anything.
+ */
+.av-auth-art {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/*
+ * The <defs> carrier. It holds the geometry and draws nothing, so it is taken out of the layout
+ * entirely — left in flow it is an empty box at the SVG default size, pushing the panel around.
+ */
+.av-auth-mandala-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.av-auth-mandala {
+    position: absolute;
+    display: block;
+}
+
+/*
+ * MARIGOLD AT 0.16 ON WHITE IS A MARK, NOT TEXT, and that is what makes it legal. The locked rule
+ * is that marigold never carries running type on white — it measures about 1.9:1 — and nothing is
+ * being read here. As a tint behind a form it is the same use the site makes of it.
+ */
+.av-auth-mandala-near {
+    right: -6rem;
+    bottom: -6rem;
+    width: 20rem;
+    height: 20rem;
+    fill: var(--av-marigold);
+    opacity: 0.16;
+}
+
+/*
+ * The second stamp, smaller and higher, so the corner reads as a drift of marks rather than one
+ * stranded shape. Indigo at 0.05 — the same trick the panel's tinted ground uses.
+ */
+.av-auth-mandala-far {
+    right: 7rem;
+    bottom: 3.5rem;
+    width: 7rem;
+    height: 7rem;
+    fill: var(--av-indigo);
+    opacity: 0.06;
+}
+
+/* Below 1024px the form has the whole screen, so the corner ornament would sit under the button. */
+@media (max-width: 1023px) {
+    .av-auth-art {
+        display: none;
+    }
+}
+
+/* ── The logo ────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * `align-self` IS LOAD-BEARING, and its absence is not a nudge — it stretches the logo.
+ *
+ * `.av-auth-form` is a column flexbox, so its items default to `align-items: stretch`. That
+ * resolves the image's `width: auto` to the full width of the column while `height` stays pinned,
+ * and the lockup renders at about 2.9x its true aspect: a squashed, letterboxed smear that still
+ * looks deliberate enough at a glance to be mistaken for a bad crop of the asset. It is an <img>
+ * with an intrinsic aspect ratio, so it must size itself, not be sized by its row.
+ *
+ * 5.5rem, which is LARGER THAN THE SIDEBAR'S 4.25rem, and that is the right way round here. The
+ * heading this panel used to open with is gone, so the lockup is now the only thing above the
+ * fields — it identifies the screen on its own, and at the old 3.5rem it read as a caption sitting
+ * above a form rather than as the top of the page.
+ *
+ * The ceiling is the asset, not the layout: `logo.webp` is 420px wide, so past about 6rem the
+ * wordmark starts to soften on a 2x display. Anything bigger needs a bigger source file.
+ */
+.av-auth-logo {
+    /*
+     * CENTRED, and `align-self` is still what stops the stretch — it just centres instead of
+     * pinning left now. Removing it altogether would not left-align the logo, it would blow the
+     * lockup out to the full column width; see the note above.
+     */
+    align-self: center;
+    height: 5.5rem;
+    width: auto;
+    margin-bottom: 1.5rem;
+}
+
+/* ── The form itself ───────────────────────────────────────────────────────────────────────── */
+
+/*
+ * The fields, the focus ring and the submit button are already the site's — see CONTROLS above.
+ * All this screen adds is a little more air between the fields than a dense admin form wants, and
+ * a submit button that stands off the last field rather than tucking under it.
+ */
+.av-auth-form .fi-fo-component-ctn {
+    gap: 1rem;
+}
+
+.av-auth-form .fi-form-actions {
+    margin-top: 1.5rem;
+}
+
+.av-auth-form .fi-btn {
+    padding-top: 0.8125rem;
+    padding-bottom: 0.8125rem;
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+}
+
+/* ── The help note ─────────────────────────────────────────────────────────────────────────── */
+
+.av-auth-help {
+    margin-top: 1.25rem;
+}
+
+/* The reference's divider, without the "or" — there is no second way to sign in for it to split. */
+.av-auth-help-rule {
+    display: block;
+    height: 1px;
+    background-color: var(--av-line);
+}
+
+.av-auth-help-text {
+    margin: 0.875rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    text-align: center;
+    color: rgba(40, 40, 40, 0.66);
+}
+
+/* ══ THE TABLER LAYER ═════════════════════════════════════════════════════════════════════ */
+
+/*
+ * LAYOUT, TABLES, FORMS, STATISTICS AND GRAPHS, TAKEN FROM TABLER.
+ *
+ * Read off `preview.tabler.io`'s own compiled stylesheet rather than eyeballed from a screenshot,
+ * so the numbers below are the numbers Tabler ships:
+ *
+ *     card            border 1px · radius 8px · shadow 0 0 4px rgba(ink, .04)
+ *     card header     padding 1rem 1.25rem · transparent · title 1rem / 1.5rem, medium
+ *     card body       padding 1rem 1.25rem
+ *     table cell      padding .75rem .75rem · bottom border only · vertical-align middle
+ *     form control    padding .5625rem 1rem · .875rem / 1.25rem · border 1px · shadow 0 1px 1px
+ *     subheader       .75rem · medium · uppercase · tracking .04em · line-height 1rem
+ *
+ * ── THIS REPLACES THE HORIZON LAYER, IT DOES NOT SIT ON TOP OF IT ─────────────────────────
+ *
+ * The two systems disagree about exactly one thing and it is the important one: ELEVATION. Horizon
+ * floats — 44px of soft coloured shadow, no border, a lot of air. Tabler is flat — a 1px border
+ * doing all the separating and a 4px shadow that is very nearly zero. Applying both gives a card
+ * with a border AND a drop shadow, which is not a blend of the two looks, it is the tell of a
+ * theme assembled from two references. So the premium shadows are gone from cards and stats here.
+ *
+ * ── WHAT IS DELIBERATELY NOT TABLER'S ─────────────────────────────────────────────────────
+ *
+ * Three things stay Avdhara's, because they are locked by `models/tokens.ts` and by the previous
+ * instruction in this file, and a reference cannot outrank them:
+ *
+ *   · RADIUS stays 20px, not Tabler's 8px. `SCALE.cardRadius` is the site's, every card on the
+ *     public site uses it, and a panel at 8px would visibly not be the same product.
+ *   · The SIDEBAR stays indigo. Tabler's is near-white (#F9FAFB); the brand's dark surface is
+ *     indigo and the logo lockup that sits on it is the white variant.
+ *   · TYPE stays Baloo 2, at the sizes already set. Tabler runs Inter at .875rem.
+ */
+
+:root {
+    /* Tabler's card shadow, tinted with the brand's dark rather than with black. */
+    --av-shadow-flat: 0 0 0.25rem rgba(39, 21, 107, 0.04);
+    --av-shadow-input: 0 1px 1px rgba(39, 21, 107, 0.06);
+    --av-border: rgba(39, 21, 107, 0.1);
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * Tabler's page ground is #F9FAFB — a neutral near-white. Ours stays `--av-ground`, the same idea
+ * pulled toward indigo, because this palette contains no grey and a neutral grey next to indigo
+ * reads as a colour cast rather than as a neutral.
+ */
+.fi-main {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* ── Cards, sections and panels ────────────────────────────────────────────────────────────── */
+
+/*
+ * FLAT AND BORDERED. The border separates; the shadow only stops the card looking pasted on.
+ */
+.fi-section,
+.fi-wi-stats-overview-stat,
+.fi-wi-chart,
+.fi-ta-ctn,
+.fi-modal-window {
+    border-radius: var(--av-radius-card);
+    border: 1px solid var(--av-border);
+    box-shadow: var(--av-shadow-flat);
+    background-color: #ffffff;
+}
+
+/*
+ * THE HEADER STRIP is the most recognisable thing about a Tabler card: a title band divided from
+ * the body by a hairline, not a heading floating in the same padded box as the content. It is what
+ * makes a column of cards scan as a stack of named things.
+ */
+.fi-section-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--av-border);
+}
+
+.fi-section-content-ctn {
+    padding: 1rem 1.25rem;
+}
+
+/* Tabler's card title: 1rem at medium, not a display-sized heading inside a small box. */
+.fi-section-header-heading {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+/* ── Statistics ────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * TABLER'S STAT IS THREE LINES IN A FIXED ORDER: the uppercase subheader, the figure, the
+ * qualifier. Ours already had the overline; what changes is the elevation and the restraint —
+ * flat, bordered, and no hover lift, because a KPI is a readout and not a control.
+ */
+.fi-wi-stats-overview-stat {
+    padding: 1rem 1.25rem;
+    box-shadow: var(--av-shadow-flat);
+    transform: none;
+}
+
+.fi-wi-stats-overview-stat:hover {
+    box-shadow: var(--av-shadow-flat);
+    transform: none;
+    border-color: rgba(39, 21, 107, 0.18);
+}
+
+/* Tabler's `.subheader`, exactly: .75rem, medium, uppercase, .04em, 1rem line-height. */
+.fi-wi-stats-overview-stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1rem;
+    text-transform: uppercase;
+}
+
+/* The figure. Tabler runs its `.h1` at 1.75rem here — big, but not a hero number. */
+.fi-wi-stats-overview-stat-value {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-top: 0.25rem;
+}
+
+.fi-wi-stats-overview-stat-description {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+}
+
+/*
+ * The icon chip stays — it is Tabler's `.bg-primary-lt` avatar, the same device at the same size.
+ * Flatter, though: no shadow, and the tint carries it.
+ */
+.fi-wi-stats-overview-stat-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.625rem;
+    border-radius: 0.75rem;
+}
+
+/* ── Tables ────────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * DENSER, AND VERTICALLY CENTRED. Tabler's cell is .75rem all round against the 1rem this had, and
+ * `table-vcenter` is on by default in its dashboard — with mixed content in a row (a badge, an
+ * avatar, two lines of text) anything other than middle alignment reads as broken.
+ */
+.fi-ta-cell {
+    /*
+     * .75rem ALL ROUND, which is Tabler's cell exactly. Filament's own default is a roomier
+     * 1.25rem horizontally; overriding all four sides here rather than only the vertical pair is
+     * what actually changes the density, because the shorthand it ships wins on the axis this
+     * rule does not name.
+     *
+     * The FIRST and LAST cells get their edge inset back further down — see THE TABLE, FULL
+     * WIDTH — so the rows still start clear of the card's edge while the columns between them
+     * stay at Tabler's spacing.
+     */
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+.fi-ta-header-cell {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    vertical-align: middle;
+    background-color: rgba(39, 21, 107, 0.025);
+}
+
+/*
+ * Tabler's table header IS its subheader style — the same uppercase .75rem/.04em treatment as the
+ * stat labels. Ours already matches; only the tracking moves, to Tabler's .04em from .08em.
+ */
+.fi-ta-header-cell-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1rem;
+}
+
+/* Bottom borders only, and none under the last row — the card's own edge closes it. */
+.fi-ta-row {
+    border-bottom: 1px solid var(--av-border);
+}
+
+.fi-ta-row:last-child {
+    border-bottom: 0;
+}
+
+/* ── Forms ─────────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * TABLER'S FORM CONTROL, to the sixteenth of a rem: 9px/16px padding, 14px text on a 20px line,
+ * a 1px border and a 1px inset-ish shadow that gives the field a floor to sit on. Filament's own
+ * input is a ring rather than a border, which is why the ring is being turned off here rather
+ * than restyled.
+ */
+.fi-input-wrp {
+    border: 1px solid var(--av-border);
+    border-radius: var(--av-radius-control);
+    box-shadow: var(--av-shadow-input);
+    background-color: #ffffff;
+    transition: border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+}
+
+.fi-fo-field-wrp .fi-input {
+    padding: 0.5625rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+/*
+ * FOCUS IS A BORDER PLUS A SOFT HALO, which is Tabler's, and it is better than a hard ring at
+ * showing focus without shouting. Indigo, because a blue focus ring in a six-colour palette is a
+ * seventh colour by accident.
+ */
+.fi-input-wrp:focus-within {
+    border-color: var(--av-indigo);
+    box-shadow: 0 0 0 0.25rem rgba(39, 21, 107, 0.12);
+}
+
+/* The label above the field: Tabler's is .875rem at medium, sitting close to its input. */
+.fi-fo-field-wrp-label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-bottom: 0.375rem;
+}
+
+/* ── Graphs ────────────────────────────────────────────────────────────────────────────────── */
+
+/*
+ * Tabler's charts sit in a card with a header strip and no padding of their own beneath it — the
+ * plot runs to the card's edges, which is what makes a sparkline-style area chart read as part of
+ * the card rather than as a picture inside it.
+ */
+.fi-wi-chart {
+    padding: 1rem 1.25rem;
+}
+
+.fi-wi-chart-header {
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--av-border);
+}
+
+.fi-wi-chart-header-heading {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+/* ── Kept from the previous layer, because Tabler does not contradict them ─────────────────── */
+
+/*
+ * A HOVER THAT IS FELT RATHER THAN SEEN. 3% indigo — enough to track which row the cursor is on
+ * across a wide table, not enough to look like a selection. Tabler uses `--tblr-table-hover-bg`
+ * for the same job at a similar weight.
+ */
+.fi-ta-row {
+    transition: background-color 160ms ease-out;
+}
+
+.fi-ta-row:hover {
+    background-color: rgba(39, 21, 107, 0.03);
+}
+
+/*
+ * PILL-SHAPED AND TINTED, not solid — Tabler's `.badge` is a pill too. A row of solid-filled
+ * badges is a row of shouting; a tinted pill carries the same information and lets the row's
+ * actual content lead.
+ */
+.fi-badge {
+    border-radius: 999px;
+    padding: 0.25rem 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* ── Layout: the page header band ──────────────────────────────────────────────────────────── */
+
+/*
+ * TABLER'S PAGE TITLE IS SMALL, and this is the correction that changes the feel of every screen.
+ *
+ * `--tblr-font-size-h2: 1.25rem` on a 1.75rem line at bold. This panel was running 1.875rem — half
+ * as big again — which is why the pages read as a series of posters rather than as a tool. In
+ * Tabler the title is a label for where you are; the CONTENT is what is meant to be large.
+ *
+ * `--tblr-page-padding-y` is `spacer-4`, 1.5rem, and it sets the rhythm twice over: the header band
+ * is that far below the topbar, and the body that far below the header.
+ */
+.fi-header-heading {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
+
+.fi-header {
+    margin-bottom: 1.5rem;
+}
+
+/* ── Tables: the header row ────────────────────────────────────────────────────────────────── */
+
+/*
+ * `--tblr-bg-surface-tertiary` resolves to `--tblr-gray-50` (#f9fafb) — a header band a half-step
+ * off white rather than a tint of the accent. Ours is indigo at 3.5%, which lands in the same
+ * place on this palette; what was actually wrong was the PADDING and the wrapping.
+ *
+ * `white-space: nowrap` is the one that matters. A column header allowed to wrap turns a 40px
+ * header row into a 60px one the moment a table has a column called "Last written to", and the
+ * whole grid shifts. Tabler never wraps a header; it lets the table scroll instead.
+ */
+.fi-ta-header-cell {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
+}
+
+/* ── Tables: the two-tone body ─────────────────────────────────────────────────────────────── */
+
+/*
+ * THE THING MOST MISSING, and it is the reason a Tabler table looks calm and a default one looks
+ * busy: ONLY THE FIRST COLUMN IS FULL-STRENGTH TEXT. Everything after it is `.text-secondary`,
+ * #6b7280 — a muted grey against the #1f2937 body colour.
+ *
+ * Look at the markup and it is explicit on every row:
+ *
+ *     <td>Paweł Kuna</td>
+ *     <td class="text-secondary">UI Designer, Training</td>
+ *     <td class="text-secondary">pawel@…</td>
+ *
+ * The effect is that the eye runs straight down the first column to find the row it wants, and the
+ * supporting fields stay legible without competing. A table where every cell is equally black is a
+ * table you have to read rather than scan — which is what this panel had.
+ *
+ * Ours is indigo at 62% rather than a grey hex, because this palette contains no grey and a
+ * neutral #6b7280 beside indigo reads as a colour cast. Same contrast job, brand's own ink.
+ */
+.fi-ta-cell .fi-ta-text-item-label {
+    color: rgba(39, 21, 107, 0.62);
+}
+
+/*
+ * The first column is the one being looked up: full-strength indigo, at weight. This existed
+ * already — what it was missing was everything else stepping back so it could lead.
+ */
+.fi-ta-row .fi-ta-cell:first-of-type .fi-ta-text-item-label {
+    font-weight: 600;
+    color: var(--av-indigo);
+}
+
+/*
+ * BADGES AND LINKS KEEP THEIR OWN COLOUR. They are the exceptions Tabler makes too — a status
+ * badge that has been greyed out has lost the only thing it was for.
+ */
+.fi-ta-cell .fi-badge,
+.fi-ta-cell .fi-link,
+.fi-ta-cell a {
+    color: inherit;
+}
+
+.fi-ta-cell .fi-badge {
+    color: unset;
+}
+
+/* ── Tables: flush inside the card ─────────────────────────────────────────────────────────── */
+
+/*
+ * `.card-table` is Tabler's flush variant and its rules are, verbatim:
+ *
+ *     .card-table tr td:first-child, .card-table tr th:first-child { padding-left: 1.25rem }
+ *     .card-table tr td:last-child,  .card-table tr th:last-child  { padding-right: 1.25rem }
+ *     .card-table thead tr:first-child { border-top: 0 }
+ *
+ * Which is exactly the full-bleed arrangement already set further up this file — the table runs to
+ * the card's edges and only the outermost cells carry an inset. Confirmed against the shipped CSS
+ * rather than assumed; this comment exists so the next person does not "fix" it back to a padded
+ * table.
+ */
+.fi-ta-table thead tr:first-child {
+    border-top: 0;
+}
+
+/* ══ THE TABLE, FULL WIDTH ════════════════════════════════════════════════════════════════ */
+
+/*
+ * NO SIDE PADDING, AND LOW ELEVATION.
+ *
+ * A table is not a card with a table inside it. Filament wraps one in the same padded, shadowed
+ * panel it gives a form section, which costs 3rem of width on every row and makes a fifteen-column
+ * table scroll sideways while the page has room to spare. The rows now run to the edge of their
+ * container and the shell is a quiet outline rather than a floating card — the elevation belongs
+ * to the stat tiles and the chart, which are things you look AT, not through.
+ */
+.fi-ta-ctn {
+    border-radius: var(--av-radius-card);
+    border: 1px solid var(--av-border);
+    /* The same near-flat shadow every other card carries — see THE TABLER LAYER. */
+    box-shadow: var(--av-shadow-flat);
+    overflow: hidden;
+}
+
+/*
+ * ZERO HORIZONTAL PADDING at every level Filament applies it — the container, the header strip,
+ * the toolbar and the pagination bar all pad independently, and leaving any one of them padded
+ * leaves the header visibly inset from the rows beneath it.
+ */
+.fi-ta-ctn > *,
+.fi-ta-header,
+.fi-ta-content,
+.fi-ta-table {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*
+ * The cells put it back, once. Rows still need a left margin to read as a column rather than as
+ * text jammed against an edge — the point is that ONE rule owns it, so the header and the rows
+ * cannot disagree.
+ */
+.fi-ta-header-cell:first-child,
+.fi-ta-cell:first-of-type {
+    padding-left: 1.25rem;
+}
+
+.fi-ta-header-cell:last-child,
+.fi-ta-cell:last-of-type {
+    padding-right: 1.25rem;
+}
+
+/* The toolbar (search, filters) and the pagination bar keep their own inset. */
+.fi-ta-header-toolbar,
+.fi-ta-pagination {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+/*
+ * THE ROW ACTIONS COLUMN, right-aligned and tight. Icon buttons need far less room than labelled
+ * ones, and a wide actions column pushes the content that matters off the left of the screen.
+ */
+.fi-ta-actions {
+    gap: 0.25rem;
+    justify-content: flex-end;
+}
+
+/* ══ BUTTONS, FROM THE WEBSITE ════════════════════════════════════════════════════════════ */
+
+/*
+ * THESE ARE THE SITE'S `Button` COMPONENT, transcribed — not a new set invented for the panel.
+ *
+ * From `views/shared/Button.tsx`: the display face at 500, a 250ms ease-out transition, and per
+ * size a fixed height, radius, horizontal padding and text size. Filament's default button is
+ * closest to that component's `sm`, so `sm` is what the base rule below reproduces:
+ *
+ *     sm   h 2.5rem · radius 10px · px 1rem   · 14px
+ *     md   h 3rem   · radius 12px · px 1.5rem · 15px
+ *
+ * The variants are the site's meanings, unchanged: primary is the indigo CTA, secondary is the
+ * marigold one with INDIGO text (never white — that pairing is 1.9:1), ghost is an indigo outline
+ * that fills on hover. The 1px lift is a pointer affordance the site uses, so it comes across too.
+ */
+.fi-btn {
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 10px;
+    font-family: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0;
+    transition: transform 250ms ease-out, filter 250ms ease-out, background-color 250ms ease-out;
+}
+
+.fi-btn.fi-size-lg {
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 12px;
+    font-size: 0.9375rem;
+}
+
+.fi-btn.fi-color-primary {
+    background-color: var(--av-indigo);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(39, 21, 107, 0.25);
+}
+
+.fi-btn.fi-color-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Indigo on marigold. The locked pairing — white on marigold is about 1.9:1 and unreadable. */
+.fi-btn.fi-color-warning {
+    background-color: var(--av-marigold);
+    color: var(--av-indigo);
+    box-shadow: 0 4px 16px rgba(247, 183, 95, 0.3);
+}
+
+.fi-btn.fi-color-warning:hover {
+    filter: brightness(0.95);
+    color: var(--av-indigo);
+    transform: translateY(-1px);
+}
+
+/* The site's `ghost`: a 1.5px indigo outline that fills on hover. */
+.fi-btn.fi-btn-outlined {
+    border: 1.5px solid var(--av-indigo);
+    background-color: transparent;
+    color: var(--av-indigo);
+    box-shadow: none;
+}
+
+.fi-btn.fi-btn-outlined:hover {
+    background-color: var(--av-indigo);
+    color: #ffffff;
+}
+
+/*
+ * ICON BUTTONS: square, quiet, and no shadow. A row with three labelled buttons on it is a row
+ * you read twice — once for the record and once for the controls. `Open` and `Delete` are the two
+ * most guessable icons in any admin, and the label survives as a tooltip and as the accessible
+ * name, so nothing is lost by not printing it.
+ */
+.fi-icon-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 10px;
+    color: var(--av-indigo);
+    transition: background-color 180ms ease-out, color 180ms ease-out;
+}
+
+.fi-icon-btn:hover {
+    background-color: rgba(39, 21, 107, 0.07);
+}
+
+/*
+ * DESTRUCTIVE STAYS RED, and it stays red on hover too. Brand orange is close enough to be
+ * tempting and is the wrong call: people expect red for the control that cannot be undone, and a
+ * delete button in Avdhara orange gets pressed by accident.
+ */
+.fi-icon-btn.fi-color-danger {
+    color: #b91c1c;
+}
+
+.fi-icon-btn.fi-color-danger:hover {
+    background-color: rgba(185, 28, 28, 0.08);
+}
+
+/* ══ THE CAMPAIGN PREVIEW ════════════════════════════════════════════════════════════════ */
+
+/*
+ * The email preview's frame. A fixed height with its own scroll rather than a frame that grows to
+ * fit: an email is as long as it is, and a modal that stretches to 3,000px puts the Close button
+ * somewhere nobody can reach.
+ */
+.av-campaign-preview {
+    border-radius: var(--av-radius-control);
+    border: 1px solid var(--av-line);
+    overflow: hidden;
+    /* The mail client's own ground, so the white email reads as a message on a surface. */
+    background-color: var(--av-ground);
+}
+
+.av-campaign-preview iframe {
+    display: block;
+    width: 100%;
+    height: 70vh;
+    min-height: 26rem;
+    border: 0;
+    background-color: #ffffff;
+}
+
+/* ══ TWO-FACTOR ══════════════════════════════════════════════════════════════════════════ */
+
+/* Sits inside the split auth layout, so it inherits the login page's panel and type. */
+.av-2fa-note {
+    margin: 0 0 1.25rem;
+    font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: rgba(40, 40, 40, 0.72);
+}
+
+.av-2fa-steps {
+    margin: 0 0 1.5rem;
+    padding-left: 1.1rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: rgba(40, 40, 40, 0.78);
+}
+
+.av-2fa-steps li {
+    margin-bottom: 0.35rem;
+}
+
+/* The QR on white, always — a dark ground behind one stops some scanners reading it. */
+.av-2fa-qr {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid var(--av-border);
+    border-radius: var(--av-radius-control);
+}
+
+.av-2fa-qr svg {
+    display: block;
+    width: 11rem;
+    height: 11rem;
+}
+
+.av-2fa-manual {
+    margin-bottom: 1.5rem;
+    font-size: 0.8125rem;
+    color: rgba(40, 40, 40, 0.66);
+}
+
+.av-2fa-manual summary {
+    cursor: pointer;
+    color: var(--av-indigo);
+    font-weight: 600;
+}
+
+.av-2fa-manual code {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    background-color: var(--av-ground);
+    border: 1px solid var(--av-border);
+    border-radius: 6px;
+    /* Letter-spaced: this gets copied by hand, and a mis-typed secret fails silently. */
+    letter-spacing: 0.08em;
+    word-break: break-all;
+}
+
+/*
+ * The recovery codes. Monospace and spaced out because they are transcribed by a person, and an
+ * l/1 or O/0 confusion here means being locked out on the day it matters.
+ */
+.av-2fa-codes {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 1rem;
+    background-color: var(--av-ground);
+    border: 1px solid var(--av-border);
+    border-radius: var(--av-radius-control);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    color: var(--av-indigo);
+}
+
+.av-2fa-submit {
+    width: 100%;
+    margin-top: 1.25rem;
+    justify-content: center;
 }
 
 /* ══ MISCELLANY ═══════════════════════════════════════════════════════════════════════════ */

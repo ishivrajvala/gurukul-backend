@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Filament\Admin\Resources\JobApplicationResource;
-use App\Models\Enquiry;
+use App\Models\Campaign;
+use App\Models\Lead;
+use App\Models\Subscriber;
 use App\Models\JobApplication;
 use App\Models\JobRole;
 use App\Models\StorySubmission;
@@ -65,7 +67,7 @@ class AdminPagesRenderTest extends TestCase
         $this->assertGreaterThan(10, count($paths), 'the panel reported almost no resources');
 
         foreach ($paths as $path) {
-            $response = $this->actingAs($user)->get($path);
+            $response = $this->signedIn($user)->get($path);
 
             if ($response->getStatusCode() !== 200) {
                 $failures[] = sprintf('%s → %d', $path, $response->getStatusCode());
@@ -79,7 +81,7 @@ class AdminPagesRenderTest extends TestCase
      * Create pages too.
      *
      * They run the same form schema as edit but with NO record, which is the one thing that turns a
-     * `fn (Enquiry $record)` in a placeholder or a default into a 500 that the edit sweep never
+     * `fn (Lead $record)` in a placeholder or a default into a 500 that the edit sweep never
      * sees — the argument is null on a create page and typed closures do not accept it.
      */
     public function test_every_create_page_renders(): void
@@ -93,7 +95,7 @@ class AdminPagesRenderTest extends TestCase
             }
 
             $url = $resource::getUrl('create');
-            $response = $this->actingAs($user)->get($url);
+            $response = $this->signedIn($user)->get($url);
 
             if ($response->getStatusCode() !== 200) {
                 $failures[] = sprintf('%s → %d', $url, $response->getStatusCode());
@@ -138,7 +140,7 @@ class AdminPagesRenderTest extends TestCase
             }
 
             $url = $resource::getUrl('edit', ['record' => $record]);
-            $response = $this->actingAs($user)->get($url);
+            $response = $this->signedIn($user)->get($url);
 
             if ($response->getStatusCode() !== 200) {
                 $failures[] = sprintf('%s → %d', $url, $response->getStatusCode());
@@ -178,13 +180,32 @@ class AdminPagesRenderTest extends TestCase
     private function throwawayRecordFor(string $model): ?Model
     {
         return match ($model) {
-            Enquiry::class => Enquiry::create([
+            /*
+             * A CAMPAIGN, because its edit page mounts a RELATION MANAGER and nothing else in this
+             * sweep does. A relation manager is a separate Livewire component resolved by class
+             * name at mount; with `optimize-autoloader` on, a newly added one is absent from the
+             * classmap until `composer dump-autoload` runs, and the page dies with
+             * `Unable to find component`. Every test here passed while that was broken in the
+             * browser, because with no Campaign row the edit page was silently skipped.
+             */
+            Campaign::class => Campaign::create([
+                'subject' => 'Render test',
+                'content' => '<p>A row that exists for the length of this test.</p>',
+                'status' => Campaign::STATUS_DRAFT,
+            ]),
+            Lead::class => Lead::create([
                 'kind' => 'contact',
                 'name' => 'Render test',
                 'email' => 'render-test@example.invalid',
                 'message' => 'A row that exists for the length of this test.',
-                'status' => 'pending',
+                'status' => 'new',
             ]),
+            /*
+             * A subscriber, because its edit page reads `unsubscribe_token` and the status select
+             * — neither of which runs on the list page, which is exactly the gap this sweep exists
+             * to cover.
+             */
+            Subscriber::class => Subscriber::subscribe('render-test@example.invalid', 'Render test', 'test'),
             JobApplication::class => $this->throwawayApplication(),
             StorySubmission::class => StorySubmission::create([
                 'name' => 'Render test',

@@ -29,13 +29,25 @@ export default {
         extend: {
             fontFamily: {
                 /*
-                 * TWO FACES, and the split is the site's. Baloo 2 is the display face and carries
-                 * headings; Nunito Sans carries everything read row by row. Baloo is warm at 32px
-                 * and mushy at 13px, and an admin table is entirely 13px — setting it everywhere
-                 * would be more on-brand and measurably harder to scan.
+                 * BALOO 2 IS THE PANEL'S FACE. Everything wears it: headings, labels, table cells,
+                 * buttons, numbers, navigation. Nunito Sans is kept for ONE job — description and
+                 * helper text, the sentences a person reads rather than scans.
+                 *
+                 * THIS IS A DELIBERATE REVERSAL, and it is locked. The panel previously split them
+                 * the way the website does: Baloo for display, Nunito for anything read row by row,
+                 * on the reasoning that Baloo is warm at 32px and mushy at 13px. That reasoning is
+                 * real — a Baloo table does scan slightly slower than a Nunito one — and it was
+                 * overruled on purpose, because a panel that shares the brand's face everywhere
+                 * reads as part of Avdhara rather than as a tool bolted to the side of it. The
+                 * mushiness is answered by SIZE instead: nothing in this panel is 13px any more
+                 * (see the TEXT SIZE block in theme.css), which is what makes the face hold up.
+                 *
+                 * Do not split them again without changing that block too.
                  */
                 display: ['Baloo 2', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                sans: ['Nunito Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                sans: ['Baloo 2', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                /* The one exception: prose. Applied in theme.css, not by utility class. */
+                body: ['Nunito Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
             },
             colors: {
                 /* The six. Not a palette to extend — see the frontend's models/tokens.ts. */

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Filament\Admin\Auth\Login;
 use App\Models\User;
+use Filament\Facades\Filament;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 /**
@@ -32,6 +35,76 @@ class PanelAccessTest extends TestCase
         $this->get('/login')->assertStatus(200);
     }
 
+    /*
+     * THE SIGN-IN FORM ACTUALLY SIGNS SOMEBODY IN.
+     *
+     * `test_the_login_screen_renders` above cannot catch this and never could: the login page is
+     * now a custom Livewire component with a hand-written view (`App\Filament\Admin\Auth\Login`),
+     * and a view that dropped `{{ $this->form }}` or the submit action would still return 200 with
+     * a headline, a logo and no way in. Every other test in this file reaches the panel through
+     * `actingAs`, which walks straight past the form. This is the only one that goes through it.
+     *
+     * It drives the component rather than posting to a URL because there is no URL to post to —
+     * Filament authenticates over Livewire, so `authenticate()` is the endpoint.
+     */
+    public function test_the_login_form_authenticates_a_real_user(): void
+    {
+        $password = 'a-long-enough-password';
+
+        $user = User::create([
+            'name' => 'Sign In Test',
+            'email' => 'sign-in-test@example.invalid',
+            'password' => bcrypt($password),
+        ]);
+
+        /* A role, because `canAccessPanel` admits nobody without one — see the class docblock. */
+        $user->assignRole('content_strategist');
+
+        try {
+            Livewire::test(Login::class)
+                ->set('data.email', $user->email)
+                ->set('data.password', $password)
+                ->call('authenticate')
+                ->assertHasNoFormErrors();
+
+            $this->assertTrue(
+                Filament::auth()->check(),
+                'the form submitted without error but nobody was signed in',
+            );
+        } finally {
+            Filament::auth()->logout();
+            $user->delete();
+        }
+    }
+
+    /*
+     * And it refuses a wrong password rather than letting one through quietly. The failure arrives
+     * as a validation error on the EMAIL field, which is where Filament puts it deliberately: one
+     * message under one field cannot tell somebody which of the two they got wrong.
+     */
+    public function test_the_login_form_refuses_a_wrong_password(): void
+    {
+        $user = User::create([
+            'name' => 'Wrong Password Test',
+            'email' => 'wrong-password-test@example.invalid',
+            'password' => bcrypt('the-real-password'),
+        ]);
+
+        $user->assignRole('content_strategist');
+
+        try {
+            Livewire::test(Login::class)
+                ->set('data.email', $user->email)
+                ->set('data.password', 'not-the-real-password')
+                ->call('authenticate')
+                ->assertHasFormErrors(['email']);
+
+            $this->assertFalse(Filament::auth()->check());
+        } finally {
+            $user->delete();
+        }
+    }
+
     public function test_a_user_with_a_role_can_reach_the_panel(): void
     {
         $user = User::first();
@@ -42,7 +115,7 @@ class PanelAccessTest extends TestCase
             'the seeded user has no role, so nobody can reach the panel at all',
         );
 
-        $this->actingAs($user)->get('/')->assertStatus(200);
+        $this->signedIn($user)->get('/')->assertStatus(200);
     }
 
     public function test_a_user_with_no_role_is_refused(): void

@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 /**
  * Applications.
  *
- * ITS OWN LIST, not filtered out of the general enquiries inbox. An application read three weeks
+ * ITS OWN LIST, not filtered out of the general leads inbox. An application read three weeks
  * late is a candidate who has taken another job, and interleaving them with newsletter signups is
  * how that happens. The list defaults to pending and shows a badge on the sidebar, because this is
  * the one inbox on this site where the cost of not looking falls on somebody else.

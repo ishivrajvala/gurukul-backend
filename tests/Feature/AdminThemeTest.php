@@ -73,7 +73,7 @@ class AdminThemeTest extends TestCase
 
         $this->assertNotNull($user, 'no user to act as — seed one first');
 
-        $html = $this->actingAs($user)->get(Filament::getPanel('admin')->getUrl())->getContent();
+        $html = $this->signedIn($user)->get(Filament::getPanel('admin')->getUrl())->getContent();
 
         $this->assertStringContainsString(
             self::THEME,

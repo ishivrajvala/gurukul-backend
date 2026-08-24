@@ -14,6 +14,7 @@ class ListTopics extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [Actions\CreateAction::make()];
+        /* The New button lives IN the table now — see AppServiceProvider. */
+        return [];
     }
 }

@@ -149,6 +149,18 @@ class ArticleResource extends Resource
 
                 Forms\Components\FileUpload::make('featured_image')
                     ->image()
+                    /*
+                     * EXPLICIT TYPES AND A CEILING. `->image()` alone accepts `image/*`, which is
+                     * the BROWSER's word for what a file is — trivially set to anything by a
+                     * client that is not a browser. Naming the formats makes Laravel check the
+                     * real mime type server-side, and the size cap stops an upload field being a
+                     * way to fill the disk.
+                     *
+                     * SVG IS DELIBERATELY ABSENT. It is a document, not a picture: it can carry
+                     * script, and served from our own origin that script would run as us.
+                     */
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->maxSize(4096)
                     ->directory('journal')
                     ->disk('public')
                     ->label('Photograph'),
