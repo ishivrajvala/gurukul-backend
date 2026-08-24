@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    /*
+     * The shared secret the mail provider sends back with a bounce or complaint webhook. Unset
+     * means the endpoint answers 404 to everybody — a missing variable must never be the thing
+     * that leaves a public endpoint open.
+     */
+    'email_webhook' => [
+        'secret' => env('EMAIL_WEBHOOK_SECRET'),
+    ],
+
 ];
