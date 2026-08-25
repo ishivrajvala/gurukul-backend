@@ -50,6 +50,17 @@ class LandingPageController extends Controller
                     'canonical' => $page->seo?->canonical_url,
                 ],
                 'sections' => $page->sections->map(fn (LandingSection $s): array => [
+                    /*
+                     * COMPONENT AND VARIANT, plus `type` for as long as it exists.
+                     *
+                     * `type` is the field this API sent before sections were split into what they
+                     * are FOR and how they LOOK. It is still sent because the consumer uses it to
+                     * render a row the split migration never saw — one restored from an older dump,
+                     * most obviously — and dropping it here would turn those into blank sections
+                     * with nothing anywhere saying why.
+                     */
+                    'component' => $s->component,
+                    'variant' => $s->variant,
                     'type' => $s->type,
                     'data' => $this->withImageUrls($s->data ?? []),
                 ]),

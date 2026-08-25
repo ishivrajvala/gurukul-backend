@@ -6,6 +6,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\LandingPageResource\Pages;
 use App\Models\LandingPage;
+use App\Models\LandingSection;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -63,7 +64,7 @@ class LandingPageResource extends Resource
 
     protected static ?string $modelLabel = 'landing page';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -139,203 +140,240 @@ class LandingPageResource extends Resource
                         ->addActionLabel('Add a section')
                         ->itemLabel(fn (array $state): string => static::sectionLabel($state))
                         ->schema([
-                            Forms\Components\Select::make('type')
-                                ->options(\App\Models\LandingSection::TYPES)
+                            /*
+                             * COMPONENT, THEN LAYOUT. Two pickers, because they answer two
+                             * questions: what is this section for, and how should it look. The
+                             * layout list is filtered by the component, so an editor is only ever
+                             * offered arrangements that component is designed to survive.
+                             */
+                            Forms\Components\Select::make('component')
+                                ->label('Section')
+                                ->options(LandingSection::componentOptions())
                                 ->required()
                                 ->live()
                                 ->native(false)
-                                ->columnSpanFull(),
+                                ->searchable()
+                                ->helperText(fn (Forms\Get $get): ?string => LandingSection::purposeOf($get('component')))
+                                /* Changing the component almost always invalidates the layout — a
+                                   Hero's variants and an FAQ's barely overlap. Resetting to the new
+                                   component's default is the only safe move; leaving the old value
+                                   would store a layout the renderer has to silently correct. */
+                                ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('variant', LandingSection::defaultVariant($state)))
+                                ->columnSpan(1),
+
+                            Forms\Components\Select::make('variant')
+                                ->label('Layout')
+                                ->options(fn (Forms\Get $get): array => LandingSection::variantOptions($get('component')))
+                                ->required()
+                                ->live()
+                                ->native(false)
+                                ->helperText('How this section is arranged. The content below adapts to it.')
+                                ->columnSpan(1),
 
                             Forms\Components\Toggle::make('is_published')
                                 ->label('Show this section')
-                                ->default(true),
+                                ->default(true)
+                                ->columnSpanFull(),
 
                             /*
-                             * ONE GROUP PER TYPE, each visible only for its own type. A single set
-                             * of fields shared across six section types is a form where two thirds
-                             * of what is on screen does not apply, and an editor cannot tell which
-                             * third does.
+                             * ONE SHARED FIELD SET, SHOWN BY LAYOUT — which is the whole payoff of
+                             * every component sharing one data shape.
+                             *
+                             * The old form carried one group of fields per section type, and with
+                             * six types that was already a screen where two thirds of what showed
+                             * did not apply. At twenty-nine it would be unusable. Here a field
+                             * appears when the CHOSEN LAYOUT actually reads it: `usesImage` and the
+                             * helpers beside it hold the same knowledge the renderer has, written
+                             * once.
+                             *
+                             * Because the shape is shared, switching a section from Cards to Image
+                             * Right keeps everything already written in it, instead of moving it to
+                             * a differently-named field and losing it.
                              */
-                            ...static::heroFields(),
-                            ...static::richTextFields(),
-                            ...static::pointsFields(),
-                            ...static::faqFields(),
-                            ...static::ctaFields(),
-                            ...static::formFields(),
+                            ...static::contentFields(),
                         ])
                         ->columns(2),
                 ]),
         ]);
     }
 
-    /** What the collapsed repeater row says, so a stack of six sections is readable closed. */
+    /** What the collapsed repeater row says, so a long page is readable closed. */
     private static function sectionLabel(array $state): string
     {
-        $type = $state['type'] ?? null;
-        $name = $type ? (\App\Models\LandingSection::TYPES[$type] ?? $type) : 'New section';
-        $name = strtok($name, '—');
+        $component = $state['component'] ?? null;
+        $name = $component
+            ? (LandingSection::COMPONENTS[$component]['label'] ?? $component)
+            : 'New section';
+
+        $variant = $state['variant'] ?? null;
+        $layout = $variant ? (LandingSection::VARIANTS[$variant] ?? null) : null;
 
         $data = $state['data'] ?? [];
-        $title = is_array($data) ? ($data['title'] ?? $data['heading'] ?? null) : null;
+        $title = is_array($data) ? ($data['title'] ?? null) : null;
 
-        return trim($name).($title ? ' · '.$title : '');
+        /* Name · Title · Layout. The title is what somebody scanning a collapsed stack is looking
+           for, so it comes before the layout rather than after the component name alone. */
+        return trim($name)
+            .($title ? ' · '.$title : '')
+            .($layout ? '  ('.$layout.')' : '');
+    }
+
+    /* ---------------------------------------------------------------- fields -- */
+
+    /** Layouts that draw the single picture. */
+    private static function usesImage(?string $variant): bool
+    {
+        return in_array($variant, ['image-only', 'image-left', 'image-right', 'image-points', 'full-bleed', 'overlay'], true);
+    }
+
+    /** Layouts that draw the repeated list — points, cards, steps, questions. */
+    private static function usesItems(?string $variant): bool
+    {
+        return in_array($variant, ['content-points', 'image-points', 'cards', 'grid', 'carousel', 'timeline', 'interactive', 'content-only'], true);
+    }
+
+    /** Layouts with words in them at all. A bare picture has none. */
+    private static function usesText(?string $variant): bool
+    {
+        return ! in_array($variant, ['image-only', 'full-bleed'], true);
     }
 
     /** @return array<Forms\Components\Component> */
-    private static function heroFields(): array
+    private static function contentFields(): array
     {
         return [
             Forms\Components\TextInput::make('data.eyebrow')
                 ->label('Eyebrow')
-                ->helperText('The small uppercase line above the headline.')
+                ->helperText('The small uppercase line above the heading.')
                 ->maxLength(80)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero'),
+                ->visible(fn (Forms\Get $get): bool => static::usesText($get('variant')))
+                ->columnSpan(1),
 
             Forms\Components\TextInput::make('data.title')
-                ->label('Headline')
-                ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero')
-                ->columnSpanFull(),
+                ->label('Heading')
+                ->maxLength(160)
+                ->visible(fn (Forms\Get $get): bool => static::usesText($get('variant')))
+                ->columnSpan(1),
 
             Forms\Components\Textarea::make('data.body')
-                ->label('Paragraph')
+                ->label('Lead paragraph')
+                ->helperText('One or two plain sentences. For anything longer or formatted, use the rich text below.')
                 ->rows(3)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero')
+                ->visible(fn (Forms\Get $get): bool => static::usesText($get('variant')))
                 ->columnSpanFull(),
 
-            Forms\Components\TextInput::make('data.ctaLabel')
-                ->label('Button text')
-                ->maxLength(80)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero'),
-
-            Forms\Components\TextInput::make('data.ctaHref')
-                ->label('Button goes to')
-                ->maxLength(300)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero'),
+            /*
+             * RICH TEXT ONLY WHERE IT IS ACTUALLY RENDERED. The layouts prefer `html` over `body`
+             * when both exist, and only the prose-shaped ones read it — offering the editor on a
+             * Cards section would let somebody write three paragraphs that never appear anywhere.
+             */
+            Forms\Components\RichEditor::make('data.html')
+                ->label('Rich text')
+                ->helperText('Used instead of the lead paragraph when filled in.')
+                ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList', 'h2', 'h3', 'blockquote', 'undo', 'redo'])
+                ->visible(fn (Forms\Get $get): bool => in_array($get('variant'), ['content-only', 'full-width', 'image-left', 'image-right'], true))
+                ->columnSpanFull(),
 
             Forms\Components\FileUpload::make('data.image')
-                ->label('Picture')
+                ->label('Image')
                 ->image()
                 ->disk('public')
                 ->directory('landing')
-                ->maxSize(2048)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'hero')
-                ->columnSpanFull(),
-        ];
-    }
+                ->imageEditor()
+                ->visible(fn (Forms\Get $get): bool => static::usesImage($get('variant')))
+                ->columnSpan(1),
 
-    /** @return array<Forms\Components\Component> */
-    private static function richTextFields(): array
-    {
-        return [
-            Forms\Components\TextInput::make('data.heading')
-                ->label('Heading')
+            Forms\Components\TextInput::make('data.imageAlt')
+                ->label('Image description')
+                ->helperText('For screen readers. Leave empty if the picture is purely decorative.')
                 ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'rich_text')
+                ->visible(fn (Forms\Get $get): bool => static::usesImage($get('variant')))
+                ->columnSpan(1),
+
+            Forms\Components\TextInput::make('data.video')
+                ->label('YouTube id')
+                ->helperText('Just the id, e.g. dQw4w9WgXcQ — not the whole address.')
+                ->maxLength(40)
+                ->visible(fn (Forms\Get $get): bool => $get('variant') === 'video')
                 ->columnSpanFull(),
 
-            Forms\Components\RichEditor::make('data.html')
-                ->label('Copy')
-                ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList', 'h2', 'h3', 'blockquote', 'undo', 'redo'])
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'rich_text')
-                ->columnSpanFull(),
-        ];
-    }
-
-    /** @return array<Forms\Components\Component> */
-    private static function pointsFields(): array
-    {
-        return [
-            Forms\Components\TextInput::make('data.heading')
-                ->label('Heading')
-                ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'points')
+            Forms\Components\Repeater::make('data.media')
+                ->label('Gallery')
+                ->schema([
+                    Forms\Components\FileUpload::make('src')
+                        ->label('Image')
+                        ->image()
+                        ->disk('public')
+                        ->directory('landing')
+                        ->required(),
+                    Forms\Components\TextInput::make('alt')->label('Description')->maxLength(200),
+                ])
+                ->addActionLabel('Add a picture')
+                ->collapsed()
+                ->itemLabel(fn (array $state): string => $state['alt'] ?? 'Picture')
+                ->visible(fn (Forms\Get $get): bool => $get('variant') === 'gallery')
                 ->columnSpanFull(),
 
             Forms\Components\Repeater::make('data.items')
-                ->label('Points')
+                ->label(fn (Forms\Get $get): string => match ($get('variant')) {
+                    'timeline' => 'Steps',
+                    'content-only' => 'Questions',
+                    default => 'Items',
+                })
                 ->schema([
-                    Forms\Components\TextInput::make('title')->required()->maxLength(120),
-                    Forms\Components\Textarea::make('body')->rows(2)->maxLength(400),
+                    Forms\Components\TextInput::make('meta')
+                        ->label('Small label')
+                        ->helperText('A step number, an age span, a duration. Optional.')
+                        ->maxLength(40),
+                    Forms\Components\TextInput::make('title')
+                        ->label('Title')
+                        ->maxLength(160),
+                    Forms\Components\Textarea::make('body')
+                        ->label('Text')
+                        ->rows(3)
+                        ->columnSpanFull(),
+                    Forms\Components\FileUpload::make('image')
+                        ->label('Picture')
+                        ->image()
+                        ->disk('public')
+                        ->directory('landing')
+                        /* Only the layouts that actually draw a per-item picture. `../../` steps
+                           out of the repeater item and back to the section. */
+                        ->visible(fn (Forms\Get $get): bool => in_array($get('../../variant'), ['cards', 'grid', 'carousel', 'timeline'], true)),
                 ])
-                ->defaultItems(3)
-                ->maxItems(6)
-                ->helperText('Three or six read best in the grid. Four and five leave a gap on the last row.')
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'points')
-                ->columnSpanFull(),
-        ];
-    }
-
-    /** @return array<Forms\Components\Component> */
-    private static function faqFields(): array
-    {
-        return [
-            Forms\Components\TextInput::make('data.heading')
-                ->label('Heading')
-                ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'faq')
-                ->columnSpanFull(),
-
-            Forms\Components\Repeater::make('data.items')
-                ->label('Questions')
-                ->schema([
-                    Forms\Components\TextInput::make('question')->required()->maxLength(200),
-                    Forms\Components\Textarea::make('answer')->required()->rows(3)->maxLength(1200),
-                ])
-                ->defaultItems(3)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'faq')
-                ->columnSpanFull(),
-        ];
-    }
-
-    /** @return array<Forms\Components\Component> */
-    private static function ctaFields(): array
-    {
-        return [
-            Forms\Components\TextInput::make('data.title')
-                ->label('Heading')
-                ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'cta_band')
-                ->columnSpanFull(),
-
-            Forms\Components\Textarea::make('data.body')
-                ->label('One line beneath it')
-                ->rows(2)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'cta_band')
+                ->columns(2)
+                ->addActionLabel('Add one')
+                ->collapsed()
+                ->itemLabel(fn (array $state): string => $state['title'] ?? 'Item')
+                ->visible(fn (Forms\Get $get): bool => static::usesItems($get('variant')))
                 ->columnSpanFull(),
 
             Forms\Components\TextInput::make('data.ctaLabel')
                 ->label('Button text')
-                ->maxLength(80)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'cta_band'),
+                ->maxLength(60)
+                ->visible(fn (Forms\Get $get): bool => static::usesText($get('variant')))
+                ->columnSpan(1),
 
             Forms\Components\TextInput::make('data.ctaHref')
-                ->label('Button goes to')
-                ->maxLength(300)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'cta_band'),
-        ];
-    }
-
-    /** @return array<Forms\Components\Component> */
-    private static function formFields(): array
-    {
-        return [
-            Forms\Components\TextInput::make('data.heading')
-                ->label('Heading')
+                ->label('Button link')
+                ->helperText('A path on this site, e.g. /begin')
                 ->maxLength(200)
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'form')
-                ->columnSpanFull(),
+                ->visible(fn (Forms\Get $get): bool => static::usesText($get('variant')))
+                ->columnSpan(1),
 
+            /*
+             * THE FORM BELONGS TO THE CALL TO ACTION ALONE. Both forms are the site's own — they
+             * already post with their own kind, show their in-flight and failed states, and refuse
+             * to show a thank-you for a submission that did not arrive. Offering one on any other
+             * section would put two forms on a page competing for the same answer.
+             */
             Forms\Components\Select::make('data.form')
-                ->label('Which form')
-                ->options([
-                    'waitlist' => 'Join the waitlist',
-                    'contact' => 'Contact us',
-                ])
-                ->default('waitlist')
+                ->label('Attach a form')
+                ->options(['waitlist' => 'Join the waitlist', 'contact' => 'Contact'])
+                ->placeholder('No form')
                 ->native(false)
-                ->helperText('Submissions land in Inbox > Enquiries, filed under that kind.')
-                ->visible(fn (Forms\Get $get): bool => $get('type') === 'form')
+                ->helperText('Replaces the button with the real form.')
+                ->visible(fn (Forms\Get $get): bool => $get('component') === 'cta')
                 ->columnSpanFull(),
         ];
     }
