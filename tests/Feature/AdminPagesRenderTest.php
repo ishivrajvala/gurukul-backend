@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Filament\Admin\Resources\JobApplicationResource;
+use App\Filament\Admin\Resources\CallRequestResource;
 use App\Models\Campaign;
 use App\Models\Lead;
 use App\Models\Subscriber;
@@ -118,8 +119,17 @@ class AdminPagesRenderTest extends TestCase
                 continue;
             }
 
+            /*
+             * THROUGH THE RESOURCE'S OWN QUERY, not the bare model.
+             *
+             * Two resources now share the `Lead` table and scope it to disjoint halves — Leads
+             * excludes `booking`, Call requests is nothing but. Asking the model directly hands back
+             * whichever row is newest and then 404s, because the resource cannot see it. That is
+             * not a fixture problem: it is the same mistake a real scoped resource would make, and
+             * the query is the only place that knows what each screen is allowed to show.
+             */
             /** @var Model|null $record */
-            $record = $resource::getModel()::query()->latest('id')->first();
+            $record = $resource::getEloquentQuery()->latest('id')->first();
 
             if ($record === null) {
                 /*
@@ -128,7 +138,7 @@ class AdminPagesRenderTest extends TestCase
                  * by accident, whenever leftover test data happened to be sitting in the dev
                  * database. The test provides its own row and removes it again.
                  */
-                $record = $this->throwawayRecordFor($resource::getModel());
+                $record = $this->throwawayRecordFor($resource);
 
                 if ($record === null) {
                     $skipped[] = $resource::getSlug();
@@ -177,9 +187,24 @@ class AdminPagesRenderTest extends TestCase
      *
      * Returns null for anything not listed, which is what puts a resource in the skipped line.
      */
-    private function throwawayRecordFor(string $model): ?Model
+    private function throwawayRecordFor(string $resource): ?Model
     {
-        return match ($model) {
+        /*
+         * KEYED BY RESOURCE FIRST, because `Lead` backs two of them and a row that satisfies one
+         * is invisible to the other. Everything else is a one-model-one-resource table and matches
+         * on the model as it always did.
+         */
+        if ($resource === CallRequestResource::class) {
+            return Lead::create([
+                'kind' => 'booking',
+                'name' => 'Render test',
+                'email' => 'render-test@example.invalid',
+                'message' => 'A row that exists for the length of this test.',
+                'status' => 'new',
+            ]);
+        }
+
+        return match ($resource::getModel()) {
             /*
              * A CAMPAIGN, because its edit page mounts a RELATION MANAGER and nothing else in this
              * sweep does. A relation manager is a separate Livewire component resolved by class

@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\MostAsked;
 use App\Models\TrendingSearch;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * The Parent Journal.
@@ -23,12 +25,44 @@ use Illuminate\Http\JsonResponse;
  */
 class JournalController extends Controller
 {
-    public function index(): JsonResponse
+    /**
+     * The feed, optionally searched.
+     *
+     * SEARCH IS SERVER-SIDE, and it did not used to be. The site fetched the whole archive once and
+     * filtered it in the browser, which was fine at thirty-six rows and stopped being fine at a
+     * hundred and seventy-seven: every reader downloads every article's title and standfirst before
+     * they can type a letter, and the search can only ever match what happens to be in that payload.
+     *
+     * Moving it here also means one definition of what "matching" means. The browser matched title
+     * and standfirst; the sitemap, any future related-articles query and this endpoint would each
+     * have grown their own. `ILIKE` on both fields is deliberately the same rule as before — this
+     * change is about WHERE it runs, not about making the results different.
+     *
+     * NO PAGINATION, on purpose. The consumer pages the feed itself (`INITIAL_VISIBLE`, then eight
+     * at a time) and needs the full result set to do it, plus the counts per topic in the sidebar.
+     * A hundred and seventy-seven summaries is a small payload; when it stops being one, the
+     * consumer's paging is what has to move, not this.
+     */
+    public function index(Request $request): JsonResponse
     {
-        $articles = Article::published()
-            ->with(['topic', 'ageStages'])
-            ->get()
-            ->map(fn (Article $a): array => $this->summary($a));
+        $query = Article::published()->with(['articleTopic', 'ageStages']);
+
+        $term = trim((string) $request->query('q', ''));
+
+        /* Two characters, matching the typeahead's own floor. A single letter matches most of the
+           archive and is never what somebody meant. */
+        if (mb_strlen($term) >= 2) {
+            /* Escape the LIKE wildcards. Without this a reader typing `%` matches everything and
+               `_` matches any single character, which reads as the search being broken. */
+            $escaped = addcslashes($term, '%_\\');
+
+            $query->where(function (Builder $q) use ($escaped): void {
+                $q->where('title', 'ILIKE', '%'.$escaped.'%')
+                    ->orWhere('standfirst', 'ILIKE', '%'.$escaped.'%');
+            });
+        }
+
+        $articles = $query->get()->map(fn (Article $a): array => $this->summary($a));
 
         return response()->json(['data' => $articles]);
     }
@@ -64,7 +98,7 @@ class JournalController extends Controller
     public function show(string $slug): JsonResponse
     {
         $article = Article::published()
-            ->with(['topic', 'ageStages', 'seo'])
+            ->with(['articleTopic', 'ageStages', 'seo'])
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -95,7 +129,7 @@ class JournalController extends Controller
             'slug' => $a->slug,
             'title' => $a->title,
             'standfirst' => $a->standfirst ?? $a->short_description,
-            'topic' => $a->topic?->slug,
+            'topic' => $a->articleTopic?->slug,
             'ages' => $a->ageStages->pluck('key'),
             /*
              * WHETHER THE PIECE IS WRITTEN, without carrying the writing.

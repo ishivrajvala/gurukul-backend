@@ -1,590 +1,1572 @@
 {
+  "categories": [
+    {
+      "slug": "child-development",
+      "name": "Child Development",
+      "fullName": "Child Development",
+      "eyebrow": "Child Development",
+      "description": "What actually changes between two and sixteen, why two children the same age can look nothing alike, and what is worth watching for."
+    },
+    {
+      "slug": "focus-behaviour",
+      "name": "Focus & Behaviour",
+      "fullName": "Focus & Behaviour",
+      "eyebrow": "Focus & Behaviour",
+      "description": "Concentration, attention span, self-control and the transitions that go wrong. What is developing underneath the behaviour you can see."
+    },
+    {
+      "slug": "learning",
+      "name": "Learning",
+      "fullName": "Reading, Writing & Maths",
+      "eyebrow": "Learning",
+      "description": "How reading, handwriting and number sense actually arrive, and how to help without turning the kitchen table into a classroom."
+    },
+    {
+      "slug": "steam",
+      "name": "STEAM",
+      "fullName": "Science, Technology, Engineering, Arts & Maths",
+      "eyebrow": "STEAM",
+      "description": "Scientific thinking, building, problem solving and the kind of curiosity that survives being tested. Mostly with things you already own."
+    },
+    {
+      "slug": "technology-ai",
+      "name": "Technology & AI",
+      "fullName": "Technology & AI",
+      "eyebrow": "Technology & AI",
+      "description": "Screens, chatbots, coding and the question underneath all of them: what should a child be able to do that a machine cannot?"
+    },
+    {
+      "slug": "communication",
+      "name": "Communication",
+      "fullName": "Communication & Confidence",
+      "eyebrow": "Communication",
+      "description": "Vocabulary, listening, speaking up and the quiet child. How expression develops, and why confidence is a by-product rather than a lesson."
+    },
+    {
+      "slug": "emotions-friends",
+      "name": "Emotions & Friends",
+      "fullName": "Emotions & Friendships",
+      "eyebrow": "Emotions & Friends",
+      "description": "Anger, tantrums, siblings, empathy and belonging. What a child is still building before they can manage any of it on their own."
+    },
+    {
+      "slug": "health-safety",
+      "name": "Health & Safety",
+      "fullName": "Health, Sleep & Safety",
+      "eyebrow": "Health & Safety",
+      "description": "Sleep, movement, sensory needs, body safety and online safety. The ordinary things that quietly decide how the rest of the week goes."
+    },
+    {
+      "slug": "life-skills",
+      "name": "Life Skills",
+      "fullName": "Life Skills & Independence",
+      "eyebrow": "Life Skills",
+      "description": "Chores, money, responsibility and resilience. The practical competence a child leaves home with, built one ordinary task at a time."
+    },
+    {
+      "slug": "bharatiya-wisdom",
+      "name": "Bharatiya Wisdom",
+      "fullName": "Bharatiya Knowledge & Values",
+      "eyebrow": "Bharatiya Wisdom",
+      "description": "Panchakosha, dharma, seva, Sanskrit and cultural identity: set beside what child development can and cannot claim about them."
+    },
+    {
+      "slug": "gurukul-education",
+      "name": "Gurukul Education",
+      "fullName": "The Gurukul Tradition",
+      "eyebrow": "Gurukul Education",
+      "description": "How the gurukul actually worked, what it got right about learning, and which of its principles survive contact with a modern childhood."
+    },
+    {
+      "slug": "nature-creativity",
+      "name": "Nature & Creativity",
+      "fullName": "Nature, Play & Creativity",
+      "eyebrow": "Nature & Creativity",
+      "description": "Outdoor play, free play, boredom and making things. The unstructured hours that do more developmental work than most timetables."
+    },
+    {
+      "slug": "parenting",
+      "name": "Parenting",
+      "fullName": "Parenting & Family Life",
+      "eyebrow": "Parenting",
+      "description": "Listening, boundaries, shouting, guilt and comparison. The part nobody asks about, answered without pretending it is simple."
+    },
+    {
+      "slug": "learning-science",
+      "name": "Learning Science",
+      "fullName": "The Science of Learning",
+      "eyebrow": "Learning Science",
+      "description": "What research actually establishes about play, memory, attention and movement, including where the evidence is thinner than the headlines."
+    },
+    {
+      "slug": "global-education",
+      "name": "Global Education",
+      "fullName": "Education Systems & Approaches",
+      "eyebrow": "Global Education",
+      "description": "Finland, Japan, Singapore, Montessori, Waldorf, NEP 2020 and homeschooling. What each is actually built on, and what travels."
+    }
+  ],
   "articles": [
     {
-      "slug": "should-my-five-year-old-already-be-reading",
-      "title": "Should My Five-Year-Old Already Be Reading?",
-      "standfirst": "Reading readiness begins long before a child decodes their first sentence. Here is what to notice, and what genuinely matters at this age.",
-      "category": "learning",
+      "slug": "child-development-by-age-a-parents-guide",
+      "title": "Child Development by Age: A Parent’s Guide",
+      "standfirst": "What actually changes between two and sixteen, stage by stage, and why the ages attached to any milestone are averages rather than appointments.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 12,
+      "publishedAt": "2026-08-20",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/child-development-by-age-a-parents-guide.jpg",
+        "alt": "Illustration for Child Development by Age: A Parent's Guide"
+      }
+    },
+    {
+      "slug": "child-development-milestones-ages-2-to-4",
+      "title": "Child Development Milestones Ages 2 to 4",
+      "standfirst": "Language arrives in a rush, the body gets steadier, and the will shows up all at once. What is developing between two and four, and what the wobbles mean.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/child-development-milestones-ages-2-to-4.jpg",
+        "alt": "Illustration for Child Development Milestones Ages 2 to 4"
+      }
+    },
+    {
+      "slug": "child-development-milestones-ages-4-to-6",
+      "title": "Child Development Milestones Ages 4 to 6",
+      "standfirst": "Imagination, early self-control and the first real friendships. The four-to-six window explained without turning it into a checklist to fail.",
+      "topic": "child-development",
       "ageStages": [
         "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-06",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/child-development-milestones-ages-4-to-6.jpg",
+        "alt": "Illustration for Child Development Milestones Ages 4 to 6"
+      }
+    },
+    {
+      "slug": "child-development-milestones-ages-6-to-8",
+      "title": "Child Development Milestones Ages 6 to 8",
+      "standfirst": "Reading steadies, rules start to matter, and children begin measuring themselves against everyone around them. What is growing between six and eight.",
+      "topic": "child-development",
+      "ageStages": [
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/child-development-milestones-ages-6-to-8.jpg",
+        "alt": "Illustration for Child Development Milestones Ages 6 to 8"
+      }
+    },
+    {
+      "slug": "why-do-children-develop-at-different-speeds",
+      "title": "Why Do Children Develop at Different Speeds?",
+      "standfirst": "Two children the same age can look nothing alike and both be entirely fine. What sets the pace, what does not, and when a difference is worth a second look.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-22",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/why-do-children-develop-at-different-speeds.jpg",
+        "alt": "Illustration for Why Do Children Develop at Different Speeds"
+      }
+    },
+    {
+      "slug": "what-is-whole-child-development",
+      "title": "What Is Whole Child Development?",
+      "standfirst": "A child is not a stack of separate subjects. What it means to develop body, feeling, thinking and character together, and why splitting them apart fails.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-29",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-whole-child-development.jpg",
+        "alt": "Illustration for What Is Whole Child Development"
+      }
+    },
+    {
+      "slug": "what-is-developmental-readiness-in-children",
+      "title": "What Is Developmental Readiness in Children?",
+      "standfirst": "Readiness is not willingness and it is not age. Why a child who cannot do something this month often can two months later, without anyone teaching harder.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-developmental-readiness-in-children.jpg",
+        "alt": "Illustration for What Is Developmental Readiness in Children"
+      }
+    },
+    {
+      "slug": "how-does-play-support-child-development",
+      "title": "How Does Play Support Child Development?",
+      "standfirst": "Play is not the break from development. It is where a great deal of it happens. Attention, language, negotiation and self-control, built while nobody is being taught.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-does-play-support-child-development.jpg",
+        "alt": "Illustration for How Does Play Support Child Development"
+      }
+    },
+    {
+      "slug": "what-is-school-readiness",
+      "title": "What Is School Readiness?",
+      "standfirst": "School readiness is mostly not academic. What a child actually needs before starting school, why letters are the smallest part of it, and what to do with the year before.",
+      "topic": "child-development",
+      "ageStages": [
+        "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-21",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/what-is-school-readiness.jpg",
+        "alt": "Illustration for What Is School Readiness"
+      }
+    },
+    {
+      "slug": "how-to-support-your-childs-development-at-home",
+      "title": "How to Support Your Child’s Development at Home",
+      "standfirst": "Almost none of it needs materials, an app or a schedule. The ordinary daily things that carry the most developmental weight, and what is safe to stop worrying about.",
+      "topic": "child-development",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-29",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-support-your-childs-development-at-home.jpg",
+        "alt": "Illustration for How to Support Your Child's Development at Home"
+      }
+    },
+    {
+      "slug": "how-to-improve-concentration-in-children",
+      "title": "How to Improve Concentration in Children",
+      "standfirst": "Concentration is not something a child can produce on command. It rests on capacities that mature over years. Here is what they are, and how to strengthen them.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-08-18",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-improve-concentration-in-children.jpg",
+        "alt": "Illustration for How to Improve Concentration in Children"
+      }
+    },
+    {
+      "slug": "why-cant-my-child-focus",
+      "title": "Why Can’t My Child Focus?",
+      "standfirst": "Before assuming a focus problem, it is worth ruling out the four ordinary explanations that account for most of it: sleep, difficulty, interest, and the state of the room.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-cant-my-child-focus.jpg",
+        "alt": "Illustration for Why Can't My Child Focus"
+      }
+    },
+    {
+      "slug": "attention-span-by-age-what-is-normal",
+      "title": "Attention Span by Age: What Is Normal?",
+      "standfirst": "The numbers passed around online are mostly invented. What research actually suggests about how long a child holds attention, and why the task changes the answer.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-07-04",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/attention-span-by-age-what-is-normal.jpg",
+        "alt": "Illustration for Attention Span by Age: What Is Normal"
+      }
+    },
+    {
+      "slug": "what-is-executive-function-in-children",
+      "title": "What Is Executive Function in Children?",
+      "standfirst": "The mental control system behind starting, stopping, remembering and switching. What it is in plain language, and why it is still under construction well into the twenties.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-executive-function-in-children.jpg",
+        "alt": "Illustration for What Is Executive Function in Children"
+      }
+    },
+    {
+      "slug": "executive-function-activities-for-kids",
+      "title": "Executive Function Activities for Kids",
+      "standfirst": "Games that genuinely load working memory, inhibition and flexibility. Most of them older than any curriculum, and none of them requiring a worksheet.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-20",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/executive-function-activities-for-kids.jpg",
+        "alt": "Illustration for Executive Function Activities for Kids"
+      }
+    },
+    {
+      "slug": "how-to-improve-working-memory-in-children",
+      "title": "How to Improve Working Memory in Children",
+      "standfirst": "Working memory is how much a child can hold in mind while doing something with it. Why forgetting the second half of an instruction is not defiance, and what helps.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-improve-working-memory-in-children.jpg",
+        "alt": "Illustration for How to Improve Working Memory in Children"
+      }
+    },
+    {
+      "slug": "how-to-teach-self-control-to-children",
+      "title": "How to Teach Self Control to Children",
+      "standfirst": "Self-control is not obedience, and it cannot be installed by consequences alone. How it actually develops, and the conditions that let a child practise it.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-self-control-to-children.jpg",
+        "alt": "Illustration for How to Teach Self Control to Children"
+      }
+    },
+    {
+      "slug": "why-does-my-child-have-trouble-with-transitions",
+      "title": "Why Does My Child Have Trouble With Transitions?",
+      "standfirst": "Stopping one thing and starting another is a specific skill, and it is harder than either activity. Why transitions produce more meltdowns than anything else in the day.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-does-my-child-have-trouble-with-transitions.jpg",
+        "alt": "Illustration for Why Does My Child Have Trouble With Transitions"
+      }
+    },
+    {
+      "slug": "how-much-screen-time-is-healthy-for-kids",
+      "title": "How Much Screen Time Is Healthy for Kids?",
+      "standfirst": "The honest answer is that the number matters less than what it displaces and what is on the screen. What the guidance says, and where it is weaker than it sounds.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-much-screen-time-is-healthy-for-kids.jpg",
+        "alt": "Illustration for How Much Screen Time Is Healthy for Kids"
+      }
+    },
+    {
+      "slug": "how-to-reduce-screen-time-for-kids",
+      "title": "How to Reduce Screen Time for Kids",
+      "standfirst": "Cutting screen time without a daily fight is mostly a question of what replaces it. What works, what backfires, and why how you announce it matters more than the rule.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-reduce-screen-time-for-kids.jpg",
+        "alt": "Illustration for How to Reduce Screen Time for Kids"
+      }
+    },
+    {
+      "slug": "why-does-my-child-get-angry-when-screen-time-ends",
+      "title": "Why Does My Child Get Angry When Screen Time Ends?",
+      "standfirst": "The end of a screen is a hard transition on top of an absorbing state. Why the reaction looks out of proportion, and how to make the ending land better.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-01-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-does-my-child-get-angry-when-screen-time-ends.jpg",
+        "alt": "Illustration for Why Does My Child Get Angry When Screen Time Ends"
+      }
+    },
+    {
+      "slug": "signs-of-overstimulation-in-children",
+      "title": "Signs of Overstimulation in Children",
+      "standfirst": "Overstimulation often looks like bad behaviour and gets treated as it. How to tell them apart, and what a child needs when the input has outrun what they can process.",
+      "topic": "focus-behaviour",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/signs-of-overstimulation-in-children.jpg",
+        "alt": "Illustration for Signs of Overstimulation in Children"
+      }
+    },
+    {
+      "slug": "when-should-a-child-start-reading",
+      "title": "When Should a Child Start Reading?",
+      "standfirst": "Reading is a stack of separate abilities that mature at their own pace, and the visible part arrives last. What the age numbers mean, and what they do not.",
+      "topic": "learning",
+      "ageStages": [
+        "explorers",
+        "builders"
       ],
       "readingMinutes": 8,
       "publishedAt": "2026-08-17",
       "isFeatured": true,
       "image": {
-        "src": "/journal/reading-at-five.jpg",
-        "alt": "A parent and child sharing a picture book"
+        "src": "/journal/when-should-a-child-start-reading.jpg",
+        "alt": "Illustration for When Should a Child Start Reading"
       }
     },
     {
-      "slug": "my-child-hates-writing-what-do-i-do",
-      "title": "My Child Hates Writing. What Do I Do?",
-      "standfirst": "The bottleneck is almost never imagination. Separating the thinking from the handwriting lets both of them get easier.",
-      "category": "learning",
-      "ageStages": [
-        "builders",
-        "thinkers"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-04",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/hates-writing.jpg",
-        "alt": "A child pausing over an open exercise book"
-      }
-    },
-    {
-      "slug": "math-anxiety-why-kids-struggle-and-what-helps",
-      "title": "Math Anxiety: Why Kids Struggle (and What Helps)",
-      "standfirst": "Math confidence grows from curiosity and hands-on experiences, not pressure.",
-      "category": "learning",
-      "ageStages": [
-        "builders"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-08-13",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/math-anxiety.jpg",
-        "alt": "A child working with counting blocks at a table"
-      }
-    },
-    {
-      "slug": "how-much-homework-is-too-much",
-      "title": "How Much Homework Is Too Much?",
-      "standfirst": "There is a point where the evening costs more than the worksheet returns. The research is clearer about where that point sits than schools tend to be.",
-      "category": "learning",
-      "ageStages": [
-        "thinkers",
-        "leaders"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-07-29",
-      "isFeatured": true,
-      "image": {
-        "src": "/journal/homework-hour.jpg",
-        "alt": "A parent sitting beside a child at a homework table"
-      }
-    },
-    {
-      "slug": "my-toddler-wont-sit-still-to-learn-anything",
-      "title": "My Toddler Won't Sit Still to Learn Anything",
-      "standfirst": "At three, sitting still is not the state learning happens in. Almost everything a child of this age takes in arrives through movement.",
-      "category": "learning",
-      "ageStages": [
-        "seekers"
-      ],
-      "readingMinutes": 5,
-      "publishedAt": "2026-07-19",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/toddler-moving.jpg",
-        "alt": "A toddler moving between play materials on the floor"
-      }
-    },
-    {
-      "slug": "why-doesnt-my-child-listen-the-first-time",
-      "title": "Why Doesn't My Child Listen the First Time?",
-      "standfirst": "Selective hearing is rarely selective. Working memory offers a plainer explanation, and a fix that does not involve raising your voice.",
-      "category": "behaviour",
+      "slug": "how-to-teach-a-child-to-read-at-home",
+      "title": "How to Teach a Child to Read at Home",
+      "standfirst": "What genuinely helps at home is closer to talking, listening and playing with sounds than to instruction. A developmental route through reading, in order.",
+      "topic": "learning",
       "ageStages": [
         "explorers",
         "builders"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-08-06",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/first-time-listening.jpg",
-        "alt": "A parent crouching to speak with a child at eye level"
-      }
-    },
-    {
-      "slug": "big-feelings-little-bodies-understanding-tantrums",
-      "title": "Big Feelings, Little Bodies: Understanding Tantrums",
-      "standfirst": "Tantrums are communication, not manipulation. Let's understand what's really going on.",
-      "category": "behaviour",
-      "ageStages": [
-        "seekers"
-      ],
-      "readingMinutes": 5,
-      "publishedAt": "2026-08-15",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/tantrum.jpg",
-        "alt": "A young child mid-tantrum with a parent close by"
-      }
-    },
-    {
-      "slug": "should-i-punish-or-explain",
-      "title": "Should I Punish or Explain?",
-      "standfirst": "A consequence a child cannot connect to the act is just a punishment with better branding. The connection is the whole mechanism.",
-      "category": "behaviour",
-      "ageStages": [
-        "explorers",
-        "builders",
-        "thinkers"
       ],
       "readingMinutes": 9,
       "publishedAt": "2026-07-25",
-      "isFeatured": true,
-      "image": {
-        "src": "/journal/punish-or-explain.jpg",
-        "alt": "A parent and child talking together on a doorstep"
-      }
-    },
-    {
-      "slug": "my-teenager-has-stopped-talking-to-me",
-      "title": "My Teenager Has Stopped Talking to Me",
-      "standfirst": "The silence is developmental before it is personal. What reopens the conversation is usually sideways, not direct.",
-      "category": "behaviour",
-      "ageStages": [
-        "leaders",
-        "visionaries"
-      ],
-      "readingMinutes": 8,
-      "publishedAt": "2026-07-11",
       "isFeatured": false,
       "image": {
-        "src": "/journal/teen-silence.jpg",
-        "alt": "A parent and teenager walking side by side"
+        "src": "/journal/how-to-teach-a-child-to-read-at-home.jpg",
+        "alt": "Illustration for How to Teach a Child to Read at Home"
       }
     },
     {
-      "slug": "my-child-keeps-falling-out-with-friends",
-      "title": "My Child Keeps Falling Out With Friends. Should I Step In?",
-      "standfirst": "Conflict isn't always something adults need to remove. Here's how to support without taking over.",
-      "category": "friends",
+      "slug": "signs-your-child-is-ready-to-read",
+      "title": "Signs Your Child Is Ready to Read",
+      "standfirst": "The readiness signals are mostly things you hear rather than things you see on a page. Rhyme, sound play, story memory, and ordinary curiosity about print.",
+      "topic": "learning",
       "ageStages": [
-        "builders"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-08-16",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/falling-out.jpg",
-        "alt": "Two children sorting something out in a playground"
-      }
-    },
-    {
-      "slug": "my-child-doesnt-want-to-share",
-      "title": "My Child Doesn't Want to Share",
-      "standfirst": "Before about four, sharing on demand asks for something the brain has not built yet. There is a better thing to teach in the meantime.",
-      "category": "friends",
-      "ageStages": [
-        "seekers",
         "explorers"
-      ],
-      "readingMinutes": 5,
-      "publishedAt": "2026-08-02",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/sharing.jpg",
-        "alt": "Two young children playing with the same set of blocks"
-      }
-    },
-    {
-      "slug": "is-my-child-being-left-out-or-just-quiet",
-      "title": "Is My Child Being Left Out or Just Quiet?",
-      "standfirst": "Slow to warm is a temperament, not a deficit. The pressure to fix it is usually what does the damage.",
-      "category": "friends",
-      "ageStages": [
-        "builders",
-        "thinkers"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-07-22",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/quiet-child.jpg",
-        "alt": "A child watching a group before joining in"
-      }
-    },
-    {
-      "slug": "how-do-i-talk-to-my-child-about-bullying",
-      "title": "How Do I Talk to My Child About Bullying?",
-      "standfirst": "The conversation that works is the one had before anything happens, and it sounds nothing like a warning.",
-      "category": "friends",
-      "ageStages": [
-        "thinkers",
-        "leaders"
-      ],
-      "readingMinutes": 9,
-      "publishedAt": "2026-07-08",
-      "isFeatured": true,
-      "image": {
-        "src": "/journal/bullying-talk.jpg",
-        "alt": "A parent and child sitting together on a sofa talking"
-      }
-    },
-    {
-      "slug": "how-do-i-build-confidence-without-empty-praise",
-      "title": "How Do I Build Confidence Without Empty Praise?",
-      "standfirst": "Some encouragement makes a child more fragile, not less. The difference sits in one word, and most of us reach for the wrong one.",
-      "category": "confidence",
-      "ageStages": [
-        "explorers",
-        "builders"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-11",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/praise.jpg",
-        "alt": "A parent watching a child finish something on their own"
-      }
-    },
-    {
-      "slug": "my-child-gives-up-before-trying",
-      "title": "My Child Gives Up Before Trying. Why?",
-      "standfirst": "Quitting early is often a prediction rather than a preference. Changing the prediction takes smaller wins than you would expect.",
-      "category": "confidence",
-      "ageStages": [
-        "builders",
-        "thinkers"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-07-30",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/gives-up.jpg",
-        "alt": "A child part way through a difficult build"
-      }
-    },
-    {
-      "slug": "is-my-teenagers-self-doubt-normal",
-      "title": "Is My Teenager's Self Doubt Normal?",
-      "standfirst": "Around thirteen, self image gets rebuilt from the outside in. Knowing that is happening makes it easier not to argue with it.",
-      "category": "confidence",
-      "ageStages": [
-        "leaders",
-        "visionaries"
-      ],
-      "readingMinutes": 8,
-      "publishedAt": "2026-07-14",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/teen-self-doubt.jpg",
-        "alt": "A teenager at a window in thought"
-      }
-    },
-    {
-      "slug": "how-much-sleep-does-my-child-actually-need",
-      "title": "How Much Sleep Does My Child Actually Need?",
-      "standfirst": "Consolidation, mood and attention all run on the same overnight process. An hour of lost sleep shows up in all three by Thursday.",
-      "category": "health",
-      "ageStages": [
-        "explorers",
-        "builders",
-        "thinkers"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-09",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/sleep.jpg",
-        "alt": "A child settled in bed with a bedside lamp on"
-      }
-    },
-    {
-      "slug": "my-child-is-a-fussy-eater-should-i-worry",
-      "title": "My Child Is a Fussy Eater. Should I Worry?",
-      "standfirst": "Most narrow eating between two and six is a developmental stage with a predictable exit. A few signs are worth acting on.",
-      "category": "health",
-      "ageStages": [
-        "seekers",
-        "explorers"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-07-27",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/fussy-eater.jpg",
-        "alt": "A family meal with a child considering the food"
-      }
-    },
-    {
-      "slug": "how-do-i-know-if-my-child-is-anxious",
-      "title": "How Do I Know If My Child Is Anxious?",
-      "standfirst": "Anxiety at this age rarely announces itself. It arrives as stomach aches, stalling and anger, which is why it gets missed.",
-      "category": "health",
-      "ageStages": [
-        "thinkers",
-        "leaders"
-      ],
-      "readingMinutes": 9,
-      "publishedAt": "2026-07-16",
-      "isFeatured": true,
-      "image": {
-        "src": "/journal/anxious.jpg",
-        "alt": "A parent sitting close to a child at the end of the day"
-      }
-    },
-    {
-      "slug": "when-should-i-start-teaching-body-safety",
-      "title": "When Should I Start Teaching Body Safety?",
-      "standfirst": "Earlier than most families expect, and in plainer words. The vocabulary matters more than the conversation.",
-      "category": "safety",
-      "ageStages": [
-        "seekers",
-        "explorers"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-07",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/body-safety.jpg",
-        "alt": "A parent and young child talking at bath time"
-      }
-    },
-    {
-      "slug": "how-do-i-talk-about-strangers-without-scaring-my-child",
-      "title": "How Do I Talk About Strangers Without Scaring My Child?",
-      "standfirst": "The stranger rule is the least useful part of keeping a child safe. What replaces it is more specific and less frightening.",
-      "category": "safety",
-      "ageStages": [
-        "explorers",
-        "builders"
-      ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-07-21",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/strangers.jpg",
-        "alt": "A parent and child walking together in a busy street"
-      }
-    },
-    {
-      "slug": "is-my-teenager-safe-online",
-      "title": "Is My Teenager Safe Online?",
-      "standfirst": "Monitoring buys less than most parents hope. What actually protects a teenager is whether they will tell you when something goes wrong.",
-      "category": "safety",
-      "ageStages": [
-        "leaders",
-        "visionaries"
-      ],
-      "readingMinutes": 10,
-      "publishedAt": "2026-07-05",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/teen-online.jpg",
-        "alt": "A teenager and parent talking at a kitchen table"
-      }
-    },
-    {
-      "slug": "how-much-screen-time-is-too-much",
-      "title": "How Much Screen Time Is Too Much?",
-      "standfirst": "Two hours of one thing and two hours of another do completely different work on a child. Counting minutes hides the difference.",
-      "category": "technology-ai",
-      "ageStages": [
-        "explorers",
-        "builders",
-        "thinkers"
-      ],
-      "readingMinutes": 9,
-      "publishedAt": "2026-08-10",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/screen-time.jpg",
-        "alt": "A family evening with a device set aside on the table"
-      }
-    },
-    {
-      "slug": "raising-children-in-a-digital-world",
-      "title": "Raising Children in a Digital World",
-      "standfirst": "Tools are here to stay. Our role is to help children use them wisely and mindfully.",
-      "category": "technology-ai",
-      "ageStages": [
-        "thinkers"
-      ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-14",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/digital-world.jpg",
-        "alt": "A child using a tablet at a table at home"
-      }
-    },
-    {
-      "slug": "should-my-child-be-using-ai-for-homework",
-      "title": "Should My Child Be Using AI for Homework?",
-      "standfirst": "The question is not whether they use it. It is which part of the thinking gets skipped, and whether that part mattered.",
-      "category": "technology-ai",
-      "ageStages": [
-        "leaders",
-        "visionaries"
-      ],
-      "readingMinutes": 9,
-      "publishedAt": "2026-08-01",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/ai-homework.jpg",
-        "alt": "A teenager working at a desk with notes and a laptop"
-      }
-    },
-    {
-      "slug": "when-should-my-child-get-a-phone",
-      "title": "When Should My Child Get a Phone?",
-      "standfirst": "The talk that matters happens about two years before the phone arrives, and it is not about rules.",
-      "category": "technology-ai",
-      "ageStages": [
-        "thinkers",
-        "leaders"
-      ],
-      "readingMinutes": 8,
-      "publishedAt": "2026-07-18",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/first-phone.jpg",
-        "alt": "A parent and child talking on a sofa"
-      }
-    },
-    {
-      "slug": "why-does-turning-off-the-screen-cause-a-meltdown",
-      "title": "Why Does Turning Off the Screen Cause a Meltdown?",
-      "standfirst": "The transition, not the screen, is what your child is reacting to. Which puts the fix before the switch rather than after it.",
-      "category": "technology-ai",
-      "ageStages": [
-        "seekers",
-        "explorers",
-        "builders"
       ],
       "readingMinutes": 6,
       "publishedAt": "2026-07-03",
       "isFeatured": false,
       "image": {
-        "src": "/journal/turning-it-off.jpg",
-        "alt": "A child being given a warning before a screen goes off"
+        "src": "/journal/signs-your-child-is-ready-to-read.jpg",
+        "alt": "Illustration for Signs Your Child Is Ready to Read"
       }
     },
     {
-      "slug": "when-should-children-learn-about-money",
-      "title": "When Should Children Learn About Money?",
-      "standfirst": "Money habits are largely set by about seven. What builds them is smaller and more ordinary than a lesson.",
-      "category": "money-life-skills",
+      "slug": "should-a-4-year-old-be-able-to-read",
+      "title": "Should a 4 Year Old Be Able to Read?",
+      "standfirst": "Almost never, and that is not a delay. What four-year-olds are actually building towards reading, and why the early readers you hear about tell you very little.",
+      "topic": "learning",
+      "ageStages": [
+        "explorers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-06-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/should-a-4-year-old-be-able-to-read.jpg",
+        "alt": "Illustration for Should a 4 Year Old Be Able to Read"
+      }
+    },
+    {
+      "slug": "should-a-5-year-old-be-able-to-read",
+      "title": "Should a 5 Year Old Be Able to Read?",
+      "standfirst": "Five feels like a threshold because of how schooling is arranged, not because of how children develop. What is reasonable at five, and what is worth noticing.",
+      "topic": "learning",
+      "ageStages": [
+        "explorers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/should-a-5-year-old-be-able-to-read.jpg",
+        "alt": "Illustration for Should a 5 Year Old Be Able to Read"
+      }
+    },
+    {
+      "slug": "my-child-knows-letters-but-cannot-read-words",
+      "title": "My Child Knows Letters but Cannot Read Words",
+      "standfirst": "Knowing letter names and blending sounds into a word are two different skills, and the gap between them is the most common place reading stalls. How to close it.",
+      "topic": "learning",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/my-child-knows-letters-but-cannot-read-words.jpg",
+        "alt": "Illustration for My Child Knows Letters but Cannot Read Words"
+      }
+    },
+    {
+      "slug": "how-to-improve-reading-skills-in-children",
+      "title": "How to Improve Reading Skills in Children",
+      "standfirst": "Once decoding works, progress depends on vocabulary, background knowledge and stamina far more than on reading practice alone. Where the real gains actually sit.",
+      "topic": "learning",
       "ageStages": [
         "builders",
         "thinkers"
       ],
-      "readingMinutes": 7,
-      "publishedAt": "2026-08-08",
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-04",
       "isFeatured": false,
       "image": {
-        "src": "/journal/money.jpg",
-        "alt": "A child counting coins at a table with a parent"
+        "src": "/journal/how-to-improve-reading-skills-in-children.jpg",
+        "alt": "Illustration for How to Improve Reading Skills in Children"
       }
     },
     {
-      "slug": "should-i-give-my-child-pocket-money",
-      "title": "Should I Give My Child Pocket Money?",
-      "standfirst": "Tied to chores or given freely changes what the money teaches. Both work, but not for the same thing.",
-      "category": "money-life-skills",
+      "slug": "how-to-improve-handwriting-in-children",
+      "title": "How to Improve Handwriting in Children",
+      "standfirst": "Untidy handwriting is usually a hand-strength and control problem rather than a care problem. What actually builds a legible hand, and what to stop correcting.",
+      "topic": "learning",
       "ageStages": [
-        "thinkers",
-        "leaders"
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-improve-handwriting-in-children.jpg",
+        "alt": "Illustration for How to Improve Handwriting in Children"
+      }
+    },
+    {
+      "slug": "fine-motor-activities-for-writing",
+      "title": "Fine Motor Activities for Writing",
+      "standfirst": "The grip that holds a pencil is built by tearing, threading, squeezing and pinching long before it is built by writing. Activities that do the groundwork.",
+      "topic": "learning",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
       ],
       "readingMinutes": 6,
-      "publishedAt": "2026-07-24",
+      "publishedAt": "2026-02-18",
       "isFeatured": false,
       "image": {
-        "src": "/journal/pocket-money.jpg",
-        "alt": "A child putting money into a savings tin"
+        "src": "/journal/fine-motor-activities-for-writing.jpg",
+        "alt": "Illustration for Fine Motor Activities for Writing"
       }
     },
     {
-      "slug": "what-should-a-fourteen-year-old-be-able-to-do-alone",
-      "title": "What Should a Fourteen-Year-Old Be Able to Do Alone?",
-      "standfirst": "Judgement is built by making decisions that carry weight. Most teenagers are handed neither the weight nor the decision.",
-      "category": "money-life-skills",
+      "slug": "how-to-improve-maths-skills-in-children",
+      "title": "How to Improve Maths Skills in Children",
+      "standfirst": "Number sense comes before arithmetic and predicts more of what follows. How to build the underlying feel for quantity that makes the procedures make sense.",
+      "topic": "learning",
       "ageStages": [
-        "leaders",
-        "visionaries"
+        "explorers",
+        "builders",
+        "thinkers"
       ],
       "readingMinutes": 8,
-      "publishedAt": "2026-07-09",
+      "publishedAt": "2026-01-26",
       "isFeatured": false,
       "image": {
-        "src": "/journal/independence.jpg",
-        "alt": "A teenager cooking a meal in a home kitchen"
+        "src": "/journal/how-to-improve-maths-skills-in-children.jpg",
+        "alt": "Illustration for How to Improve Maths Skills in Children"
       }
     },
     {
-      "slug": "how-do-i-teach-respect-without-teaching-fear",
-      "title": "How Do I Teach Respect Without Teaching Fear?",
-      "standfirst": "Many of us were raised on obedience and want something different. The tradition has more to offer than the version we inherited.",
-      "category": "values-culture",
-      "ageStages": [
-        "builders",
-        "thinkers",
-        "leaders"
-      ],
-      "readingMinutes": 9,
-      "publishedAt": "2026-08-05",
-      "isFeatured": false,
-      "image": {
-        "src": "/journal/respect.jpg",
-        "alt": "Three generations of a family together at home"
-      }
-    },
-    {
-      "slug": "my-child-is-losing-our-mother-tongue",
-      "title": "My Child Is Losing Our Mother Tongue",
-      "standfirst": "A common worry and a solvable one. What keeps a language alive at home is far smaller than a curriculum.",
-      "category": "values-culture",
+      "slug": "learning-activities-for-kids-at-home",
+      "title": "Learning Activities for Kids at Home",
+      "standfirst": "Learning activities that are genuinely developmental rather than school reproduced at the kitchen table. Sorted by what each one is actually building.",
+      "topic": "learning",
       "ageStages": [
         "seekers",
         "explorers",
         "builders"
       ],
       "readingMinutes": 7,
-      "publishedAt": "2026-07-26",
+      "publishedAt": "2026-01-05",
       "isFeatured": false,
       "image": {
-        "src": "/journal/mother-tongue.jpg",
-        "alt": "A grandparent reading aloud to a child"
+        "src": "/journal/learning-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Learning Activities for Kids at Home"
       }
     },
     {
-      "slug": "how-do-i-pass-on-our-values-without-lecturing",
-      "title": "How Do I Pass on Our Values Without Lecturing?",
-      "standfirst": "Children absorb what a household repeats, not what it announces. The distinction decides whether any of it survives adolescence.",
-      "category": "values-culture",
+      "slug": "what-is-steam-education-for-kids",
+      "title": "What Is STEAM Education for Kids?",
+      "standfirst": "STEAM is less a syllabus than a way of working: notice something, ask why, build a version, find out you were wrong. What the letters mean and what they miss.",
+      "topic": "steam",
       "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-08-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-steam-education-for-kids.jpg",
+        "alt": "Illustration for What Is STEAM Education for Kids"
+      }
+    },
+    {
+      "slug": "stem-vs-steam-what-is-the-difference",
+      "title": "STEM vs STEAM: What Is the Difference?",
+      "standfirst": "The A is not decoration. What adding arts to STEM actually changes about how a child approaches a problem, and where the distinction is oversold.",
+      "topic": "steam",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/stem-vs-steam-what-is-the-difference.jpg",
+        "alt": "Illustration for STEM vs STEAM: What Is the Difference"
+      }
+    },
+    {
+      "slug": "science-activities-for-kids-at-home",
+      "title": "Science Activities for Kids at Home",
+      "standfirst": "Science at home is not demonstrations that always work. It is questions with genuinely unknown answers, and most of them need nothing you do not already own.",
+      "topic": "steam",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-07-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/science-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Science Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "easy-science-experiments-for-kids",
+      "title": "Easy Science Experiments for Kids",
+      "standfirst": "Experiments a child can run themselves, each with the prediction step left in, because the guessing beforehand is where most of the thinking happens.",
+      "topic": "steam",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/easy-science-experiments-for-kids.jpg",
+        "alt": "Illustration for Easy Science Experiments for Kids"
+      }
+    },
+    {
+      "slug": "stem-activities-for-kids-at-home",
+      "title": "STEM Activities for Kids at Home",
+      "standfirst": "Activities that put a real constraint in front of a child rather than a set of instructions, sorted by the age at which the constraint stops being frustrating.",
+      "topic": "steam",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/stem-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for STEM Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "engineering-activities-for-kids",
+      "title": "Engineering Activities for Kids",
+      "standfirst": "Building something that has to hold, span, carry or roll teaches iteration faster than any lesson about iteration. Challenges that fail usefully.",
+      "topic": "steam",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-25",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/engineering-activities-for-kids.jpg",
+        "alt": "Illustration for Engineering Activities for Kids"
+      }
+    },
+    {
+      "slug": "maths-activities-for-kids-at-home",
+      "title": "Maths Activities for Kids at Home",
+      "standfirst": "Cooking, shopping, folding and games carry more early maths than worksheets do, because the quantities are real and the answer matters to the child.",
+      "topic": "steam",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/maths-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Maths Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "how-to-develop-scientific-thinking-in-children",
+      "title": "How to Develop Scientific Thinking in Children",
+      "standfirst": "Scientific thinking is a habit of holding an idea loosely enough to test it. How that habit forms, and the ordinary conversations that build or block it.",
+      "topic": "steam",
+      "ageStages": [
+        "builders",
         "thinkers",
         "leaders"
       ],
       "readingMinutes": 8,
-      "publishedAt": "2026-07-12",
+      "publishedAt": "2026-03-11",
       "isFeatured": false,
       "image": {
-        "src": "/journal/values.jpg",
-        "alt": "A family preparing food together in a kitchen"
+        "src": "/journal/how-to-develop-scientific-thinking-in-children.jpg",
+        "alt": "Illustration for How to Develop Scientific Thinking in Children"
       }
     },
     {
-      "slug": "why-do-i-feel-guilty-at-nine-every-night",
-      "title": "Why Do I Feel Guilty at Nine Every Night?",
-      "standfirst": "Almost every parent replays the day once the house goes quiet. Here is what that replay is for, and when it stops being useful.",
-      "category": "parenting",
+      "slug": "problem-solving-activities-for-kids",
+      "title": "Problem Solving Activities for Kids",
+      "standfirst": "Puzzles and challenges chosen for the kind of thinking each one demands (pattern, sequence, constraint, trade-off) rather than for how they photograph.",
+      "topic": "steam",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/problem-solving-activities-for-kids.jpg",
+        "alt": "Illustration for Problem Solving Activities for Kids"
+      }
+    },
+    {
+      "slug": "robotics-for-kids-what-age-should-they-start",
+      "title": "Robotics for Kids: What Age Should They Start?",
+      "standfirst": "Robotics kits are sold to ages far younger than the thinking they require. What a child needs to be able to do first, and what they get from it when they can.",
+      "topic": "steam",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-25",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/robotics-for-kids-what-age-should-they-start.jpg",
+        "alt": "Illustration for Robotics for Kids: What Age Should They Start"
+      }
+    },
+    {
+      "slug": "what-is-systems-thinking-for-kids",
+      "title": "What Is Systems Thinking for Kids?",
+      "standfirst": "Seeing that things connect, that changing one part moves another, and that some effects arrive late. How this way of thinking develops, and how to feed it.",
+      "topic": "steam",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-04",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-systems-thinking-for-kids.jpg",
+        "alt": "Illustration for What Is Systems Thinking for Kids"
+      }
+    },
+    {
+      "slug": "how-to-develop-critical-thinking-in-children",
+      "title": "How to Develop Critical Thinking in Children",
+      "standfirst": "Critical thinking is not scepticism and it cannot run on an empty head. It needs knowledge to work on. What genuinely builds it at each stage.",
+      "topic": "steam",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-12-15",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-develop-critical-thinking-in-children.jpg",
+        "alt": "Illustration for How to Develop Critical Thinking in Children"
+      }
+    },
+    {
+      "slug": "what-is-ai-for-kids",
+      "title": "What Is AI for Kids?",
+      "standfirst": "How to explain what these systems actually do (pattern and prediction, not understanding) in language a child can hold on to and check things against.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-14",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/what-is-ai-for-kids.jpg",
+        "alt": "Illustration for What Is AI for Kids"
+      }
+    },
+    {
+      "slug": "should-children-use-ai",
+      "title": "Should Children Use AI?",
+      "standfirst": "The useful question is not whether but for what. Where these tools support a child’s thinking, where they quietly replace it, and how to tell which is happening.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/should-children-use-ai.jpg",
+        "alt": "Illustration for Should Children Use AI"
+      }
+    },
+    {
+      "slug": "what-age-should-kids-start-using-ai",
+      "title": "What Age Should Kids Start Using AI?",
+      "standfirst": "Age matters less than whether a child can already do the thing unaided. Why capability, not birthday, is the sensible gate, and what to require first.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-30",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-age-should-kids-start-using-ai.jpg",
+        "alt": "Illustration for What Age Should Kids Start Using AI"
+      }
+    },
+    {
+      "slug": "is-chatgpt-safe-for-kids",
+      "title": "Is ChatGPT Safe for Kids?",
+      "standfirst": "What the real risks are (confident wrong answers, data, and the pull towards outsourcing effort), and the settings and habits that address each of them.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/is-chatgpt-safe-for-kids.jpg",
+        "alt": "Illustration for Is ChatGPT Safe for Kids"
+      }
+    },
+    {
+      "slug": "should-kids-use-chatgpt-for-homework",
+      "title": "Should Kids Use ChatGPT for Homework?",
+      "standfirst": "There is a line between a tool that helps a child think and one that thinks instead. Where it falls, and how to make it visible to the child rather than policed.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/should-kids-use-chatgpt-for-homework.jpg",
+        "alt": "Illustration for Should Kids Use ChatGPT for Homework"
+      }
+    },
+    {
+      "slug": "how-to-teach-ai-to-kids",
+      "title": "How to Teach AI to Kids",
+      "standfirst": "Teaching AI without a screen: sorting, rules, prediction and bias can all be shown with cards and objects before a child ever opens a chatbot.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-23",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-ai-to-kids.jpg",
+        "alt": "Illustration for How to Teach AI to Kids"
+      }
+    },
+    {
+      "slug": "what-age-should-kids-start-coding",
+      "title": "What Age Should Kids Start Coding?",
+      "standfirst": "The sequencing and logic that coding needs can be built years before a keyboard is involved. When code itself starts to make sense, and what comes first.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-age-should-kids-start-coding.jpg",
+        "alt": "Illustration for What Age Should Kids Start Coding"
+      }
+    },
+    {
+      "slug": "best-coding-activities-for-kids-without-screens",
+      "title": "Best Coding Activities for Kids Without Screens",
+      "standfirst": "Algorithms, loops, conditions and debugging, taught with paper, tape, floor tiles and each other. The thinking transfers; the syntax can wait.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-03-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/best-coding-activities-for-kids-without-screens.jpg",
+        "alt": "Illustration for Best Coding Activities for Kids Without Screens"
+      }
+    },
+    {
+      "slug": "how-to-teach-digital-literacy-to-kids",
+      "title": "How to Teach Digital Literacy to Kids",
+      "standfirst": "Digital literacy is not knowing how to use a device. Most children manage that. It is knowing where something came from and who benefits from it being shown to them.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-digital-literacy-to-kids.jpg",
+        "alt": "Illustration for How to Teach Digital Literacy to Kids"
+      }
+    },
+    {
+      "slug": "how-to-prepare-children-for-an-ai-future",
+      "title": "How to Prepare Children for an AI Future",
+      "standfirst": "The honest answer is that nobody knows the jobs. What we can say is which human capacities keep their value, and those are developmental rather than technical.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-01-23",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-prepare-children-for-an-ai-future.jpg",
+        "alt": "Illustration for How to Prepare Children for an AI Future"
+      }
+    },
+    {
+      "slug": "future-skills-every-child-needs",
+      "title": "Future Skills Every Child Needs",
+      "standfirst": "Most future-skills lists are the same competencies renamed. The ones with genuine developmental backing, and the age at which each becomes buildable.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/future-skills-every-child-needs.jpg",
+        "alt": "Illustration for Future Skills Every Child Needs"
+      }
+    },
+    {
+      "slug": "ai-vs-human-intelligence-what-should-children-learn",
+      "title": "AI vs Human Intelligence: What Should Children Learn?",
+      "standfirst": "What these systems do well, what they cannot do at all, and what that implies about where a child’s years are best spent. Your child is not in a race with a machine.",
+      "topic": "technology-ai",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-12-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/ai-vs-human-intelligence-what-should-children-learn.jpg",
+        "alt": "Illustration for AI vs Human Intelligence: What Should Children Learn"
+      }
+    },
+    {
+      "slug": "how-to-improve-communication-skills-in-children",
+      "title": "How to Improve Communication Skills in Children",
+      "standfirst": "Communication is built in ordinary back-and-forth long before it is taught. What each stage adds, and the daily habits that widen a child’s range.",
+      "topic": "communication",
       "ageStages": [
         "seekers",
         "explorers",
         "builders",
         "thinkers"
       ],
-      "readingMinutes": 6,
+      "readingMinutes": 8,
       "publishedAt": "2026-08-12",
       "isFeatured": false,
       "image": {
-        "src": "/journal/nine-at-night.jpg",
-        "alt": "A parent sitting alone in a quiet living room in the evening"
+        "src": "/journal/how-to-improve-communication-skills-in-children.jpg",
+        "alt": "Illustration for How to Improve Communication Skills in Children"
       }
     },
     {
-      "slug": "we-are-both-exhausted-how-do-we-do-this",
-      "title": "We Are Both Exhausted. How Do We Do This?",
-      "standfirst": "Two tired adults negotiating an evening is its own problem, separate from the children, and it deserves its own plan.",
-      "category": "parenting",
+      "slug": "how-to-build-confidence-in-children",
+      "title": "How to Build Confidence in Children",
+      "standfirst": "Confidence is a by-product of competence, not a thing that can be praised into existence. Where it actually comes from, and why praise often works against it.",
+      "topic": "communication",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-21",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-build-confidence-in-children.jpg",
+        "alt": "Illustration for How to Build Confidence in Children"
+      }
+    },
+    {
+      "slug": "how-to-help-a-shy-child",
+      "title": "How to Help a Shy Child",
+      "standfirst": "Shyness is a temperament, not a fault to be corrected, and pushing usually deepens it. How to widen a quiet child’s world at a pace they can carry.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-help-a-shy-child.jpg",
+        "alt": "Illustration for How to Help a Shy Child"
+      }
+    },
+    {
+      "slug": "how-to-improve-vocabulary-in-children",
+      "title": "How to Improve Vocabulary in Children",
+      "standfirst": "Vocabulary grows from conversation and reading aloud far more than from word lists, because a word needs a context before it becomes usable.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-06",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-improve-vocabulary-in-children.jpg",
+        "alt": "Illustration for How to Improve Vocabulary in Children"
+      }
+    },
+    {
+      "slug": "how-to-improve-speaking-skills-in-children",
+      "title": "How to Improve Speaking Skills in Children",
+      "standfirst": "Fluent speaking depends on having something to say and a listener who waits. What builds both, and why correcting mid-sentence sets a child back.",
+      "topic": "communication",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-improve-speaking-skills-in-children.jpg",
+        "alt": "Illustration for How to Improve Speaking Skills in Children"
+      }
+    },
+    {
+      "slug": "how-to-encourage-children-to-talk-more",
+      "title": "How to Encourage Children to Talk More",
+      "standfirst": "Most children talk more when the questions get better and the pauses get longer. Small changes to how you ask that reliably open a child up.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-04-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-encourage-children-to-talk-more.jpg",
+        "alt": "Illustration for How to Encourage Children to Talk More"
+      }
+    },
+    {
+      "slug": "how-to-develop-listening-skills-in-children",
+      "title": "How to Develop Listening Skills in Children",
+      "standfirst": "Listening is an attention skill before it is a manners skill. Why a child who ignores you may be at the limit of what they can hold, and what genuinely helps.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-30",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-develop-listening-skills-in-children.jpg",
+        "alt": "Illustration for How to Develop Listening Skills in Children"
+      }
+    },
+    {
+      "slug": "storytelling-activities-for-kids",
+      "title": "Storytelling Activities for Kids",
+      "standfirst": "Making stories builds sequence, memory and perspective at once. Prompts and games that get a child telling rather than reciting.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-03-08",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/storytelling-activities-for-kids.jpg",
+        "alt": "Illustration for Storytelling Activities for Kids"
+      }
+    },
+    {
+      "slug": "how-to-teach-public-speaking-to-kids",
+      "title": "How to Teach Public Speaking to Kids",
+      "standfirst": "Public speaking is mostly managed nerves and rehearsed structure. What is age-appropriate to expect, and how to build up without a performance every time.",
+      "topic": "communication",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-public-speaking-to-kids.jpg",
+        "alt": "Illustration for How to Teach Public Speaking to Kids"
+      }
+    },
+    {
+      "slug": "why-is-my-child-afraid-to-speak-in-public",
+      "title": "Why Is My Child Afraid to Speak in Public?",
+      "standfirst": "The fear is of being judged, and it arrives at the same age as the ability to imagine being judged. Why that is developmental progress, and how to work with it.",
+      "topic": "communication",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-is-my-child-afraid-to-speak-in-public.jpg",
+        "alt": "Illustration for Why Is My Child Afraid to Speak in Public"
+      }
+    },
+    {
+      "slug": "questions-to-ask-kids-instead-of-how-was-school",
+      "title": "Questions to Ask Kids Instead of “How Was School?”",
+      "standfirst": "The standard question reliably produces the standard answer. Questions specific enough to be answerable, and why the timing matters as much as the wording.",
+      "topic": "communication",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 5,
+      "publishedAt": "2026-01-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/questions-to-ask-kids-instead-of-how-was-school.jpg",
+        "alt": "Illustration for Questions to Ask Kids Instead of “How Was School?”"
+      }
+    },
+    {
+      "slug": "how-storytelling-helps-child-development",
+      "title": "How Storytelling Helps Child Development",
+      "standfirst": "Story is how children rehearse sequence, cause, other minds and their own memory. What it develops, and why being told stories is not the same as being read to.",
+      "topic": "communication",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-storytelling-helps-child-development.jpg",
+        "alt": "Illustration for How Storytelling Helps Child Development"
+      }
+    },
+    {
+      "slug": "how-to-help-a-child-control-anger",
+      "title": "How to Help a Child Control Anger",
+      "standfirst": "Anger is not the problem to be removed; it is the signal that something has exceeded what a child can currently manage. What helps in the moment, and after.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-08-11",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-help-a-child-control-anger.jpg",
+        "alt": "Illustration for How to Help a Child Control Anger"
+      }
+    },
+    {
+      "slug": "why-is-my-child-angry-all-the-time",
+      "title": "Why Is My Child Angry All the Time?",
+      "standfirst": "Persistent anger usually has a load underneath it. Sleep, school, sensory input, or something a child cannot yet put into words. How to find which.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-is-my-child-angry-all-the-time.jpg",
+        "alt": "Illustration for Why Is My Child Angry All the Time"
+      }
+    },
+    {
+      "slug": "how-to-handle-tantrums-in-children",
+      "title": "How to Handle Tantrums in Children",
+      "standfirst": "A tantrum is a nervous system past its limit, not a negotiation. Why reasoning fails mid-tantrum, what actually shortens one, and what to do afterwards.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-handle-tantrums-in-children.jpg",
+        "alt": "Illustration for How to Handle Tantrums in Children"
+      }
+    },
+    {
+      "slug": "how-to-teach-emotional-regulation-to-kids",
+      "title": "How to Teach Emotional Regulation to Kids",
+      "standfirst": "Regulation is borrowed from an adult long before it is owned. The developmental sequence from co-regulation to self-regulation, and how to move along it.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-06-04",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-emotional-regulation-to-kids.jpg",
+        "alt": "Illustration for How to Teach Emotional Regulation to Kids"
+      }
+    },
+    {
+      "slug": "how-to-help-an-overwhelmed-child-calm-down",
+      "title": "How to Help an Overwhelmed Child Calm Down",
+      "standfirst": "What genuinely brings a flooded child down, and why most of it is physical rather than verbal, and happens before any conversation can land.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-help-an-overwhelmed-child-calm-down.jpg",
+        "alt": "Illustration for How to Help an Overwhelmed Child Calm Down"
+      }
+    },
+    {
+      "slug": "how-to-stop-sibling-fighting",
+      "title": "How to Stop Sibling Fighting",
+      "standfirst": "Some sibling conflict is how children learn to negotiate, and eliminating it removes the practice. Where the line sits, and how to referee less.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-20",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-stop-sibling-fighting.jpg",
+        "alt": "Illustration for How to Stop Sibling Fighting"
+      }
+    },
+    {
+      "slug": "how-to-teach-empathy-to-children",
+      "title": "How to Teach Empathy to Children",
+      "standfirst": "Empathy needs the ability to imagine another mind, which arrives gradually. What is reasonable to expect at each age, and what builds it faster than instruction.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-29",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-empathy-to-children.jpg",
+        "alt": "Illustration for How to Teach Empathy to Children"
+      }
+    },
+    {
+      "slug": "how-to-help-your-child-make-friends",
+      "title": "How to Help Your Child Make Friends",
+      "standfirst": "Friendship rests on specific, teachable skills: joining, sharing attention, repairing. Which one a struggling child is usually missing, and how to help.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-06",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-help-your-child-make-friends.jpg",
+        "alt": "Illustration for How to Help Your Child Make Friends"
+      }
+    },
+    {
+      "slug": "what-to-do-when-your-child-has-no-friends",
+      "title": "What to Do When Your Child Has No Friends",
+      "standfirst": "The first job is working out which kind of alone it is: unwanted, chosen, or temporary. Each needs a different response, and one of them needs none.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-to-do-when-your-child-has-no-friends.jpg",
+        "alt": "Illustration for What to Do When Your Child Has No Friends"
+      }
+    },
+    {
+      "slug": "how-to-teach-social-skills-to-children",
+      "title": "How to Teach Social Skills to Children",
+      "standfirst": "Social skills are learned by doing them badly with feedback, not by being told. Where to create low-stakes practice, and what to coach afterwards.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-20",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-social-skills-to-children.jpg",
+        "alt": "Illustration for How to Teach Social Skills to Children"
+      }
+    },
+    {
+      "slug": "how-to-help-children-deal-with-losing",
+      "title": "How to Help Children Deal With Losing",
+      "standfirst": "Losing badly at six is normal; the capacity to lose well is built over years. How to let a child feel it without either rescuing them or toughening them up.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2025-12-30",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-help-children-deal-with-losing.jpg",
+        "alt": "Illustration for How to Help Children Deal With Losing"
+      }
+    },
+    {
+      "slug": "how-to-teach-children-to-apologize",
+      "title": "How to Teach Children to Apologize",
+      "standfirst": "A forced sorry teaches the word, not the repair. What a genuine apology requires developmentally, and how to grow it from the ordinary repairs at home.",
+      "topic": "emotions-friends",
+      "ageStages": [
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2025-12-11",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-children-to-apologize.jpg",
+        "alt": "Illustration for How to Teach Children to Apologize"
+      }
+    },
+    {
+      "slug": "how-much-sleep-do-kids-need-by-age",
+      "title": "How Much Sleep Do Kids Need by Age?",
+      "standfirst": "Sleep is the single variable that changes most about the following day. The ranges by age, the signs a child is short, and why bedtime is the wrong lever.",
+      "topic": "health-safety",
       "ageStages": [
         "seekers",
         "explorers",
@@ -593,81 +1575,1868 @@
         "leaders",
         "visionaries"
       ],
-      "readingMinutes": 6,
-      "publishedAt": "2026-07-31",
-      "isFeatured": false,
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-09",
+      "isFeatured": true,
       "image": {
-        "src": "/journal/exhausted.jpg",
-        "alt": "Two parents talking at the end of the day"
+        "src": "/journal/how-much-sleep-do-kids-need-by-age.jpg",
+        "alt": "Illustration for How Much Sleep Do Kids Need by Age"
       }
     },
     {
-      "slug": "am-i-comparing-my-child-too-much",
-      "title": "Am I Comparing My Child Too Much?",
-      "standfirst": "Another parent mentions what their child is already doing and the evening curdles. A short note on where that feeling comes from.",
-      "category": "parenting",
+      "slug": "how-much-physical-activity-do-kids-need",
+      "title": "How Much Physical Activity Do Kids Need?",
+      "standfirst": "Movement is not only about fitness. It feeds attention, sleep and mood. How much a child needs, and why the kind of movement matters as much as the amount.",
+      "topic": "health-safety",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-18",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-much-physical-activity-do-kids-need.jpg",
+        "alt": "Illustration for How Much Physical Activity Do Kids Need"
+      }
+    },
+    {
+      "slug": "sensory-activities-for-kids-at-home",
+      "title": "Sensory Activities for Kids at Home",
+      "standfirst": "Sensory play is not only for children with sensory needs. What each kind of input actually regulates, and how to build a small menu that works at home.",
+      "topic": "health-safety",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-06-25",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/sensory-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Sensory Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "how-screen-time-affects-childrens-sleep",
+      "title": "How Screen Time Affects Children’s Sleep",
+      "standfirst": "The mechanism is more about arousal and displaced hours than blue light alone. What the evidence supports, and the change that makes the biggest difference.",
+      "topic": "health-safety",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-03",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-screen-time-affects-childrens-sleep.jpg",
+        "alt": "Illustration for How Screen Time Affects Children's Sleep"
+      }
+    },
+    {
+      "slug": "how-to-teach-body-safety-to-children",
+      "title": "How to Teach Body Safety to Children",
+      "standfirst": "Body safety is taught in calm, ordinary language over years, not in one conversation. The words to use, the rules that hold, and what to avoid teaching by accident.",
+      "topic": "health-safety",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-11",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-teach-body-safety-to-children.jpg",
+        "alt": "Illustration for How to Teach Body Safety to Children"
+      }
+    },
+    {
+      "slug": "good-touch-and-bad-touch-for-kids",
+      "title": "Good Touch and Bad Touch for Kids",
+      "standfirst": "The good-touch bad-touch framing has known gaps. A clearer approach built on body ownership, secrets and telling, and why the difference matters.",
+      "topic": "health-safety",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/good-touch-and-bad-touch-for-kids.jpg",
+        "alt": "Illustration for Good Touch and Bad Touch for Kids"
+      }
+    },
+    {
+      "slug": "internet-safety-rules-for-kids",
+      "title": "Internet Safety Rules for Kids",
+      "standfirst": "Rules a child can actually follow, at the age each becomes meaningful, and why rules alone stop working around the age they matter most.",
+      "topic": "health-safety",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/internet-safety-rules-for-kids.jpg",
+        "alt": "Illustration for Internet Safety Rules for Kids"
+      }
+    },
+    {
+      "slug": "online-safety-for-children-a-parents-guide",
+      "title": "Online Safety for Children: A Parent’s Guide",
+      "standfirst": "The full picture: contact, content, conduct and commerce. What to set up, what to talk about, and the one thing that predicts whether a child tells you.",
+      "topic": "health-safety",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 10,
+      "publishedAt": "2026-03-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/online-safety-for-children-a-parents-guide.jpg",
+        "alt": "Illustration for Online Safety for Children: A Parent's Guide"
+      }
+    },
+    {
+      "slug": "cyber-safety-for-kids",
+      "title": "Cyber Safety for Kids",
+      "standfirst": "Passwords, scams, oversharing and the trail a child leaves. The practical habits worth building before they are needed rather than after.",
+      "topic": "health-safety",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/cyber-safety-for-kids.jpg",
+        "alt": "Illustration for Cyber Safety for Kids"
+      }
+    },
+    {
+      "slug": "how-to-keep-children-safe-in-online-games",
+      "title": "How to Keep Children Safe in Online Games",
+      "standfirst": "Games are where most children meet strangers online. Which features carry the risk, what to change in the settings, and what to agree together.",
+      "topic": "health-safety",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-keep-children-safe-in-online-games.jpg",
+        "alt": "Illustration for How to Keep Children Safe in Online Games"
+      }
+    },
+    {
+      "slug": "safety-rules-every-child-should-know",
+      "title": "Safety Rules Every Child Should Know",
+      "standfirst": "The short list that covers road, water, strangers, home and getting lost. With the age each rule can genuinely be understood rather than merely repeated.",
+      "topic": "health-safety",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-29",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/safety-rules-every-child-should-know.jpg",
+        "alt": "Illustration for Safety Rules Every Child Should Know"
+      }
+    },
+    {
+      "slug": "chores-for-kids-by-age",
+      "title": "Chores for Kids by Age",
+      "standfirst": "What a child can genuinely take on at each age, and why the point is contribution rather than help. Includes what to stop doing for them.",
+      "topic": "life-skills",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-08",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/chores-for-kids-by-age.jpg",
+        "alt": "Illustration for Chores for Kids by Age"
+      }
+    },
+    {
+      "slug": "how-to-make-your-child-independent",
+      "title": "How to Make Your Child Independent",
+      "standfirst": "Independence grows in the gaps we leave rather than in the lessons we give. Where to step back first, and how to tell readiness from reluctance.",
+      "topic": "life-skills",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-make-your-child-independent.jpg",
+        "alt": "Illustration for How to Make Your Child Independent"
+      }
+    },
+    {
+      "slug": "life-skills-every-child-should-learn",
+      "title": "Life Skills Every Child Should Learn",
+      "standfirst": "The competences a child should leave home with, grouped by when each becomes learnable, and the handful that are quietly the hardest to teach late.",
+      "topic": "life-skills",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/life-skills-every-child-should-learn.jpg",
+        "alt": "Illustration for Life Skills Every Child Should Learn"
+      }
+    },
+    {
+      "slug": "how-to-teach-responsibility-to-children",
+      "title": "How to Teach Responsibility to Children",
+      "standfirst": "Responsibility is the experience of something depending on you. How to create that honestly, and why reminders undo it faster than anything else.",
+      "topic": "life-skills",
       "ageStages": [
         "explorers",
         "builders",
         "thinkers"
       ],
-      "readingMinutes": 5,
-      "publishedAt": "2026-07-17",
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-01",
       "isFeatured": false,
       "image": {
-        "src": "/journal/comparison.jpg",
-        "alt": "Parents talking at a school gate"
+        "src": "/journal/how-to-teach-responsibility-to-children.jpg",
+        "alt": "Illustration for How to Teach Responsibility to Children"
+      }
+    },
+    {
+      "slug": "how-to-build-resilience-in-children",
+      "title": "How to Build Resilience in Children",
+      "standfirst": "Resilience is not toughness and it is not built by hardship. What actually predicts it, and the conditions a child needs to recover rather than harden.",
+      "topic": "life-skills",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-build-resilience-in-children.jpg",
+        "alt": "Illustration for How to Build Resilience in Children"
+      }
+    },
+    {
+      "slug": "should-kids-get-pocket-money",
+      "title": "Should Kids Get Pocket Money?",
+      "standfirst": "Pocket money is a teaching tool or it is nothing. What it teaches when it is unconditional, what changes when it is tied to chores, and which to choose.",
+      "topic": "life-skills",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-04-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/should-kids-get-pocket-money.jpg",
+        "alt": "Illustration for Should Kids Get Pocket Money"
+      }
+    },
+    {
+      "slug": "how-to-teach-kids-about-money",
+      "title": "How to Teach Kids About Money",
+      "standfirst": "Money sense is built by handling real money and making real mistakes with small amounts. A sequence from cash to choices to consequences.",
+      "topic": "life-skills",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-kids-about-money.jpg",
+        "alt": "Illustration for How to Teach Kids About Money"
+      }
+    },
+    {
+      "slug": "how-to-teach-needs-vs-wants-to-kids",
+      "title": "How to Teach Needs vs Wants to Kids",
+      "standfirst": "The distinction is harder than it sounds and adults disagree about it too. How to teach it without moralising, using decisions a child actually faces.",
+      "topic": "life-skills",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-03-03",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-needs-vs-wants-to-kids.jpg",
+        "alt": "Illustration for How to Teach Needs vs Wants to Kids"
+      }
+    },
+    {
+      "slug": "how-to-develop-leadership-skills-in-children",
+      "title": "How to Develop Leadership Skills in Children",
+      "standfirst": "Leadership at this age is mostly responsibility, perspective-taking and the nerve to speak. What genuinely builds it, and why titles do not.",
+      "topic": "life-skills",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-develop-leadership-skills-in-children.jpg",
+        "alt": "Illustration for How to Develop Leadership Skills in Children"
+      }
+    },
+    {
+      "slug": "decision-making-activities-for-kids",
+      "title": "Decision Making Activities for Kids",
+      "standfirst": "Deciding well is a skill built through small, real, reversible choices. Where to hand a child the decision, and how to debrief without judging it.",
+      "topic": "life-skills",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-01-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/decision-making-activities-for-kids.jpg",
+        "alt": "Illustration for Decision Making Activities for Kids"
+      }
+    },
+    {
+      "slug": "problem-solving-skills-for-children",
+      "title": "Problem Solving Skills for Children",
+      "standfirst": "The developmental sequence behind solving a problem (noticing, defining, trying, adjusting), and where most children get stuck at each age.",
+      "topic": "life-skills",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/problem-solving-skills-for-children.jpg",
+        "alt": "Illustration for Problem Solving Skills for Children"
+      }
+    },
+    {
+      "slug": "entrepreneurship-activities-for-kids",
+      "title": "Entrepreneurship Activities for Kids",
+      "standfirst": "Real small ventures teach costing, failure and customers faster than any lesson. Age-appropriate ideas, and what the adult should refuse to do.",
+      "topic": "life-skills",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/entrepreneurship-activities-for-kids.jpg",
+        "alt": "Illustration for Entrepreneurship Activities for Kids"
+      }
+    },
+    {
+      "slug": "what-is-bharatiya-knowledge-system",
+      "title": "What Is Bharatiya Knowledge System?",
+      "standfirst": "A short, honest introduction to what the Indian knowledge traditions actually contain, how they were organised, and what a parent might take from them today.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-08-06",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/what-is-bharatiya-knowledge-system.jpg",
+        "alt": "Illustration for What Is Bharatiya Knowledge System"
+      }
+    },
+    {
+      "slug": "indian-knowledge-systems-for-children",
+      "title": "Indian Knowledge Systems for Children",
+      "standfirst": "Which parts of this inheritance a child can genuinely meet at each age. Through story, language, craft and observation rather than through doctrine.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/indian-knowledge-systems-for-children.jpg",
+        "alt": "Illustration for Indian Knowledge Systems for Children"
+      }
+    },
+    {
+      "slug": "what-is-panchakosha",
+      "title": "What Is Panchakosha?",
+      "standfirst": "The five-sheath model of a person, explained plainly: what each kosha refers to, where the idea comes from, and what it is and is not a claim about.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-panchakosha.jpg",
+        "alt": "Illustration for What Is Panchakosha"
+      }
+    },
+    {
+      "slug": "panchakosha-and-child-development",
+      "title": "Panchakosha and Child Development",
+      "standfirst": "Read as a map of the whole child, panchakosha lines up with much that development research also describes. Where the two agree, and where the comparison is stretched.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-05-31",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/panchakosha-and-child-development.jpg",
+        "alt": "Illustration for Panchakosha and Child Development"
+      }
+    },
+    {
+      "slug": "what-is-dharma-for-kids",
+      "title": "What Is Dharma for Kids?",
+      "standfirst": "Dharma is usually mistranslated as duty and then taught as obedience. A more careful reading, and how it can be introduced to a child as a question rather than a rule.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-08",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-dharma-for-kids.jpg",
+        "alt": "Illustration for What Is Dharma for Kids"
+      }
+    },
+    {
+      "slug": "how-to-teach-indian-values-to-children",
+      "title": "How to Teach Indian Values to Children",
+      "standfirst": "Values are absorbed from what a household actually does under pressure. How to pass on an inheritance a child chooses to keep rather than merely complies with.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-indian-values-to-children.jpg",
+        "alt": "Illustration for How to Teach Indian Values to Children"
+      }
+    },
+    {
+      "slug": "what-is-seva-and-how-to-teach-it-to-children",
+      "title": "What Is Seva and How to Teach It to Children?",
+      "standfirst": "Service stops being service the moment it is performed for an audience. How to build it into ordinary family life so it forms character rather than a record.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-seva-and-how-to-teach-it-to-children.jpg",
+        "alt": "Illustration for What Is Seva and How to Teach It to Children"
+      }
+    },
+    {
+      "slug": "benefits-of-sanskrit-for-children",
+      "title": "Benefits of Sanskrit for Children",
+      "standfirst": "What learning Sanskrit genuinely offers a child (grammatical precision, access to texts, phonetic range), and a clear-eyed look at the claims that outrun the evidence.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/benefits-of-sanskrit-for-children.jpg",
+        "alt": "Illustration for Benefits of Sanskrit for Children"
+      }
+    },
+    {
+      "slug": "how-to-teach-sanskrit-to-kids-at-home",
+      "title": "How to Teach Sanskrit to Kids at Home",
+      "standfirst": "A practical route in through sound, recitation and small daily contact, for a parent who is not a scholar and does not want to make it a chore.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-teach-sanskrit-to-kids-at-home.jpg",
+        "alt": "Illustration for How to Teach Sanskrit to Kids at Home"
+      }
+    },
+    {
+      "slug": "indian-stories-with-moral-lessons-for-kids",
+      "title": "Indian Stories With Moral Lessons for Kids",
+      "standfirst": "Stories worth telling, and why the ones that hold up are usually the ones that leave the moral unstated for the child to arrive at themselves.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/indian-stories-with-moral-lessons-for-kids.jpg",
+        "alt": "Illustration for Indian Stories With Moral Lessons for Kids"
+      }
+    },
+    {
+      "slug": "why-cultural-identity-matters-for-children",
+      "title": "Why Cultural Identity Matters for Children",
+      "standfirst": "A child who knows where they come from carries a steadier sense of who they are. What belonging does developmentally, and how it is built rather than declared.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-12-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-cultural-identity-matters-for-children.jpg",
+        "alt": "Illustration for Why Cultural Identity Matters for Children"
+      }
+    },
+    {
+      "slug": "janmashtami-with-children-meaning-stories-and-things-to-do",
+      "title": "Janmashtami With Children: Meaning, Stories and Things to Do",
+      "standfirst": "What the festival is actually about, told so a child can hold it, and a handful of things a family can make, sing and do rather than only watch.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-12-08",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/janmashtami-with-children-meaning-stories-and-things-to-do.jpg",
+        "alt": "Illustration for Janmashtami With Children: Meaning, Stories and Things to Do"
+      }
+    },
+    {
+      "slug": "ganesh-chaturthi-with-children-meaning-making-and-visarjan",
+      "title": "Ganesh Chaturthi With Children: Meaning, Making and Visarjan",
+      "standfirst": "Shaping the murti, living with it for days, and letting it go. The making and the parting are both the teaching, and children feel the second one keenly.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-11-30",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/ganesh-chaturthi-with-children-meaning-making-and-visarjan.jpg",
+        "alt": "Illustration for Ganesh Chaturthi With Children: Meaning, Making and Visarjan"
+      }
+    },
+    {
+      "slug": "navratri-with-children-nine-nights-nine-ways-to-take-part",
+      "title": "Navratri With Children: Nine Nights, Nine Ways to Take Part",
+      "standfirst": "Nine nights is a long time for a child. What each stretch can hold (story, movement, colour, food and rest) without turning it into a schedule.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-11-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/navratri-with-children-nine-nights-nine-ways-to-take-part.jpg",
+        "alt": "Illustration for Navratri With Children: Nine Nights, Nine Ways to Take Part"
+      }
+    },
+    {
+      "slug": "ancient-indian-education-and-modern-child-development",
+      "title": "Ancient Indian Education and Modern Child Development",
+      "standfirst": "Where classical Indian educational practice and contemporary developmental science point the same way, where they do not, and why the honest comparison is the useful one.",
+      "topic": "bharatiya-wisdom",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-11-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/ancient-indian-education-and-modern-child-development.jpg",
+        "alt": "Illustration for Ancient Indian Education and Modern Child Development"
+      }
+    },
+    {
+      "slug": "what-is-the-gurukul-education-system",
+      "title": "What Is the Gurukul Education System?",
+      "standfirst": "What a gurukul actually was (who attended, what was taught, how long it lasted) separated from the version that circulates online.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-08-05",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/what-is-the-gurukul-education-system.jpg",
+        "alt": "Illustration for What Is the Gurukul Education System"
+      }
+    },
+    {
+      "slug": "gurukul-education-system-in-ancient-india",
+      "title": "Gurukul Education System in Ancient India",
+      "standfirst": "The historical picture across periods and regions, including what changed over time and what the sources do and do not let us say with confidence.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-07-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/gurukul-education-system-in-ancient-india.jpg",
+        "alt": "Illustration for Gurukul Education System in Ancient India"
+      }
+    },
+    {
+      "slug": "advantages-of-gurukul-education",
+      "title": "Advantages of Gurukul Education",
+      "standfirst": "The genuine strengths (small groups, long relationships, learning tied to living, mastery over pace) stated without pretending the system had no costs.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-21",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/advantages-of-gurukul-education.jpg",
+        "alt": "Illustration for Advantages of Gurukul Education"
+      }
+    },
+    {
+      "slug": "gurukul-education-vs-modern-education",
+      "title": "Gurukul Education vs Modern Education",
+      "standfirst": "A fair comparison across purpose, pace, assessment and relationship, including where modern schooling is clearly the better answer and why.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-05-29",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/gurukul-education-vs-modern-education.jpg",
+        "alt": "Illustration for Gurukul Education vs Modern Education"
+      }
+    },
+    {
+      "slug": "how-did-the-gurukul-education-system-work",
+      "title": "How Did the Gurukul Education System Work?",
+      "standfirst": "The daily shape of it: the household, the routine, the labour, the recitation and the long apprenticeship that made a subject stick.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-did-the-gurukul-education-system-work.jpg",
+        "alt": "Illustration for How Did the Gurukul Education System Work"
+      }
+    },
+    {
+      "slug": "what-subjects-were-taught-in-gurukul",
+      "title": "What Subjects Were Taught in Gurukul?",
+      "standfirst": "The actual curriculum (language, logic, mathematics, ethics, craft and physical training), and how the subjects were held together rather than timetabled apart.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-subjects-were-taught-in-gurukul.jpg",
+        "alt": "Illustration for What Subjects Were Taught in Gurukul"
+      }
+    },
+    {
+      "slug": "what-is-the-guru-shishya-tradition",
+      "title": "What Is the Guru Shishya Tradition?",
+      "standfirst": "A relationship, not a job title. What made the transmission work, what it demanded of both people, and where the model becomes unsafe without safeguards.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-23",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-the-guru-shishya-tradition.jpg",
+        "alt": "Illustration for What Is the Guru Shishya Tradition"
+      }
+    },
+    {
+      "slug": "life-skills-in-the-gurukul-education-system",
+      "title": "Life Skills in the Gurukul Education System",
+      "standfirst": "Cooking, cleaning, growing and repairing were part of the education rather than a distraction from it. What that arrangement taught that a timetable cannot.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/life-skills-in-the-gurukul-education-system.jpg",
+        "alt": "Illustration for Life Skills in the Gurukul Education System"
+      }
+    },
+    {
+      "slug": "role-of-nature-in-gurukul-education",
+      "title": "Role of Nature in Gurukul Education",
+      "standfirst": "Learning happened outdoors because that is where life happened. What proximity to the natural world contributed, and what of it can be recovered now.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-06",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/role-of-nature-in-gurukul-education.jpg",
+        "alt": "Illustration for Role of Nature in Gurukul Education"
+      }
+    },
+    {
+      "slug": "gurukul-vs-montessori-education",
+      "title": "Gurukul vs Montessori Education",
+      "standfirst": "Two traditions that both trust the child and organise learning around readiness, and differ sharply on the adult’s role, materials and the place of memory.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-14",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/gurukul-vs-montessori-education.jpg",
+        "alt": "Illustration for Gurukul vs Montessori Education"
+      }
+    },
+    {
+      "slug": "can-gurukul-education-work-today",
+      "title": "Can Gurukul Education Work Today?",
+      "standfirst": "What transfers, what does not, and what would have to be rebuilt from scratch. An honest answer rather than a nostalgic one.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-12-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/can-gurukul-education-work-today.jpg",
+        "alt": "Illustration for Can Gurukul Education Work Today"
+      }
+    },
+    {
+      "slug": "modern-gurukul-education-what-should-we-keep-and-what-should-we-change",
+      "title": "Modern Gurukul Education: What Should We Keep and What Should We Change?",
+      "standfirst": "We are not recreating the past. Which principles are worth carrying forward into a modern developmental system, and which belong to their own century.",
+      "topic": "gurukul-education",
+      "ageStages": [
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 10,
+      "publishedAt": "2025-12-06",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/modern-gurukul-education-what-should-we-keep-and-what-should-we-change.jpg",
+        "alt": "Illustration for Modern Gurukul Education: What Should We Keep and What Should We Change"
+      }
+    },
+    {
+      "slug": "benefits-of-outdoor-play-for-kids",
+      "title": "Benefits of Outdoor Play for Kids",
+      "standfirst": "Outdoor play does work indoors cannot: distance vision, risk calibration, whole-body movement and unsupervised negotiation. What each of those builds.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-08-03",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/benefits-of-outdoor-play-for-kids.jpg",
+        "alt": "Illustration for Benefits of Outdoor Play for Kids"
+      }
+    },
+    {
+      "slug": "outdoor-activities-for-kids",
+      "title": "Outdoor Activities for Kids",
+      "standfirst": "Activities that need space and little else, sorted by the developmental work each one does rather than by how long it keeps a child busy.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-07-12",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/outdoor-activities-for-kids.jpg",
+        "alt": "Illustration for Outdoor Activities for Kids"
+      }
+    },
+    {
+      "slug": "nature-activities-for-kids",
+      "title": "Nature Activities for Kids",
+      "standfirst": "Ways to slow a child down enough to notice something (observation, collection, tracking and tending) that work in a park as well as a forest.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-06-19",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/nature-activities-for-kids.jpg",
+        "alt": "Illustration for Nature Activities for Kids"
+      }
+    },
+    {
+      "slug": "creative-activities-for-kids-at-home",
+      "title": "Creative Activities for Kids at Home",
+      "standfirst": "Open-ended making, with the outcome genuinely unknown at the start. Why kits and templates produce a result but not much creative thinking.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-05-28",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/creative-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Creative Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "benefits-of-free-play-for-children",
+      "title": "Benefits of Free Play for Children",
+      "standfirst": "Play that adults do not organise is where children practise deciding, negotiating and self-regulating. What is lost when every hour is scheduled.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/benefits-of-free-play-for-children.jpg",
+        "alt": "Illustration for Benefits of Free Play for Children"
+      }
+    },
+    {
+      "slug": "open-ended-play-ideas-for-kids",
+      "title": "Open Ended Play Ideas for Kids",
+      "standfirst": "Materials that can become anything, and why a box of loose parts outlasts most toys by years. What to keep, and what to quietly retire.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-04-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/open-ended-play-ideas-for-kids.jpg",
+        "alt": "Illustration for Open Ended Play Ideas for Kids"
+      }
+    },
+    {
+      "slug": "why-is-boredom-good-for-kids",
+      "title": "Why Is Boredom Good for Kids?",
+      "standfirst": "Boredom is the uncomfortable gap in which a child has to generate something themselves. Why filling it every time removes the practice, and how to sit it out.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-21",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-is-boredom-good-for-kids.jpg",
+        "alt": "Illustration for Why Is Boredom Good for Kids"
+      }
+    },
+    {
+      "slug": "what-to-do-when-kids-say-im-bored",
+      "title": "What to Do When Kids Say “I’m Bored”",
+      "standfirst": "What the sentence usually means, what it rarely means, and a set of responses that hand the problem back without dismissing the child.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-02-27",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-to-do-when-kids-say-im-bored.jpg",
+        "alt": "Illustration for What to Do When Kids Say “I'm Bored”"
+      }
+    },
+    {
+      "slug": "art-activities-for-kids-at-home",
+      "title": "Art Activities for Kids at Home",
+      "standfirst": "Process over product: what changes when the drawing is not for anyone, and how to respond to finished work without grading it by accident.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-02-04",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/art-activities-for-kids-at-home.jpg",
+        "alt": "Illustration for Art Activities for Kids at Home"
+      }
+    },
+    {
+      "slug": "gardening-activities-for-kids",
+      "title": "Gardening Activities for Kids",
+      "standfirst": "Growing something teaches patience, cause and care on a timescale nothing else at home matches. What works in pots, and what survives a child’s attention span.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 6,
+      "publishedAt": "2026-01-13",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/gardening-activities-for-kids.jpg",
+        "alt": "Illustration for Gardening Activities for Kids"
+      }
+    },
+    {
+      "slug": "how-to-develop-creativity-in-children",
+      "title": "How to Develop Creativity in Children",
+      "standfirst": "Creativity needs raw material, permission to be bad at things, and unstructured time. Where each of those usually goes missing, and how to restore it.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-12-23",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-develop-creativity-in-children.jpg",
+        "alt": "Illustration for How to Develop Creativity in Children"
+      }
+    },
+    {
+      "slug": "best-screen-free-activities-for-kids",
+      "title": "Best Screen Free Activities for Kids",
+      "standfirst": "Alternatives strong enough to actually compete with a screen, which means absorbing, social or physical, not merely worthy.",
+      "topic": "nature-creativity",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-05",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/best-screen-free-activities-for-kids.jpg",
+        "alt": "Illustration for Best Screen Free Activities for Kids"
+      }
+    },
+    {
+      "slug": "how-to-get-kids-to-listen-without-yelling",
+      "title": "How to Get Kids to Listen Without Yelling",
+      "standfirst": "Most not-listening is a capacity problem rather than a respect problem. What to change about how instructions are given before changing the volume.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-08-02",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/how-to-get-kids-to-listen-without-yelling.jpg",
+        "alt": "Illustration for How to Get Kids to Listen Without Yelling"
+      }
+    },
+    {
+      "slug": "how-to-stop-yelling-at-your-child",
+      "title": "How to Stop Yelling at Your Child",
+      "standfirst": "Yelling is usually the end of a chain that started much earlier in the day. How to interrupt it upstream, and what to do in the moment you have already started.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-stop-yelling-at-your-child.jpg",
+        "alt": "Illustration for How to Stop Yelling at Your Child"
+      }
+    },
+    {
+      "slug": "how-to-set-boundaries-with-children",
+      "title": "How to Set Boundaries With Children",
+      "standfirst": "A boundary is something the adult holds, not something the child agrees to. Why that distinction removes most of the negotiating, and how to hold one warmly.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-18",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-set-boundaries-with-children.jpg",
+        "alt": "Illustration for How to Set Boundaries With Children"
+      }
+    },
+    {
+      "slug": "gentle-parenting-vs-permissive-parenting",
+      "title": "Gentle Parenting vs Permissive Parenting",
+      "standfirst": "The two get confused constantly, including by people practising one and describing the other. What actually separates them, and where each one fails.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/gentle-parenting-vs-permissive-parenting.jpg",
+        "alt": "Illustration for Gentle Parenting vs Permissive Parenting"
+      }
+    },
+    {
+      "slug": "how-to-discipline-a-child-without-shouting",
+      "title": "How to Discipline a Child Without Shouting",
+      "standfirst": "Discipline means teaching, and teaching requires a child calm enough to learn. What works instead of escalation, and what consequences can and cannot do.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-04",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-discipline-a-child-without-shouting.jpg",
+        "alt": "Illustration for How to Discipline a Child Without Shouting"
+      }
+    },
+    {
+      "slug": "how-to-handle-a-stubborn-child",
+      "title": "How to Handle a Stubborn Child",
+      "standfirst": "Much of what reads as stubbornness is a child holding on to the only autonomy available to them. How to give ground that costs nothing and keep what matters.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-11",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-handle-a-stubborn-child.jpg",
+        "alt": "Illustration for How to Handle a Stubborn Child"
+      }
+    },
+    {
+      "slug": "why-does-my-child-not-listen-to-me",
+      "title": "Why Does My Child Not Listen to Me?",
+      "standfirst": "Four ordinary reasons, only one of which is defiance, and the one most parents land on last is usually the right one.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-20",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/why-does-my-child-not-listen-to-me.jpg",
+        "alt": "Illustration for Why Does My Child Not Listen to Me"
+      }
+    },
+    {
+      "slug": "how-to-stay-calm-when-your-child-is-having-a-tantrum",
+      "title": "How to Stay Calm When Your Child Is Having a Tantrum",
+      "standfirst": "Staying calm is a physical skill you can prepare for rather than a personality trait. What to do with your own body first, and why it changes the outcome.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-25",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-stay-calm-when-your-child-is-having-a-tantrum.jpg",
+        "alt": "Illustration for How to Stay Calm When Your Child Is Having a Tantrum"
+      }
+    },
+    {
+      "slug": "how-to-stop-comparing-your-child",
+      "title": "How to Stop Comparing Your Child",
+      "standfirst": "Comparison is almost involuntary, and it reliably distorts what you notice. Where it comes from, what it costs a child, and how to interrupt the habit.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-02-03",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-stop-comparing-your-child.jpg",
+        "alt": "Illustration for How to Stop Comparing Your Child"
+      }
+    },
+    {
+      "slug": "how-to-deal-with-parent-guilt",
+      "title": "How to Deal With Parent Guilt",
+      "standfirst": "Guilt is the tax on caring, and it is a poor guide to decisions. How to tell useful guilt from the ambient kind, and what to do with each.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-11",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-deal-with-parent-guilt.jpg",
+        "alt": "Illustration for How to Deal With Parent Guilt"
+      }
+    },
+    {
+      "slug": "how-to-build-a-strong-parent-child-relationship",
+      "title": "How to Build a Strong Parent Child Relationship",
+      "standfirst": "The relationship is the mechanism through which everything else works. What actually deepens it, and why it is built in small ordinary moments rather than big ones.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-12-21",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-build-a-strong-parent-child-relationship.jpg",
+        "alt": "Illustration for How to Build a Strong Parent Child Relationship"
+      }
+    },
+    {
+      "slug": "how-to-create-a-daily-routine-for-kids",
+      "title": "How to Create a Daily Routine for Kids",
+      "standfirst": "A routine works when it removes decisions rather than adds rules. How to build one a child can run themselves, and which parts of the day to fix first.",
+      "topic": "parenting",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-12-03",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-to-create-a-daily-routine-for-kids.jpg",
+        "alt": "Illustration for How to Create a Daily Routine for Kids"
+      }
+    },
+    {
+      "slug": "what-is-play-based-learning",
+      "title": "What Is Play Based Learning?",
+      "standfirst": "A precise definition, because the term is used for everything from free play to worksheets with stickers. What the research is actually describing.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-31",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-play-based-learning.jpg",
+        "alt": "Illustration for What Is Play Based Learning"
+      }
+    },
+    {
+      "slug": "benefits-of-play-based-learning",
+      "title": "Benefits of Play Based Learning",
+      "standfirst": "What the evidence supports on language, self-regulation and later academic outcomes, including where findings are mixed and why that matters.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-09",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/benefits-of-play-based-learning.jpg",
+        "alt": "Illustration for Benefits of Play Based Learning"
+      }
+    },
+    {
+      "slug": "what-is-guided-play",
+      "title": "What Is Guided Play?",
+      "standfirst": "The middle ground between free play and direct instruction, and the one with the strongest evidence behind it. What the adult does, and what they must not.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-06-16",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-guided-play.jpg",
+        "alt": "Illustration for What Is Guided Play"
+      }
+    },
+    {
+      "slug": "how-executive-function-affects-school-performance",
+      "title": "How Executive Function Affects School Performance",
+      "standfirst": "Executive function predicts school outcomes about as well as early ability does. What that finding means in practice, and what it does not license.",
+      "topic": "learning-science",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-25",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-executive-function-affects-school-performance.jpg",
+        "alt": "Illustration for How Executive Function Affects School Performance"
+      }
+    },
+    {
+      "slug": "how-does-working-memory-affect-learning",
+      "title": "How Does Working Memory Affect Learning?",
+      "standfirst": "Working memory is the bottleneck almost every classroom task runs through. Why overloading it looks like inattention, and how instruction can lighten it.",
+      "topic": "learning-science",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-05-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-does-working-memory-affect-learning.jpg",
+        "alt": "Illustration for How Does Working Memory Affect Learning"
+      }
+    },
+    {
+      "slug": "how-does-attention-affect-learning",
+      "title": "How Does Attention Affect Learning?",
+      "standfirst": "Nothing gets learned that was not attended to first. How attention is allocated, why interest changes capacity, and what divided attention actually costs.",
+      "topic": "learning-science",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-04-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-does-attention-affect-learning.jpg",
+        "alt": "Illustration for How Does Attention Affect Learning"
+      }
+    },
+    {
+      "slug": "how-does-movement-help-children-learn",
+      "title": "How Does Movement Help Children Learn?",
+      "standfirst": "The links between physical activity, attention and memory. Stated at the strength the evidence supports, which is more modest than the popular version.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-03-18",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/how-does-movement-help-children-learn.jpg",
+        "alt": "Illustration for How Does Movement Help Children Learn"
+      }
+    },
+    {
+      "slug": "what-is-the-science-of-learning",
+      "title": "What Is the Science of Learning?",
+      "standfirst": "The findings that hold up across settings (spacing, retrieval, elaboration, worked examples), and how they apply to a child rather than a student.",
+      "topic": "learning-science",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-24",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-the-science-of-learning.jpg",
+        "alt": "Illustration for What Is the Science of Learning"
+      }
+    },
+    {
+      "slug": "what-does-neuroscience-say-about-child-development",
+      "title": "What Does Neuroscience Say About Child Development?",
+      "standfirst": "What brain science genuinely establishes about childhood, and the large gap between that and the claims made in its name. A guide to reading the headlines.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-02-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-does-neuroscience-say-about-child-development.jpg",
+        "alt": "Illustration for What Does Neuroscience Say About Child Development"
+      }
+    },
+    {
+      "slug": "does-starting-school-earlier-help-children",
+      "title": "Does Starting School Earlier Help Children?",
+      "standfirst": "Countries start formal schooling anywhere between four and seven. What the comparative evidence shows about long-run outcomes, and what it cannot settle.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-01-10",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/does-starting-school-earlier-help-children.jpg",
+        "alt": "Illustration for Does Starting School Earlier Help Children"
+      }
+    },
+    {
+      "slug": "what-does-research-say-about-screen-time",
+      "title": "What Does Research Say About Screen Time?",
+      "standfirst": "A careful read of a noisy literature: what is well established, what is contested, and why most of the strong claims in either direction are overstated.",
+      "topic": "learning-science",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-12-20",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-does-research-say-about-screen-time.jpg",
+        "alt": "Illustration for What Does Research Say About Screen Time"
+      }
+    },
+    {
+      "slug": "best-education-systems-in-the-world-what-can-parents-learn",
+      "title": "Best Education Systems in the World: What Can Parents Learn?",
+      "standfirst": "Rankings measure a narrow slice of what schooling does. What the high-performing systems actually share, and which of it a family can use at home.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-07-30",
+      "isFeatured": true,
+      "image": {
+        "src": "/journal/best-education-systems-in-the-world-what-can-parents-learn.jpg",
+        "alt": "Illustration for Best Education Systems in the World: What Can Parents Learn"
+      }
+    },
+    {
+      "slug": "finland-education-system-explained",
+      "title": "Finland Education System Explained",
+      "standfirst": "Late starts, little homework, no ranking and heavily trained teachers. What Finland actually does, and which parts depend on conditions elsewhere lacks.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-07-07",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/finland-education-system-explained.jpg",
+        "alt": "Illustration for Finland Education System Explained"
+      }
+    },
+    {
+      "slug": "japanese-education-system-explained",
+      "title": "Japanese Education System Explained",
+      "standfirst": "Cleaning the classroom, walking to school alone, and the emphasis on group responsibility. What Japan builds deliberately, and what it costs adolescents.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-06-15",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/japanese-education-system-explained.jpg",
+        "alt": "Illustration for Japanese Education System Explained"
+      }
+    },
+    {
+      "slug": "singapore-education-system-explained",
+      "title": "Singapore Education System Explained",
+      "standfirst": "World-leading maths results alongside an acknowledged pressure problem. How the teaching approach works, and what Singapore itself is trying to change.",
+      "topic": "global-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-05-23",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/singapore-education-system-explained.jpg",
+        "alt": "Illustration for Singapore Education System Explained"
+      }
+    },
+    {
+      "slug": "montessori-education-a-parents-guide",
+      "title": "Montessori Education: A Parent’s Guide",
+      "standfirst": "The prepared environment, the materials, the mixed ages and the uninterrupted work period. What the method rests on, and how to spot a nominal Montessori.",
+      "topic": "global-education",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-05-01",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/montessori-education-a-parents-guide.jpg",
+        "alt": "Illustration for Montessori Education: A Parent's Guide"
+      }
+    },
+    {
+      "slug": "montessori-vs-traditional-education",
+      "title": "Montessori vs Traditional Education",
+      "standfirst": "Where the two differ on pace, choice, assessment and the adult’s role, and what the comparative evidence does and does not show about outcomes.",
+      "topic": "global-education",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-04-08",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/montessori-vs-traditional-education.jpg",
+        "alt": "Illustration for Montessori vs Traditional Education"
+      }
+    },
+    {
+      "slug": "reggio-emilia-approach-explained",
+      "title": "Reggio Emilia Approach Explained",
+      "standfirst": "Children as capable investigators, the environment as a third teacher, and documentation instead of testing. What the approach asks of adults.",
+      "topic": "global-education",
+      "ageStages": [
+        "seekers",
+        "explorers"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-03-17",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/reggio-emilia-approach-explained.jpg",
+        "alt": "Illustration for Reggio Emilia Approach Explained"
+      }
+    },
+    {
+      "slug": "waldorf-education-explained",
+      "title": "Waldorf Education Explained",
+      "standfirst": "Delayed academics, rhythm, story and craft: set out plainly, including the philosophical commitments underneath that parents are often not told about.",
+      "topic": "global-education",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2026-02-22",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/waldorf-education-explained.jpg",
+        "alt": "Illustration for Waldorf Education Explained"
+      }
+    },
+    {
+      "slug": "what-is-alternative-education",
+      "title": "What Is Alternative Education?",
+      "standfirst": "The term covers approaches with almost nothing in common. A map of the main families, and the questions worth asking of any of them.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2026-01-31",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-alternative-education.jpg",
+        "alt": "Illustration for What Is Alternative Education"
+      }
+    },
+    {
+      "slug": "alternative-education-in-india",
+      "title": "Alternative Education in India",
+      "standfirst": "What exists in practice (the schools, the models, the legal position), and the practical questions a family should ask before moving a child.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2026-01-08",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/alternative-education-in-india.jpg",
+        "alt": "Illustration for Alternative Education in India"
+      }
+    },
+    {
+      "slug": "what-is-nep-2020-for-parents",
+      "title": "What Is NEP 2020 for Parents?",
+      "standfirst": "The policy in plain language: the 5+3+3+4 structure, foundational literacy, mother-tongue instruction and assessment, and what has actually changed so far.",
+      "topic": "global-education",
+      "ageStages": [
+        "seekers",
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 9,
+      "publishedAt": "2025-12-18",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-nep-2020-for-parents.jpg",
+        "alt": "Illustration for What Is NEP 2020 for Parents"
+      }
+    },
+    {
+      "slug": "homeschooling-in-india-a-parents-guide",
+      "title": "Homeschooling in India: A Parent’s Guide",
+      "standfirst": "The legal position, the board options, the socialisation question answered honestly, and a realistic account of what it asks of the adults.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers",
+        "leaders"
+      ],
+      "readingMinutes": 10,
+      "publishedAt": "2025-12-02",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/homeschooling-in-india-a-parents-guide.jpg",
+        "alt": "Illustration for Homeschooling in India: A Parent's Guide"
+      }
+    },
+    {
+      "slug": "what-is-holistic-education",
+      "title": "What Is Holistic Education?",
+      "standfirst": "A term used so widely it has nearly stopped meaning anything. What it should mean, and the questions that separate a real claim from a brochure one.",
+      "topic": "global-education",
+      "ageStages": [
+        "explorers",
+        "builders",
+        "thinkers"
+      ],
+      "readingMinutes": 7,
+      "publishedAt": "2025-11-29",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-holistic-education.jpg",
+        "alt": "Illustration for What Is Holistic Education"
+      }
+    },
+    {
+      "slug": "what-is-future-ready-education",
+      "title": "What Is Future Ready Education?",
+      "standfirst": "Preparing a child for conditions nobody can specify. Why the answer turns out to be developmental capacities rather than a list of technologies.",
+      "topic": "global-education",
+      "ageStages": [
+        "builders",
+        "thinkers",
+        "leaders",
+        "visionaries"
+      ],
+      "readingMinutes": 8,
+      "publishedAt": "2025-11-26",
+      "isFeatured": false,
+      "image": {
+        "src": "/journal/what-is-future-ready-education.jpg",
+        "alt": "Illustration for What Is Future Ready Education"
       }
     }
   ],
   "mostAsked": [
     {
-      "question": "Should my 5-year-old be reading?",
-      "slug": "should-my-five-year-old-already-be-reading"
+      "question": "Why can’t my child focus?",
+      "slug": "why-cant-my-child-focus"
     },
     {
-      "question": "How much screen time is too much?",
-      "slug": "how-much-screen-time-is-too-much"
+      "question": "Should my five-year-old be reading by now?",
+      "slug": "should-a-5-year-old-be-able-to-read"
     },
     {
-      "question": "My child doesn't want to share. What can I do?",
-      "slug": "my-child-doesnt-want-to-share"
+      "question": "How do I get my child to listen without yelling?",
+      "slug": "how-to-get-kids-to-listen-without-yelling"
     },
     {
-      "question": "How do I build confidence in my child?",
-      "slug": "how-do-i-build-confidence-without-empty-praise"
-    },
-    {
-      "question": "When should children learn about money?",
-      "slug": "when-should-children-learn-about-money"
-    },
-    {
-      "question": "Why doesn't my child listen the first time?",
-      "slug": "why-doesnt-my-child-listen-the-first-time"
-    },
-    {
-      "question": "Should I punish or explain?",
-      "slug": "should-i-punish-or-explain"
-    },
-    {
-      "question": "When should my child get a phone?",
-      "slug": "when-should-my-child-get-a-phone"
+      "question": "How much screen time is actually healthy?",
+      "slug": "how-much-screen-time-is-healthy-for-kids"
     },
     {
       "question": "How much sleep does my child need?",
-      "slug": "how-much-sleep-does-my-child-actually-need"
+      "slug": "how-much-sleep-do-kids-need-by-age"
     },
     {
-      "question": "How do I know if my child is anxious?",
-      "slug": "how-do-i-know-if-my-child-is-anxious"
+      "question": "What do I do about tantrums?",
+      "slug": "how-to-handle-tantrums-in-children"
+    },
+    {
+      "question": "Is ChatGPT safe for my child?",
+      "slug": "is-chatgpt-safe-for-kids"
+    },
+    {
+      "question": "What does school readiness actually mean?",
+      "slug": "what-is-school-readiness"
+    },
+    {
+      "question": "How do I build my child’s confidence?",
+      "slug": "how-to-build-confidence-in-children"
+    },
+    {
+      "question": "How do I teach body safety without frightening them?",
+      "slug": "how-to-teach-body-safety-to-children"
     }
   ],
   "trending": [
+    "janmashtami",
+    "ganesh chaturthi",
+    "navratri",
+    "concentration",
+    "school readiness",
     "screen time",
-    "reading",
-    "tantrums",
-    "confidence",
+    "AI for kids",
+    "executive function",
     "sleep",
-    "friendship"
+    "gurukul"
   ]
 }

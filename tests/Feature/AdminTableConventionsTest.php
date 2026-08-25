@@ -34,12 +34,12 @@ class AdminTableConventionsTest extends TestCase
      */
     public function test_the_create_button_renders_inside_the_table(): void
     {
-        $html = $this->signedIn($this->panelUser())->get('/topics')->getContent();
+        $html = $this->signedIn($this->panelUser())->get('/article-topics')->getContent();
 
-        $this->assertStringContainsString('New topic', $html, 'the create button is not on the page at all');
+        $this->assertStringContainsString('New article topic', $html, 'the create button is not on the page at all');
 
         $table = strpos($html, 'fi-ta-ctn');
-        $button = strpos($html, 'New topic');
+        $button = strpos($html, 'New article topic');
 
         $this->assertNotFalse($table, 'no table container rendered');
         $this->assertGreaterThan(
