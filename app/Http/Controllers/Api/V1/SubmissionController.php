@@ -14,6 +14,7 @@ use App\Models\AgeStage;
 use App\Models\Circle;
 use App\Models\CircleQuestion;
 use App\Models\CircleSignup;
+use App\Jobs\SendParentGuide;
 use App\Models\Lead;
 use App\Models\LeadKind;
 use App\Models\Subscriber;
@@ -241,7 +242,7 @@ class SubmissionController extends Controller
 
         $kind = LeadKind::from($data['kind']);
 
-        Lead::create([
+        $lead = Lead::create([
             'kind' => $kind->value,
             'name' => $data['name'] ?? null,
             'email' => $data['email'],
@@ -252,6 +253,22 @@ class SubmissionController extends Controller
             /* Where this kind's process starts, which the model layer decides. */
             'status' => $kind->initialStatus(),
         ] + $this->attribution($data));
+
+        /*
+         * THE GUIDE SENDS ITSELF.
+         *
+         * Somebody typed an address to get one file. Making them wait on a person to notice the row
+         * and forward it is the difference between a working promise and a form that looks broken —
+         * and it is why `new → sent` on this kind used to describe a task nobody was doing.
+         *
+         * QUEUED, so the parent's request returns immediately whatever the mail server is doing, and
+         * so a slow or refused handshake cannot turn a successful submission into a 500. The job
+         * writes the outcome back onto this lead, including the reason when it fails. It needs
+         * `queue:work` running — see RUNBOOK.md, where that is already not optional.
+         */
+        if ($kind === LeadKind::ParentGuide) {
+            SendParentGuide::dispatch($lead);
+        }
 
         /* The row is saved; this is a courtesy on top of it and never throws. */
         NotifyAdmins::of(
