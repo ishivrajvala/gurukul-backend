@@ -102,12 +102,12 @@ class ArticleResource extends Resource
             ])->columns(2),
 
             Forms\Components\Section::make('Filing')->schema([
-                Forms\Components\Select::make('topic_id')
-                    ->relationship('topic', 'name')
+                Forms\Components\Select::make('article_topic_id')
+                    ->relationship('articleTopic', 'name')
                     ->required()
                     ->preload()
                     ->label('Topic')
-                    ->helperText('One of the shared ten. The same list Circles and Stories file under.'),
+                    ->helperText('One of the fifteen Journal topics. Edit the list under Article topics.'),
 
                 Forms\Components\Select::make('ageStages')
                     ->relationship('ageStages', 'name')
@@ -227,7 +227,7 @@ class ArticleResource extends Resource
             ->defaultSort('published_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable()->limit(52)->weight('semibold')->wrap(),
-                Tables\Columns\TextColumn::make('topic.name')->label('Topic')->badge()->color('gray'),
+                Tables\Columns\TextColumn::make('articleTopic.name')->label('Topic')->badge()->color('gray'),
                 Tables\Columns\TextColumn::make('ageStages.range_label')
                     ->label('Ages')
                     ->badge()
@@ -247,7 +247,7 @@ class ArticleResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')->options(['draft' => 'Draft', 'published' => 'Published']),
-                Tables\Filters\SelectFilter::make('topic')->relationship('topic', 'name')->preload(),
+                Tables\Filters\SelectFilter::make('articleTopic')->relationship('articleTopic', 'name')->preload()->label('Topic'),
                 Tables\Filters\Filter::make('unwritten')
                     ->label('Still to write')
                     ->query(fn ($query) => $query->whereNull('content')),

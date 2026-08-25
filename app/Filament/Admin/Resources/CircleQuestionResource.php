@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Clusters\Requests as RequestsCluster;
 use App\Filament\Admin\Resources\CircleQuestionResource\Pages;
 use App\Models\CircleQuestion;
 use Filament\Forms;
@@ -32,7 +33,7 @@ class CircleQuestionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
-    protected static ?string $navigationGroup = 'Inbox';
+    protected static ?string $cluster = RequestsCluster::class;
 
     protected static ?int $navigationSort = 2;
 

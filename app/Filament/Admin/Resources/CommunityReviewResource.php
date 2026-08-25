@@ -35,7 +35,7 @@ class CommunityReviewResource extends Resource
 
     protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationLabel = 'Community reviews';
 

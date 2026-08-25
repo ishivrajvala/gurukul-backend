@@ -36,13 +36,20 @@ class ListLeads extends ListRecords
      */
     public function getTabs(): array
     {
+        /* Bookings have their own screen — see `CallRequestResource`. `LeadResource` already
+           excludes them at the query; this keeps the tab row honest about it too. */
+        $kinds = array_filter(
+            LeadKind::cases(),
+            fn (LeadKind $kind): bool => $kind !== LeadKind::Booking,
+        );
+
         $tabs = [
             'all' => Tab::make('All')
-                ->badge(Lead::query()->open()->count() ?: null)
+                ->badge(static::getResource()::getEloquentQuery()->open()->count() ?: null)
                 ->badgeColor('warning'),
         ];
 
-        foreach (LeadKind::cases() as $kind) {
+        foreach ($kinds as $kind) {
             $open = Lead::query()
                 ->where('kind', $kind->value)
                 ->whereIn('status', $kind->openStatuses())

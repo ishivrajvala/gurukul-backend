@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Clusters\Requests as RequestsCluster;
 use App\Filament\Admin\Resources\CircleSignupResource\Pages;
 use App\Models\CircleSignup;
 use Filament\Forms;
@@ -50,7 +51,7 @@ class CircleSignupResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
 
-    protected static ?string $navigationGroup = 'Inbox';
+    protected static ?string $cluster = RequestsCluster::class;
 
     protected static ?int $navigationSort = 1;
 

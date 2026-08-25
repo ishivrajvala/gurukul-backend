@@ -88,11 +88,12 @@ class CircleResource extends Resource
                     ->label('Age stages')
                     ->helperText('Leave EMPTY for a Circle that is for every stage — that is what makes the universal Circle universal. Ticking all six is a different record and reads differently on the site.'),
 
-                Forms\Components\Select::make('topics')
-                    ->relationship('topics', 'name')
+                Forms\Components\Select::make('circleTopics')
+                    ->relationship('circleTopics', 'name')
                     ->multiple()
                     ->preload()
-                    ->helperText('The shared topics. The same ten the Journal and Stories file under.'),
+                    ->label('Topics')
+                    ->helperText('What this Circle is about. Edit the list under Circle topics.'),
 
                 Forms\Components\Select::make('petals')
                     ->relationship('petals', 'name')

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources\SubscriberResource\Pages;
 
+use App\Filament\Admin\Resources\CampaignResource;
 use App\Filament\Admin\Resources\SubscriberResource;
+use App\Models\Campaign;
 use App\Models\Subscriber;
+use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,8 +19,33 @@ class ListSubscribers extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        /* No create: see `SubscriberResource::canCreate`. Consent is the asset. */
-        return [];
+        /*
+         * WRITE TO THE LIST, FROM THE LIST.
+         *
+         * There is no Create here — see `SubscriberResource::canCreate`, consent is the asset — but
+         * the one thing somebody looking at these addresses actually wants to do is write to them,
+         * and that used to mean knowing that a separate top-level menu called Campaigns existed.
+         *
+         * It opens a DRAFT rather than sending anything. Nothing leaves until it is written and
+         * sent deliberately, and `Campaign::markSending` holds the lock that stops the same email
+         * going out twice. The count in the button is the deliverable list as it stands right now,
+         * which is the number the person writing needs to see before they start.
+         */
+        return [
+            Actions\Action::make('emailEveryone')
+                ->label(fn (): string => 'Email all '.Subscriber::query()->deliverable()->count().' subscribers')
+                ->icon('heroicon-o-paper-airplane')
+                ->visible(fn (): bool => Subscriber::query()->deliverable()->exists())
+                ->action(function (): void {
+                    $campaign = Campaign::create([
+                        'subject' => '',
+                        'status' => Campaign::STATUS_DRAFT,
+                        'created_by' => auth()->id(),
+                    ]);
+
+                    $this->redirect(CampaignResource::getUrl('edit', ['record' => $campaign]));
+                }),
+        ];
     }
 
     /**

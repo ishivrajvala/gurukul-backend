@@ -51,13 +51,13 @@ class SubscriberResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
-    protected static ?string $navigationGroup = 'Email list';
+    protected static ?string $navigationGroup = 'Inbox';
 
     protected static ?string $navigationLabel = 'Subscribers';
 
     protected static ?string $modelLabel = 'subscriber';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     /**
      * THE BADGE IS THE LIST SIZE, NOT A BACKLOG — and it is the one number on this panel that is
@@ -92,15 +92,26 @@ class SubscriberResource extends Resource
             Forms\Components\TextInput::make('name')->maxLength(120),
 
             /*
-             * EDITABLE, because this is where a bounce gets recorded by hand until something
-             * automatic does it. `unsubscribed` is a person's decision and normally arrives through
-             * the link in the email rather than from here.
+             * SUBSCRIBED OR UNSUBSCRIBED, and deliberately not Bounced.
+             *
+             * `bounced` is still a real status on the model and the tab still counts it — what it
+             * is not is something a person should set by hand. A bounce is a fact reported by the
+             * sending provider AFTER a delivery fails, and `Subscriber::markBounced` says plainly
+             * that only a webhook may call it. Offering it here invited somebody to mark an address
+             * bounced because one send looked odd, which silently stops writing to a real reader and
+             * looks identical to them never having signed up.
+             *
+             * What an editor genuinely needs to manage is the other one: somebody asking us to stop.
+             * That is the row action, and it keeps the record rather than deleting it.
              */
             Forms\Components\Select::make('status')
-                ->options(Subscriber::STATUSES)
+                ->options([
+                    Subscriber::STATUS_SUBSCRIBED => Subscriber::STATUSES[Subscriber::STATUS_SUBSCRIBED],
+                    Subscriber::STATUS_UNSUBSCRIBED => Subscriber::STATUSES[Subscriber::STATUS_UNSUBSCRIBED],
+                ])
                 ->required()
                 ->native(false)
-                ->helperText('Only subscribed addresses are written to. Bounced is not the same as unsubscribed: one is a rejected address, the other is somebody asking us to stop.'),
+                ->helperText('Only subscribed addresses are written to. A bounced address is set by the sending provider, never here.'),
 
             Forms\Components\TextInput::make('source')->label('Signed up from')->disabled(),
 

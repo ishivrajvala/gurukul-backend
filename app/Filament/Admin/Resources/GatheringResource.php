@@ -51,7 +51,7 @@ class GatheringResource extends Resource
 
     protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -64,8 +64,8 @@ class GatheringResource extends Resource
                     ->searchable()
                     ->label('Circle'),
 
-                Forms\Components\Select::make('topic_id')
-                    ->relationship('topic', 'name')
+                Forms\Components\Select::make('circle_topic_id')
+                    ->relationship('circleTopic', 'name')
                     ->preload()
                     ->label('Topic')
                     ->helperText('What this hour is about, which may differ from the Circle as a whole.'),

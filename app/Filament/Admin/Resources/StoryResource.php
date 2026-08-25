@@ -57,7 +57,7 @@ class StoryResource extends Resource
 
     protected static ?string $navigationGroup = 'Parenting';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -115,11 +115,11 @@ class StoryResource extends Resource
             ])->columns(3),
 
             Forms\Components\Section::make('Filing')->schema([
-                Forms\Components\Select::make('topic_id')
-                    ->relationship('topic', 'name')
+                Forms\Components\Select::make('story_tag_id')
+                    ->relationship('storyTag', 'name')
                     ->preload()
-                    ->label('Topic')
-                    ->helperText('What a parent would search for. This is the FILTER.'),
+                    ->label('Story tag')
+                    ->helperText('What this family changed — the situation a reader recognises. This is the FILTER. Edit the list under Story tags.'),
 
                 Forms\Components\Select::make('petal_id')
                     ->relationship('petal', 'name')

@@ -150,16 +150,28 @@ class AdminPanelProvider extends PanelProvider
                  */
                 fn (string $label): NavigationGroup => NavigationGroup::make($label)->collapsible(false),
                 [
+                    /*
+                     * THE INBOX IS EVERYTHING SOMEBODY SENT US, and it is now four entries rather
+                     * than seven. Requests is a CLUSTER — circle signups, circle questions and
+                     * story submissions behind one entry — because the person opening the panel in
+                     * the morning wants one answer to "what came in", not a column of five to check
+                     * in turn. Leads is the forms where somebody waits on a reply.
+                     *
+                     * Subscribers and Emails moved IN here, from a group of their own. The argument
+                     * for keeping them out was that nobody "handles" a subscriber, so counting them
+                     * as waiting work made the badge meaningless — that part was right and still is,
+                     * which is why neither carries a badge. But a separate top-level group for two
+                     * items put more structure in the menu than the job deserved, and the list is
+                     * plainly a thing people send us their address for.
+                     */
                     'Inbox',
                     /*
-                     * THE EMAIL LIST IS ITS OWN GROUP, directly under the inbox and deliberately
-                     * not in it. Subscribers used to be the fifth tab of Enquiries, sitting in the
-                     * same pending count as four things that all needed doing — but nobody handles
-                     * a subscriber, so every one of them read as work that could never be finished
-                     * and made the number meaningless. An inbox answers "what is waiting for me";
-                     * this answers "who gets Thursday's email".
+                     * CALLS IS ITS OWN GROUP, directly under the inbox. A call request is the same
+                     * table as a lead and was the third tab of it; what makes it different is the
+                     * clock. It goes stale in hours, and buried in a tab nobody could see which
+                     * requests had been sitting since yesterday. See `CallRequestResource`.
                      */
-                    'Email list',
+                    'Calls',
                     /* Everything written and published: articles, landing pages, the top strip. */
                     'Content System',
                     /* Circles and Stories merged: both are the parenting community, and two groups
@@ -228,6 +240,9 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-arrow-top-right-on-square'),
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
+            /* Clusters group several resources behind ONE nav entry. `Requests` is the only
+               one: three tables that are all "somebody sent us something". See that class. */
+            ->discoverClusters(in: app_path('Filament/Admin/Clusters'), for: 'App\Filament\Admin\Clusters')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,

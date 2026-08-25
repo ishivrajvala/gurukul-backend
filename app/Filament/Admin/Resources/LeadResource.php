@@ -6,6 +6,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\LeadResource\Pages;
 use App\Filament\Admin\Resources\LeadResource\RelationManagers\NotesRelationManager;
+use App\Jobs\SendParentGuide;
 use App\Models\Lead;
 use App\Models\LeadKind;
 use App\Models\LeadNote;
@@ -15,13 +16,19 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 /**
- * LEADS — the four site forms where somebody is waiting on a reply.
+ * LEADS — the site forms where somebody is waiting on a reply.
  *
- * Join waitlist · Contact · Book a call · Parent guide.
+ * Join waitlist · Contact · Parent guide.
+ *
+ * BOOK A CALL USED TO BE THE FOURTH and is now its own screen. It is still the same table and the
+ * same `LeadKind`; what it is not is the same clock. The other three wait on a reply and are worked
+ * through in a day or two, while a call request goes stale in hours — and as one tab of four it was
+ * impossible to see which requests had been sitting since yesterday. See `CallRequestResource`.
  *
  * ONE RESOURCE, because four near-identical screens is four places to forget to look. `kind` is
  * the tab, and the extra fields each form collected are in `payload` rather than four sets of
@@ -56,7 +63,7 @@ class LeadResource extends Resource
 
     protected static ?string $navigationGroup = 'Inbox';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'Leads';
 
@@ -68,9 +75,21 @@ class LeadResource extends Resource
      * still ours. Counting only untouched rows would hide every follow-up; counting everything
      * unfinished would climb for ever. `Lead::scopeOpen` draws that line once.
      */
+    /**
+     * BOOKINGS ARE NOT HERE ANY MORE. They are the same table, filtered out at the query so the
+     * exclusion holds for the tabs, the badge, the global search and the edit page alike — see
+     * `CallRequestResource` for why a call request needed a screen with a clock on it. A filter
+     * would not do: a filter is a thing somebody can clear, and clearing it would show a family
+     * twice in two places with two different processes.
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('kind', '!=', LeadKind::Booking->value);
+    }
+
     public static function getNavigationBadge(): ?string
     {
-        $waiting = Lead::query()->open()->count();
+        $waiting = static::getEloquentQuery()->open()->count();
 
         return $waiting > 0 ? (string) $waiting : null;
     }
@@ -300,6 +319,40 @@ class LeadResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open'),
+
+                /*
+                 * SEND THE GUIDE AGAIN.
+                 *
+                 * The guide sends itself the moment somebody asks — see `SendParentGuide` — so this
+                 * is the exception path, and today it is the ONLY path: no guide PDF has been
+                 * produced yet, so every request marks itself `failed` with a reason saying exactly
+                 * that. Drop the file in and these rows can all be sent from here without anybody
+                 * re-entering an address.
+                 *
+                 * It is offered on `failed` and on `new` — never on `sent`, because a second copy of
+                 * a file somebody already has is not a fix for anything, and the job refuses it
+                 * anyway.
+                 */
+                Tables\Actions\Action::make('sendGuide')
+                    ->label(fn (Lead $r): string => $r->status === 'failed' ? 'Try again' : 'Send the guide')
+                    ->icon('heroicon-o-paper-airplane')
+                    ->visible(fn (Lead $r): bool => $r->kind === LeadKind::ParentGuide
+                        && in_array($r->status, ['new', 'failed'], true))
+                    ->requiresConfirmation()
+                    ->modalDescription(fn (Lead $r): string => 'The guide will be emailed to '.$r->email.'.')
+                    ->action(function (Lead $record): void {
+                        /* Clear the failure first: the job refuses to re-send a `sent` row, and
+                           leaving `failed` on a row we are actively retrying reads as the outcome. */
+                        $record->forceFill(['status' => LeadKind::ParentGuide->initialStatus()])->save();
+
+                        SendParentGuide::dispatch($record->fresh());
+
+                        Notification::make()
+                            ->title('Queued')
+                            ->body('It will send on the next queue pass. The status here will say whether it went.')
+                            ->success()
+                            ->send();
+                    }),
 
                 /*
                  * LOG A CONTACT AND MOVE THE LEAD IN ONE ACT, because they are one act.

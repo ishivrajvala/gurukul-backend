@@ -39,13 +39,15 @@ class CampaignResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-paper-airplane';
 
-    protected static ?string $navigationGroup = 'Email list';
+    protected static ?string $navigationGroup = 'Inbox';
 
-    protected static ?string $navigationLabel = 'Campaigns';
+    protected static ?string $navigationLabel = 'Emails';
 
-    protected static ?string $modelLabel = 'campaign';
+    protected static ?string $modelLabel = 'email';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?string $pluralModelLabel = 'emails';
+
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $recordTitleAttribute = 'subject';
 
