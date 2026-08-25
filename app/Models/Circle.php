@@ -40,9 +40,9 @@ class Circle extends Model
         return $this->belongsToMany(AgeStage::class);
     }
 
-    public function topics(): BelongsToMany
+    public function circleTopics(): BelongsToMany
     {
-        return $this->belongsToMany(Topic::class);
+        return $this->belongsToMany(CircleTopic::class);
     }
 
     public function petals(): BelongsToMany

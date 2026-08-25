@@ -30,7 +30,7 @@ class Article extends Model
     protected $fillable = [
         'title', 'slug', 'standfirst', 'short_description', 'content',
         'featured_image', 'featured_image_alt',
-        'topic_id', 'category_id',
+        'article_topic_id',
         'reading_minutes', 'is_featured', 'status', 'published_at',
     ];
 
@@ -43,9 +43,9 @@ class Article extends Model
         ];
     }
 
-    public function topic(): BelongsTo
+    public function articleTopic(): BelongsTo
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(ArticleTopic::class);
     }
 
     public function ageStages(): BelongsToMany

@@ -30,7 +30,7 @@ class StoryController extends Controller
     public function index(): JsonResponse
     {
         $stories = Story::published()
-            ->with(['topic', 'petal', 'ageStages'])
+            ->with(['storyTag', 'petal', 'ageStages'])
             ->get()
             ->map(fn (Story $s): array => $this->summary($s));
 
@@ -52,7 +52,7 @@ class StoryController extends Controller
     {
         $stories = Story::published()
             ->onHome()
-            ->with(['topic', 'petal', 'ageStages'])
+            ->with(['storyTag', 'petal', 'ageStages'])
             ->get()
             ->map(fn (Story $s): array => $this->summary($s));
 
@@ -62,7 +62,7 @@ class StoryController extends Controller
     public function show(string $slug): JsonResponse
     {
         $story = Story::published()
-            ->with(['topic', 'petal', 'ageStages'])
+            ->with(['storyTag', 'petal', 'ageStages'])
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -119,8 +119,8 @@ class StoryController extends Controller
             'slug' => $s->slug,
             'title' => $s->title,
             'standfirst' => $s->standfirst,
-            'topic' => $s->topic?->slug,
-            /* The petal is the EYEBROW, the topic is the FILTER. Different questions on purpose. */
+            'tag' => $s->storyTag?->slug,
+            /* The petal is the EYEBROW, the tag is the FILTER. Different questions on purpose. */
             'petal' => $s->petal?->name,
             'ages' => $s->ageStages->pluck('key'),
             'author' => ['name' => $s->author_name, 'relation' => $s->author_relation],

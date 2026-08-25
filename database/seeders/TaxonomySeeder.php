@@ -5,26 +5,84 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\AgeStage;
+use App\Models\ArticleTopic;
+use App\Models\CircleTopic;
 use App\Models\Petal;
-use App\Models\Topic;
+use App\Models\StoryTag;
 use Illuminate\Database\Seeder;
 
 /**
- * The three shared vocabularies, copied from the frontend's locked models.
+ * The site's vocabularies.
  *
- * SOURCE OF TRUTH, FOR NOW, IS THE FRONTEND. `models/topics.ts`, `models/ages.ts` and
- * `models/pathwayLibrary.ts` hold these lists and the site renders from them today. Seeding the
- * same slugs, names and ORDER is what lets the API replace those files later without a single
- * rename — and what stops the two projects growing two vocabularies.
+ * THREE LISTS WHERE THERE WAS ONE. `topics` was a single shared table that articles, circles,
+ * gatherings and stories all filed against. It was split because the Journal's taxonomy is now
+ * chosen for search and the other two modules have no use for it — see the split migration.
  *
- * `updateOrCreate` on the slug, so re-running is safe and an editor's description edits survive a
- * reseed of the ordering.
+ * Where each list comes from now differs, and that is the important part:
+ *
+ *   ARTICLE TOPICS come from `database/data/journal.json`, alongside the articles filed under them.
+ *   One file, so a topic cannot be added without the articles that justify it, and the seeder
+ *   cannot file an article under a topic that does not exist.
+ *
+ *   CIRCLE TOPICS are the original ten, written out here. They were designed for this job and all
+ *   six circles already sit across them cleanly.
+ *
+ *   STORY TAGS are new, and are the one list here that is not a subject vocabulary at all.
+ *
+ * `updateOrCreate` on the slug throughout, so re-running is safe and an editor's description edits
+ * survive a reseed of the ordering.
  */
 class TaxonomySeeder extends Seeder
 {
     public function run(): void
     {
-        /* The ten topics, in locked nav order. Never sorted alphabetically. */
+        $this->articleTopics();
+        $this->circleTopics();
+        $this->storyTags();
+        $this->ageStages();
+        $this->petals();
+    }
+
+    /**
+     * The fifteen Journal topics, read from the same file as the articles.
+     *
+     * TOPICS NOT IN THE FILE ARE DELETED. This list is generated from the frontend model and is
+     * meant to match it exactly; a topic left behind from a previous shape would appear in the
+     * panel's filter dropdown and on the site's topic rail as a category with nothing in it. The
+     * articles that referenced it are replaced in the same run, so nothing is orphaned by this.
+     */
+    private function articleTopics(): void
+    {
+        $path = database_path('data/journal.json');
+
+        if (! is_file($path)) {
+            $this->command?->warn('journal.json not found — article topics skipped.');
+
+            return;
+        }
+
+        /** @var array{categories: array<int, array<string, mixed>>} $data */
+        $data = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+
+        $keep = [];
+
+        foreach ($data['categories'] as $i => $row) {
+            ArticleTopic::updateOrCreate(['slug' => $row['slug']], [
+                'name' => $row['name'],
+                'full_name' => $row['fullName'],
+                'eyebrow' => $row['eyebrow'],
+                'description' => $row['description'],
+                'position' => $i,
+            ]);
+            $keep[] = $row['slug'];
+        }
+
+        ArticleTopic::whereNotIn('slug', $keep)->delete();
+    }
+
+    /** The original ten, in locked nav order. Never sorted alphabetically. */
+    private function circleTopics(): void
+    {
         $topics = [
             ['learning', 'Learning', 'Learning & Academics', 'Learning & Academics', 'Helping parents understand how reading, writing, mathematics, science and learning develop without turning childhood into a race.'],
             ['behaviour', 'Behaviour', 'Behaviour & Emotions', 'Behaviour', 'What is going on underneath the shouting, the stalling and the silence, and what actually helps once you can see it.'],
@@ -39,7 +97,43 @@ class TaxonomySeeder extends Seeder
         ];
 
         foreach ($topics as $i => [$slug, $name, $fullName, $eyebrow, $description]) {
-            Topic::updateOrCreate(['slug' => $slug], [
+            CircleTopic::updateOrCreate(['slug' => $slug], [
+                'name' => $name,
+                'full_name' => $fullName,
+                'eyebrow' => $eyebrow,
+                'description' => $description,
+                'position' => $i,
+            ]);
+        }
+    }
+
+    /**
+     * What a family CHANGED, not what subject the story is about.
+     *
+     * This is the one taxonomy here that is not a subject vocabulary, and the difference is the
+     * reason it exists. Under the old shared list, the story of a parent who stopped checking
+     * homework every evening was filed as "Learning" — true, and useless, because it sat beside
+     * articles about reading levels and told a reader nothing about why they would open it.
+     *
+     * A reader browsing stories is not choosing a subject to study. They are looking for a family
+     * that was in the situation they are in now. So these are named for the turn the story takes,
+     * and each of the eight current stories has one that fits exactly rather than approximately.
+     */
+    private function storyTags(): void
+    {
+        $tags = [
+            ['parent-changed-first', 'The parent changed first', 'When the parent changed first', 'The parent changed first', 'Families where nothing improved until an adult altered what they were doing, rather than the child.'],
+            ['letting-go-of-control', 'Letting go of control', 'Letting go of control', 'Letting go of control', 'Parents who stopped supervising something, and found out what their child did with the space.'],
+            ['learning-without-pressure', 'Learning without pressure', 'Learning without pressure', 'Learning without pressure', 'What changed when the question stopped being whether a child was ahead.'],
+            ['ending-a-daily-battle', 'Ending a daily battle', 'Ending a daily battle', 'Ending a daily battle', 'The recurring fight — bedtime, homework, the morning — and how one household stopped having it.'],
+            ['finding-confidence', 'Finding confidence', 'Finding confidence', 'Finding confidence', 'Children who did not believe they could, and what actually shifted it.'],
+            ['stepping-back-socially', 'Stepping back socially', 'Stepping back from friendships', 'Stepping back socially', 'Parents who wanted to solve a friendship problem, and learned what happens when they do not.'],
+            ['language-and-belonging', 'Language & belonging', 'Language, culture and belonging', 'Language & belonging', 'Raising a child inside more than one language or culture, and what it gives them.'],
+            ['choosing-a-different-path', 'Choosing a different path', 'Choosing a different path', 'Choosing a different path', 'Families who took a route nobody around them was taking, and how that conversation went.'],
+        ];
+
+        foreach ($tags as $i => [$slug, $name, $fullName, $eyebrow, $description]) {
+            StoryTag::updateOrCreate(['slug' => $slug], [
                 'name' => $name,
                 'full_name' => $fullName,
                 'eyebrow' => $eyebrow,
@@ -48,13 +142,22 @@ class TaxonomySeeder extends Seeder
             ]);
         }
 
-        /*
-         * The six stages, youngest first. The names are the pathway names the site already routes
-         * on (/seekers … /visionaries); comps have called 8-11 "Connectors" and 14-16 "Pathfinders"
-         * and those would rename live pathways, so the locked names win.
-         *
-         * `range_label` uses an EN DASH, matching the site exactly.
-         */
+        /* PRUNE WHAT THE SPLIT LEFT BEHIND. The migration copied all ten of the old shared topics
+           into this table so no story was ever tagless mid-migration. Stories have since been
+           re-tagged onto the eight above, leaving ten empty subject labels that would show up as
+           filter chips leading to nothing. */
+        StoryTag::whereNotIn('slug', array_column($tags, 0))->delete();
+    }
+
+    /**
+     * The six stages, youngest first. The names are the pathway names the site already routes on
+     * (/seekers … /visionaries); comps have called 8-11 "Connectors" and 14-16 "Pathfinders" and
+     * those would rename live pathways, so the locked names win.
+     *
+     * `range_label` uses an EN DASH, matching the site exactly.
+     */
+    private function ageStages(): void
+    {
         $stages = [
             ['seekers', 'Seekers', '2–4', 2, 4],
             ['explorers', 'Explorers', '4–6', 4, 6],
@@ -73,8 +176,11 @@ class TaxonomySeeder extends Seeder
                 'position' => $i,
             ]);
         }
+    }
 
-        /* The Nine Petals, in their framework numbering. */
+    /** The Nine Petals, in their framework numbering. */
+    private function petals(): void
+    {
         $petals = [
             ['attention-self-mastery', 'Attention & Self Mastery'],
             ['learning-literacy', 'Learning & Literacy'],

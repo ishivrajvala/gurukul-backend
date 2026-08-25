@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\TopicResource\Pages;
-use App\Models\Topic;
+use App\Filament\Admin\Resources\ArticleTopicResource\Pages;
+use App\Models\ArticleTopic;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,22 +13,35 @@ use Filament\Tables;
 use Filament\Tables\Table;
 
 /**
- * The ten shared topics.
+ * The fifteen Parent Journal topics.
  *
- * EDITABLE, BUT NOT EXTENDABLE IN PRACTICE. The frontend files articles, circles and stories
- * against these exact ten slugs, so adding an eleventh here does nothing until the site knows about
- * it, and changing a slug breaks whatever already points at it. Wording and order are the fields an
- * editor actually wants; the slug is deliberately disabled after creation.
+ * IT SITS UNDER ARTICLES, NOT IN TAXONOMY, and that is the point of the move. This list used to be
+ * the shared "Topics" table three modules filed against, parked in a Taxonomy group with age stages
+ * and petals — reference data, edited once. It is not that any more. It is the Journal's own
+ * category structure, chosen for what parents search, and the person editing it is the person
+ * editing articles. It belongs next to them.
+ *
+ * EDITABLE, BUT NOT EXTENDABLE IN PRACTICE. The frontend files articles against these exact fifteen
+ * slugs and draws an icon per slug, so adding a sixteenth here does nothing until the site knows
+ * about it, and changing a slug orphans every article already filed under it. Wording and order are
+ * what an editor actually wants; the slug is disabled after creation.
  */
-class TopicResource extends Resource
+class ArticleTopicResource extends Resource
 {
-    protected static ?string $model = Topic::class;
+    protected static ?string $model = ArticleTopic::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Taxonomy';
+    protected static ?string $navigationGroup = 'Content System';
 
-    protected static ?int $navigationSort = 1;
+    /** Directly under Articles. */
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = 'Article topics';
+
+    protected static ?string $modelLabel = 'article topic';
+
+    protected static ?string $pluralModelLabel = 'article topics';
 
     public static function form(Form $form): Form
     {
@@ -40,12 +53,12 @@ class TopicResource extends Resource
                 ->maxLength(60),
 
             Forms\Components\TextInput::make('full_name')
-                ->helperText('The heading of a topic page, e.g. "Learning & Academics".')
+                ->helperText('The heading of a topic page, e.g. "Reading, Writing & Maths".')
                 ->required()
                 ->maxLength(120),
 
             Forms\Components\TextInput::make('eyebrow')
-                ->helperText('The uppercase form above a title. A third field on purpose: the design uses the long name for some topics and the short one for others, so it cannot be derived.')
+                ->helperText('The uppercase form above an article title. A third field on purpose: the design uses the long name for some topics and the short one for others, so it cannot be derived.')
                 ->required()
                 ->maxLength(120),
 
@@ -56,7 +69,7 @@ class TopicResource extends Resource
                 ->columnSpanFull(),
 
             Forms\Components\TextInput::make('slug')
-                ->helperText('The identifier the website matches on. Changing it breaks every article, circle and story already filed here.')
+                ->helperText('The identifier the website matches on, and the icon it draws. Changing it orphans every article already filed here.')
                 ->required()
                 ->disabledOn('edit')
                 ->unique(ignoreRecord: true),
@@ -79,7 +92,6 @@ class TopicResource extends Resource
                 Tables\Columns\TextColumn::make('full_name')->label('Full name')->searchable()->toggleable(),
                 Tables\Columns\TextColumn::make('slug')->color('gray')->toggleable(),
                 Tables\Columns\TextColumn::make('articles_count')->counts('articles')->label('Articles'),
-                Tables\Columns\TextColumn::make('stories_count')->counts('stories')->label('Stories'),
             ])
             ->actions([Tables\Actions\EditAction::make()]);
     }
@@ -87,9 +99,9 @@ class TopicResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTopics::route('/'),
-            'create' => Pages\CreateTopic::route('/create'),
-            'edit' => Pages\EditTopic::route('/{record}/edit'),
+            'index' => Pages\ListArticleTopics::route('/'),
+            'create' => Pages\CreateArticleTopic::route('/create'),
+            'edit' => Pages\EditArticleTopic::route('/{record}/edit'),
         ];
     }
 }

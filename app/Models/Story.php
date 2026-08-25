@@ -23,7 +23,7 @@ class Story extends Model
 {
     protected $fillable = [
         'slug', 'title', 'standfirst', 'body',
-        'topic_id', 'petal_id',
+        'story_tag_id', 'petal_id',
         'author_name', 'author_relation', 'place',
         'media_kind', 'youtube_id', 'media_aspect', 'duration_minutes',
         'reading_minutes', 'image_path', 'image_alt',
@@ -42,9 +42,9 @@ class Story extends Model
         ];
     }
 
-    public function topic(): BelongsTo
+    public function storyTag(): BelongsTo
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(StoryTag::class);
     }
 
     public function petal(): BelongsTo

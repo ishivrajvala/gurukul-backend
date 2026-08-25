@@ -9,7 +9,7 @@ use App\Models\CommunityReview;
 use App\Models\Petal;
 use App\Models\Story;
 use App\Models\Testimonial;
-use App\Models\Topic;
+use App\Models\StoryTag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
@@ -30,7 +30,7 @@ class StorySeeder extends Seeder
 
     public function run(): void
     {
-        $topics = Topic::pluck('id', 'slug');
+        $tags = StoryTag::pluck('id', 'slug');
         $petals = Petal::pluck('id', 'slug');
         $stages = AgeStage::pluck('id', 'key');
 
@@ -44,7 +44,7 @@ class StorySeeder extends Seeder
                     'I stopped asking whether she was ahead and started noticing what she was actually doing, which took a surprising amount of effort because the first question is so much faster to answer.',
                     'What I saw once I looked was a child who was learning constantly and almost none of it in the places I had been checking. Our evenings changed from practice into stories and questions, and so did she.',
                 ],
-                'topic' => 'learning', 'petal' => 'learning-literacy',
+                'tag' => 'learning-without-pressure', 'petal' => 'learning-literacy',
                 'author' => ['Priya', 'Parent of a 5-year-old'], 'place' => 'Bengaluru',
                 'media' => 'video', 'duration' => 4, 'reading' => 6,
                 'featured' => true, 'stages' => ['explorers'],
@@ -54,7 +54,7 @@ class StorySeeder extends Seeder
                 'title' => 'The biggest change was actually in how I responded.',
                 'standfirst' => 'I went looking for something that would settle him. What I found was a habit of my own I had never looked at.',
                 'body' => null,
-                'topic' => 'behaviour', 'petal' => 'emotional-intelligence-relationships',
+                'tag' => 'parent-changed-first', 'petal' => 'emotional-intelligence-relationships',
                 'author' => ['Divya', 'Parent of a 3-year-old'], 'place' => 'Hyderabad',
                 'media' => 'video', 'duration' => 3, 'reading' => 3,
                 'featured' => true, 'stages' => ['seekers'],
@@ -64,7 +64,7 @@ class StorySeeder extends Seeder
                 'title' => 'Bedtime stopped becoming a battle every evening.',
                 'standfirst' => 'What changed was not a new rule. It was the twenty minutes before the rule was ever needed.',
                 'body' => null,
-                'topic' => 'family-life-fallback', 'petal' => 'health-vitality',
+                'tag' => 'ending-a-daily-battle', 'petal' => 'health-vitality',
                 'author' => ['Sneha', 'Parent of a 5-year-old'], 'place' => 'Bengaluru',
                 'media' => 'video', 'duration' => 2, 'reading' => 3,
                 'featured' => true, 'stages' => ['explorers'],
@@ -78,7 +78,7 @@ class StorySeeder extends Seeder
                     'What changed was not something I said. It was learning to sit on my hands. He would struggle, I would feel the pull to step in and finish it for him, and I would count instead.',
                     'He still says he cannot do things. The difference is that now it is the first thing he says rather than the last, and somewhere behind it he has started to expect that he will be wrong about that.',
                 ],
-                'topic' => 'confidence', 'petal' => 'character-leadership',
+                'tag' => 'finding-confidence', 'petal' => 'character-leadership',
                 'author' => ['Kavita', 'Parent of a 7-year-old'], 'place' => 'Pune',
                 'media' => 'written', 'duration' => null, 'reading' => 5,
                 'featured' => false, 'stages' => ['builders'],
@@ -92,7 +92,7 @@ class StorySeeder extends Seeder
                     'A friend suggested I try answering with a question instead of a plan. So I started asking what she thought she might do. The first few times she said she did not know, and we sat in that.',
                     'The friendships did not get easier. She got steadier inside them.',
                 ],
-                'topic' => 'friends', 'petal' => 'emotional-intelligence-relationships',
+                'tag' => 'stepping-back-socially', 'petal' => 'emotional-intelligence-relationships',
                 'author' => ['Anjali', 'Parent of a 9-year-old'], 'place' => 'Mumbai',
                 'media' => 'written', 'duration' => null, 'reading' => 7,
                 'featured' => false, 'stages' => ['thinkers'],
@@ -106,7 +106,7 @@ class StorySeeder extends Seeder
                     'A rule would have made it a chore, and we had seen that go badly elsewhere. What worked was giving the other languages somewhere to live: cooking, a grandparent on video most weeks, songs in the car.',
                     'They still answer in English about half the time. The difference is that the other languages are now attached to people and to things they want, rather than to a rule they are failing at.',
                 ],
-                'topic' => 'values-culture', 'petal' => 'bharatiya-wisdom-identity',
+                'tag' => 'language-and-belonging', 'petal' => 'bharatiya-wisdom-identity',
                 'author' => ['Padma', 'Parent of two'], 'place' => 'Chennai',
                 'media' => 'written', 'duration' => null, 'reading' => 6,
                 'featured' => false, 'stages' => ['seekers', 'explorers', 'builders'],
@@ -120,7 +120,7 @@ class StorySeeder extends Seeder
                     'The first fortnight after we stopped was worse than we had feared. Two things went in half-done and one did not go in at all, and we had to sit on our hands through the consequences.',
                     'It turned out he had been outsourcing the checking to us, and once it was his, he did it. Not as well as we did. Well enough, and it is his.',
                 ],
-                'topic' => 'learning', 'petal' => 'thinking-innovation',
+                'tag' => 'letting-go-of-control', 'petal' => 'thinking-innovation',
                 'author' => ['Arun', 'Parent of an 11-year-old'], 'place' => 'Indore',
                 'media' => 'written', 'duration' => null, 'reading' => 5,
                 'featured' => false, 'stages' => ['thinkers', 'leaders'],
@@ -134,7 +134,7 @@ class StorySeeder extends Seeder
                     'When she told us, my first reaction was to explain why she was wrong. What eventually helped was asking her to tell me the whole of it and not saying anything until she had finished.',
                     'I am certain that it is her decision, and that the picture I was attached to was mine rather than a prediction about her. Those are not the same thing and I had them confused for years.',
                 ],
-                'topic' => 'parenting', 'petal' => 'creativity-nature-future-readiness',
+                'tag' => 'choosing-a-different-path', 'petal' => 'creativity-nature-future-readiness',
                 'author' => ['Bhavna', 'Parent of a 16-year-old'], 'place' => 'Mumbai',
                 'media' => 'written', 'duration' => null, 'reading' => 8,
                 'featured' => false, 'stages' => ['visionaries'],
@@ -142,15 +142,16 @@ class StorySeeder extends Seeder
         ];
 
         foreach ($stories as $i => $data) {
-            /* The frontend has a `family-life` topic that the shared ten does not; it maps to
-               Parenting, which is where that content actually belongs. */
-            $topicSlug = $data['topic'] === 'family-life-fallback' ? 'parenting' : $data['topic'];
+            /* RE-TAGGED, not remapped. These used to carry a subject topic from the shared ten,
+               which produced labels that were true and useless — a story about a parent who stopped
+               checking homework was filed under "Learning", beside articles on reading levels. The
+               tag now names the turn the story takes. See TaxonomySeeder::storyTags(). */
 
             $story = Story::updateOrCreate(['slug' => $data['slug']], [
                 'title' => $data['title'],
                 'standfirst' => $data['standfirst'],
                 'body' => $data['body'],
-                'topic_id' => $topics[$topicSlug],
+                'story_tag_id' => $tags[$data['tag']],
                 'petal_id' => $petals[$data['petal']],
                 'author_name' => $data['author'][0],
                 'author_relation' => $data['author'][1],
@@ -193,10 +194,11 @@ class StorySeeder extends Seeder
             Testimonial::updateOrCreate(
                 ['slug' => 'testimonial-' . ($i + 1)],
                 [
-                    /* `type` predates this module and is NOT NULL with an enum of text|youtube.
-                       Every testimonial here is a written line — the filmed ones are Stories, which
-                       is the whole point of keeping the two apart. */
-                    'type' => 'text',
+                    /* `type` USED TO BE HERE and is not any more. It predated this module as a
+                       NOT NULL enum of text|youtube, and was dropped by
+                       `2026_08_20_000011_drop_legacy_testimonial_columns` once the filmed ones
+                       became Stories — which is the whole point of keeping the two apart. Writing
+                       it broke `db:seed` outright for every seeder after this one. */
                     'content' => $quote,
                     'family_label' => $family,
                     'position' => $i,

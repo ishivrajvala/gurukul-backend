@@ -26,7 +26,7 @@ class CircleController extends Controller
     {
         $circles = Circle::published()
             ->ordered()
-            ->with(['ageStages', 'topics'])
+            ->with(['ageStages', 'circleTopics'])
             ->get()
             ->map(fn (Circle $c): array => $this->circle($c));
 
@@ -36,7 +36,7 @@ class CircleController extends Controller
     public function show(string $slug): JsonResponse
     {
         $circle = Circle::published()
-            ->with(['ageStages', 'topics', 'petals'])
+            ->with(['ageStages', 'circleTopics', 'petals'])
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -47,10 +47,10 @@ class CircleController extends Controller
                 'petals' => $circle->petals->pluck('name'),
                 'gatherings' => [
                     'upcoming' => Gathering::published()->where('circle_id', $circle->id)
-                        ->upcoming()->with('topic')->get()
+                        ->upcoming()->with('circleTopic')->get()
                         ->map(fn (Gathering $g): array => $this->gathering($g)),
                     'past' => Gathering::published()->where('circle_id', $circle->id)
-                        ->past()->with('topic')->get()
+                        ->past()->with('circleTopic')->get()
                         ->map(fn (Gathering $g): array => $this->gathering($g)),
                 ],
             ],
@@ -62,7 +62,7 @@ class CircleController extends Controller
     {
         $rows = Gathering::published()
             ->upcoming()
-            ->with(['circle', 'topic', 'ageStages'])
+            ->with(['circle', 'circleTopic', 'ageStages'])
             ->get()
             ->map(fn (Gathering $g): array => $this->gathering($g) + [
                 'circle' => ['slug' => $g->circle?->slug, 'name' => $g->circle?->name],
@@ -83,7 +83,7 @@ class CircleController extends Controller
             'isFeatured' => $c->is_featured,
             'ages' => $c->ageStages->pluck('key'),
             'audience' => $c->audienceLabel(),
-            'topics' => $c->topics->pluck('slug'),
+            'topics' => $c->circleTopics->pluck('slug'),
         ];
     }
 
@@ -93,7 +93,7 @@ class CircleController extends Controller
             'slug' => $g->slug,
             'title' => $g->title,
             'description' => $g->description,
-            'topic' => $g->topic?->slug,
+            'topic' => $g->circleTopic?->slug,
             'startsAt' => $g->starts_at?->toIso8601String(),
             'format' => $g->format,
             'city' => $g->city,

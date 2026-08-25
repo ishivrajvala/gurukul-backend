@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Gathering extends Model
 {
     protected $fillable = [
-        'slug', 'circle_id', 'title', 'description', 'topic_id',
+        'slug', 'circle_id', 'title', 'description', 'circle_topic_id',
         'starts_at', 'format', 'city', 'capacity', 'taken', 'is_published',
     ];
 
@@ -39,9 +39,9 @@ class Gathering extends Model
         return $this->belongsTo(Circle::class);
     }
 
-    public function topic(): BelongsTo
+    public function circleTopic(): BelongsTo
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(CircleTopic::class);
     }
 
     public function ageStages(): BelongsToMany

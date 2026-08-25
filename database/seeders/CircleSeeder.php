@@ -8,7 +8,7 @@ use App\Models\AgeStage;
 use App\Models\Circle;
 use App\Models\Gathering;
 use App\Models\Petal;
-use App\Models\Topic;
+use App\Models\CircleTopic;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
@@ -27,7 +27,7 @@ class CircleSeeder extends Seeder
 {
     public function run(): void
     {
-        $topics = Topic::pluck('id', 'slug');
+        $topics = CircleTopic::pluck('id', 'slug');
         $stages = AgeStage::pluck('id', 'key');
         $petals = Petal::pluck('id', 'slug');
 
@@ -107,7 +107,7 @@ class CircleSeeder extends Seeder
             ]);
 
             $circle->ageStages()->sync(collect($data['stages'])->map(fn ($k) => $stages[$k])->all());
-            $circle->topics()->sync(collect($data['topics'])->map(fn ($k) => $topics[$k])->all());
+            $circle->circleTopics()->sync(collect($data['topics'])->map(fn ($k) => $topics[$k])->all());
             $circle->petals()->sync(collect($data['petals'])->map(fn ($k) => $petals[$k])->all());
         }
 
@@ -138,7 +138,7 @@ class CircleSeeder extends Seeder
                 'circle_id' => $ids[$circleSlug],
                 'title' => $title,
                 'description' => $description,
-                'topic_id' => $topics[$topic],
+                'circle_topic_id' => $topics[$topic],
                 'starts_at' => Carbon::now()->addDays($days)->setTime((int) $h, (int) $m),
                 'format' => $format,
                 'city' => $city,
